@@ -21,8 +21,9 @@ class _LandingPageState extends State<LandingPage> {
   void initState() {
     super.initState();
 
-    pageController =
-        PageController(initialPage: currentPage, viewportFraction: 0.0.w);
+    pageController = PageController(
+      initialPage: currentPage,
+    );
   }
 
   @override
@@ -35,91 +36,43 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SizedBox(
-          child: PageView(
-            controller: pageController,
-            onPageChanged: (index) {
-              setState(() {
-                isLastPage = index == 2;
-              });
-            },
-            children: [
-              buildPage(
-                color: Color(0xffF2A99C),
-                urlImage: 'https://imgur.com/a/mcs6qSQ',
-                title: 'Welcome to SkillConnect',
-                subTitle: 'SkillConnect help you get the best service you might need',
-              ),
-               buildPage(
-                color: Color(0xffF2A99C),
-                urlImage: 'https://imgur.com/a/mcs6qSQ',
-                title: 'Welcome to SkillConnect',
-                subTitle: 'SkillConnect help you get the best service you might need',
-              ),
-               buildPage(
-                color: Color(0xffF2A99C),
-                urlImage: 'https://imgur.com/a/mcs6qSQ',
-                title: 'Welcome to SkillConnect',
-                subTitle: 'SkillConnect help you get the best service you might need',
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildPage({
-    required Color color,
-    required String urlImage,
-    required String title,
-    required String subTitle,
-  }) {
-    return Container(
-      height: 812.h,
-      width: 375.w,
-      color: color,
-      child: Stack(
-        children: [
-          Container(
-            height: 476.h,
-            width: 375.w,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.r),
-              image: DecorationImage(
-                  image: NetworkImage(urlImage), fit: BoxFit.cover),
+          body: SizedBox(
+            child: PageView(
+              controller: pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  isLastPage = index == 2;
+                });
+              },
+              children: [
+                buildPage(
+                  color: Color(0xffF2A99C),
+                  urlImage: 'https://i.imgur.com/FUQjrM7.png',
+                  title: 'Welcome to SkillConnect',
+                  subTitle:
+                      'SkillConnect help you get the best service you might need',
+                ),
+                buildPage(
+                  color: Color(0xff4D4D4DC),
+                  urlImage: 'https://i.imgur.com/PPh1vo4.png',
+                  title: 'Welcome to SkillConnect',
+                  subTitle:
+                      'Giving out the best that will meet your demand',
+                ),
+                buildPage(
+                  color: Color(0xff92C4B3),
+                  urlImage: 'https://i.imgur.com/RqaCElu.png',
+                  title: 'Welcome to SkillConnect',
+                  subTitle:
+                      'We can come to your house, office or wherever works for you to render the services',
+                ),
+              ],
             ),
           ),
-          Positioned(
-            child: SizedBox(
-              height: 415.h,
-              width: 375.w,
-              child: Column(children: [
-                SizedBox(
-                  height: 50.h,
-                  width: 5.w,
-                  child: Image.asset('lib/assets/images/logo.png'),
-                ),
-                SizedBox(
-                  height: 40.h,
-                ),
-                NormalText(
-                  text: title,
-                  size: 19.2.sp,
-                  color: kMainColor,
-                  fontWeight: FontWeight.w600,
-                ),
-                SizedBox(
-                  height: 25.h,
-                ),
-                NormalText(
-                  text: subTitle,
-                  size: 16.sp,
-                  color: Colors.black54,
-                ),
-                SizedBox(
-                  height: 25.h,
-                ),
+          bottomSheet: SizedBox(
+            height: 200,
+            child: Column(
+              children: [
                 Center(
                   child: SmoothPageIndicator(
                     controller: pageController,
@@ -128,7 +81,7 @@ class _LandingPageState extends State<LandingPage> {
                         dotWidth: 10.w,
                         dotHeight: 10.h,
                         activeDotColor: kMainColor,
-                        dotColor: Colors.black12),
+                        dotColor: kBlackDull),
                     onDotClicked: (index) => pageController.animateToPage(index,
                         duration: const Duration(milliseconds: 500),
                         curve: Curves.easeOut),
@@ -139,8 +92,12 @@ class _LandingPageState extends State<LandingPage> {
                 ),
                 ReuseableButton(
                   height: 45.h,
-                  text: 'Next',
-                  onPressed: () {},
+                  text: !isLastPage? 'Next' : 'Get Started',
+                  onPressed: () {
+                    pageController.nextPage(
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeOut);
+                  },
                 ),
                 SizedBox(
                   height: 25.h,
@@ -154,6 +111,70 @@ class _LandingPageState extends State<LandingPage> {
                     size: 14.sp,
                     color: kMainColor,
                   ),
+                ),
+              ],
+            ),
+          )),
+    );
+  }
+
+  Widget buildPage({
+    required Color color,
+    required String urlImage,
+    required String title,
+    required String subTitle,
+  }) {
+    return Container(
+      height: 512.h,
+      width: 375.w,
+      color: color,
+      child: Stack(
+        children: [
+          Container(
+            height: 476.h,
+            width: 375.w,
+            child: Image.network(urlImage),
+          ),
+          Positioned(
+            bottom: 0.0,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(31.r),
+                    topRight: Radius.circular(31.r)),
+                color: kWhite,
+              ),
+              height: 415.h,
+              width: 375.w,
+              child: Column(children: [
+                SizedBox(
+                  height: 50.h,
+                  width: 50.w,
+                  child: Image.network('https://i.imgur.com/FUQjrM7.png'),
+                ),
+                SizedBox(
+                  height: 40.h,
+                ),
+                NormalText(
+                  text: title,
+                  size: 19.2.sp,
+                  color: kBlack,
+                  fontWeight: FontWeight.w600,
+                ),
+                SizedBox(
+                  height: 25.h,
+                ),
+                SizedBox(
+                  width: 272.w,
+                  height: 100.h,
+                  child: NormalText(
+                    text: subTitle,
+                    size: 16.sp,
+                    color: kBlackDull,
+                  ),
+                ),
+                SizedBox(
+                  height: 25.h,
                 ),
               ]),
             ),

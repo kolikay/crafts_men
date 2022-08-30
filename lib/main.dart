@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'screens/landing_page/landing_page_screen.dart';
 
-Future main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await Firebase.initializeApp(
       options: const FirebaseOptions(
           apiKey: "AIzaSyCduRrB3MyvBbVA-woOBgZGJvxGZZbDA9E",
@@ -23,13 +27,30 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-  
-        primarySwatch: Colors.blue,
-      ),
-      home: const LandingPage(),
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context , child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Craftsmen',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+           home: const LandingPage(),
+        routes: const {
+          // HomePageScreen.id: (context) => const HomePageScreen(),
+          // CatergoriesSearchScreen.id: (context) => const CatergoriesSearchScreen(),
+          // CategoriesPage.id: (context) => const CategoriesPage(),
+          //  OnBoardingScreen.id: (context) => const OnBoardingScreen(),
+          //  LoginScreen.id: (context) => const LoginScreen(),
+          //  SettingsScreen.id: ((context) => const SettingsScreen()),
+          //  ProfileScreen.id: ((context) => const ProfileScreen())
+        },
+        ); 
+      },
+      
     );
   }
 }
