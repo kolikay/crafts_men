@@ -4,6 +4,7 @@ import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -56,8 +57,7 @@ class _LandingPageState extends State<LandingPage> {
                   color: Color(0xff4D4D4DC),
                   urlImage: 'https://i.imgur.com/PPh1vo4.png',
                   title: 'Welcome to SkillConnect',
-                  subTitle:
-                      'Giving out the best that will meet your demand',
+                  subTitle: 'Giving out the best that will meet your demand',
                 ),
                 buildPage(
                   color: Color(0xff92C4B3),
@@ -92,7 +92,7 @@ class _LandingPageState extends State<LandingPage> {
                 ),
                 ReuseableButton(
                   height: 45.h,
-                  text: !isLastPage? 'Next' : 'Get Started',
+                  text: !isLastPage ? 'Next' : 'Get Started',
                   onPressed: () {
                     pageController.nextPage(
                         duration: const Duration(milliseconds: 500),
@@ -130,10 +130,16 @@ class _LandingPageState extends State<LandingPage> {
       color: color,
       child: Stack(
         children: [
-          Container(
+          SizedBox(
             height: 476.h,
             width: 375.w,
-            child: Image.network(urlImage),
+            child: CachedNetworkImage(
+              imageUrl: urlImage,
+              placeholder: (context, url) =>
+                  const CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(kMainColor)),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+            ),
           ),
           Positioned(
             bottom: 0.0,
