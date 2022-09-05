@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shimmer/shimmer.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -37,6 +38,7 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+          backgroundColor: Colors.black,
           body: SizedBox(
             child: PageView(
               controller: pageController,
@@ -47,20 +49,20 @@ class _LandingPageState extends State<LandingPage> {
               },
               children: [
                 buildPage(
-                  color: Color(0xffF2A99C),
+                  color: const Color(0xffF2A99C),
                   urlImage: 'https://i.imgur.com/FUQjrM7.png',
                   title: 'Welcome to SkillConnect',
                   subTitle:
                       'SkillConnect help you get the best service you might need',
                 ),
                 buildPage(
-                  color: Color(0xff4D4D4DC),
+                  color: const Color(0xff4D4D4DC),
                   urlImage: 'https://i.imgur.com/PPh1vo4.png',
                   title: 'Welcome to SkillConnect',
                   subTitle: 'Giving out the best that will meet your demand',
                 ),
                 buildPage(
-                  color: Color(0xff92C4B3),
+                  color: const Color(0xff92C4B3),
                   urlImage: 'https://i.imgur.com/RqaCElu.png',
                   title: 'Welcome to SkillConnect',
                   subTitle:
@@ -135,10 +137,23 @@ class _LandingPageState extends State<LandingPage> {
             width: 375.w,
             child: CachedNetworkImage(
               imageUrl: urlImage,
-              placeholder: (context, url) =>
-                  const CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(kMainColor)),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+              placeholder: (context, urlImage) => Shimmer.fromColors(
+                baseColor: Colors.grey[500]!,
+                highlightColor: Colors.grey[100]!,
+                child: SizedBox(
+                  height: 476.h,
+                  width: 375.w,
+                  child: Icon(
+                    Icons.image_search_rounded,
+                    size: 200.h,
+                  ),
+                ),
+              ),
+              errorWidget: (context, url, error) => const Icon(
+                Icons.error,
+                color: Colors.red,
+                size: 100,
+              ),
             ),
           ),
           Positioned(
@@ -156,7 +171,7 @@ class _LandingPageState extends State<LandingPage> {
                 SizedBox(
                   height: 50.h,
                   width: 50.w,
-                  child: Image.network('https://i.imgur.com/FUQjrM7.png'),
+                  child: Image.asset('images/logo.png'),
                 ),
                 SizedBox(
                   height: 40.h,
@@ -173,10 +188,10 @@ class _LandingPageState extends State<LandingPage> {
                 SizedBox(
                   width: 272.w,
                   height: 100.h,
-                  child: NormalText(
-                    text: subTitle,
-                    size: 16.sp,
-                    color: kBlackDull,
+                  child: Text(
+                    subTitle,
+                    style: TextStyle(fontSize: 16.sp, color: kBlackDull),
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 SizedBox(

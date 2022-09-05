@@ -65,6 +65,11 @@ dependencies:
 
   #networkimagesloader
   cached_network_image: ^3.2.1
+  # flutter_shimmer: ^2.1.2
+  shimmer: ^2.0.0
+ 
+
+  #network imageplace holder
   
 
 # flutter pub run flutter_native_splash:create
