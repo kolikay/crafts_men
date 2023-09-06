@@ -7,6 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../routes/page_routes.dart';
+import 'landing_page_screen2.dart';
+
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
 
@@ -49,20 +52,20 @@ class _LandingPageState extends State<LandingPage> {
               },
               children: [
                 buildPage(
-                  color: const Color(0xffF2A99C),
+                  color: kWhite,
                   urlImage: 'https://i.imgur.com/FUQjrM7.png',
                   title: 'Welcome to SkillConnect',
                   subTitle:
                       'SkillConnect help you get the best service you might need',
                 ),
                 buildPage(
-                  color: const Color(0xff4D4D4DC),
+                  color: kWhite,
                   urlImage: 'https://i.imgur.com/PPh1vo4.png',
                   title: 'Welcome to SkillConnect',
                   subTitle: 'Giving out the best that will meet your demand',
                 ),
                 buildPage(
-                  color: const Color(0xff92C4B3),
+                  color: kWhite,
                   urlImage: 'https://i.imgur.com/RqaCElu.png',
                   title: 'Welcome to SkillConnect',
                   subTitle:
@@ -71,7 +74,8 @@ class _LandingPageState extends State<LandingPage> {
               ],
             ),
           ),
-          bottomSheet: SizedBox(
+          bottomSheet: Container(
+            color: kDullWhite,
             height: 200,
             child: Column(
               children: [
@@ -82,7 +86,7 @@ class _LandingPageState extends State<LandingPage> {
                     effect: WormEffect(
                         dotWidth: 10.w,
                         dotHeight: 10.h,
-                        activeDotColor: kMainColor,
+                        activeDotColor: kWhite,
                         dotColor: kBlackDull),
                     onDotClicked: (index) => pageController.animateToPage(index,
                         duration: const Duration(milliseconds: 500),
@@ -99,6 +103,9 @@ class _LandingPageState extends State<LandingPage> {
                     pageController.nextPage(
                         duration: const Duration(milliseconds: 500),
                         curve: Curves.easeOut);
+                    isLastPage
+                        ? Navigator.of(context).pushNamed(LandingPage2.id)
+                        : null;
                   },
                 ),
                 SizedBox(
@@ -163,18 +170,21 @@ class _LandingPageState extends State<LandingPage> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(31.r),
                     topRight: Radius.circular(31.r)),
-                color: kWhite,
+                color: kDullWhite,
               ),
               height: 415.h,
               width: 375.w,
               child: Column(children: [
                 SizedBox(
-                  height: 50.h,
-                  width: 50.w,
+                  height: 20.h,
+                ),
+                SizedBox(
+                  height: 60.h,
+                  width: 60.w,
                   child: Image.asset('images/logo.png'),
                 ),
                 SizedBox(
-                  height: 40.h,
+                  height: 20.h,
                 ),
                 NormalText(
                   text: title,

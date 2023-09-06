@@ -1,5 +1,13 @@
-// import 'package:flutter/material.dart';
-// import 'package:scholars_padi/screens/authentication/views/sign_up1_screen.dart';
+import 'package:flutter/material.dart';
+
+import '../screens/landing_page/landing_page_screen2.dart';
+
+pushToLandingPage2(BuildContext context) async {
+  Navigator.of(context).pushNamed(LandingPage2.id);
+}
+
+
+
 
 
 // pushToNoInternetPage(BuildContext context) async {
@@ -19,9 +27,7 @@
 // //   );
 // // }
 
-// // pushToLoginPage(BuildContext context) async {
-// //   Navigator.of(context).pushNamed(LoginScreen.id);
-// // }
+
 
 // pushToLoginPage(BuildContext context) async {
 //   Navigator.of(context).pushReplacement(

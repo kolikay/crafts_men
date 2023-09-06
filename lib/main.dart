@@ -1,9 +1,10 @@
+import 'package:craftsmen/screens/landing_page/landing_page_screen2.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'screens/landing_page/landing_page_screen.dart';
+import 'screens/landing_page/landing_page_screen2.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,28 +32,25 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (context , child) {
+      builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Craftsmen',
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-           home: const LandingPage(),
-        routes: const {
-          // HomePageScreen.id: (context) => const HomePageScreen(),
-          // CatergoriesSearchScreen.id: (context) => const CatergoriesSearchScreen(),
-          // CategoriesPage.id: (context) => const CategoriesPage(),
-          //  OnBoardingScreen.id: (context) => const OnBoardingScreen(),
-          //  LoginScreen.id: (context) => const LoginScreen(),
-          //  SettingsScreen.id: ((context) => const SettingsScreen()),
-          //  ProfileScreen.id: ((context) => const ProfileScreen())
-        },
-        ); 
+          home: const LandingPage(),
+          routes: {
+            LandingPage2.id: (context) => LandingPage2(),
+            // CatergoriesSearchScreen.id: (context) => const CatergoriesSearchScreen(),
+            // CategoriesPage.id: (context) => const CategoriesPage(),
+            //  OnBoardingScreen.id: (context) => const OnBoardingScreen(),
+            //  LoginScreen.id: (context) => const LoginScreen(),
+            //  SettingsScreen.id: ((context) => const SettingsScreen()),
+            //  ProfileScreen.id: ((context) => const ProfileScreen())
+          },
+        );
       },
-      
     );
   }
 }
-
-
