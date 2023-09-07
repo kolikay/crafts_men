@@ -67,21 +67,24 @@ dependencies:
   cached_network_image: ^3.2.1
   # flutter_shimmer: ^2.1.2
   shimmer: ^2.0.0
+
+
  
 
   #network imageplace holder
   
 
 # flutter pub run flutter_native_splash:create
-# flutter_native_splash:
-#   image: lib/assets/logo.png
-#   color: '#ffffff'
+flutter_native_splash:
+  image: assets/images/logo.png
+  color: '#033766'
 
-#flutter pub run flutter_launcher_icons:main
-# flutter_icons:
-#   android: "launcher_icon"
-#   ios: true
-#   image_path: "lib/assets/displayicon.jpg"
+# flutter pub run flutter_launcher_icons:main
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo_white.png"
+
 
 dev_dependencies:
   flutter_test:

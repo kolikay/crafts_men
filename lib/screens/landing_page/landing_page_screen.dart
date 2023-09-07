@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../constants/const/cachedNetworkImage.dart';
 import '../../routes/page_routes.dart';
 import 'landing_page_screen2.dart';
 
@@ -41,7 +42,7 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          backgroundColor: Colors.black,
+          backgroundColor: kWhite,
           body: SizedBox(
             child: PageView(
               controller: pageController,
@@ -76,9 +77,10 @@ class _LandingPageState extends State<LandingPage> {
           ),
           bottomSheet: Container(
             color: kDullWhite,
-            height: 200,
+            height: 150,
             child: Column(
               children: [
+               const SizedBox(height: 10,),
                 Center(
                   child: SmoothPageIndicator(
                     controller: pageController,
@@ -94,7 +96,7 @@ class _LandingPageState extends State<LandingPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 25.h,
+                  height: 15.h,
                 ),
                 ReuseableButton(
                   height: 45.h,
@@ -109,7 +111,7 @@ class _LandingPageState extends State<LandingPage> {
                   },
                 ),
                 SizedBox(
-                  height: 25.h,
+                  height: 15.h,
                 ),
                 TextButton(
                   onPressed: () {
@@ -134,45 +136,24 @@ class _LandingPageState extends State<LandingPage> {
     required String subTitle,
   }) {
     return Container(
-      height: 512.h,
-      width: 375.w,
       color: color,
       child: Stack(
         children: [
-          SizedBox(
-            height: 476.h,
-            width: 375.w,
-            child: CachedNetworkImage(
-              imageUrl: urlImage,
-              placeholder: (context, urlImage) => Shimmer.fromColors(
-                baseColor: Colors.grey[500]!,
-                highlightColor: Colors.grey[100]!,
-                child: SizedBox(
-                  height: 476.h,
-                  width: 375.w,
-                  child: Icon(
-                    Icons.image_search_rounded,
-                    size: 200.h,
-                  ),
-                ),
-              ),
-              errorWidget: (context, url, error) => const Icon(
-                Icons.error,
-                color: Colors.red,
-                size: 100,
-              ),
-            ),
+          CachedImage(
+            imageUrl: urlImage,
+            width: 375,
+            height: 476,
           ),
           Positioned(
             bottom: 0.0,
-            child: Container(
+            child: Container(          
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(31.r),
                     topRight: Radius.circular(31.r)),
                 color: kDullWhite,
               ),
-              height: 415.h,
+              height: 376.h,
               width: 375.w,
               child: Column(children: [
                 SizedBox(
@@ -181,7 +162,7 @@ class _LandingPageState extends State<LandingPage> {
                 SizedBox(
                   height: 60.h,
                   width: 60.w,
-                  child: Image.asset('images/logo.png'),
+                  child: Image.asset('assets/images/logo.png'),
                 ),
                 SizedBox(
                   height: 20.h,
@@ -193,7 +174,7 @@ class _LandingPageState extends State<LandingPage> {
                   fontWeight: FontWeight.w600,
                 ),
                 SizedBox(
-                  height: 25.h,
+                  height: 15.h,
                 ),
                 SizedBox(
                   width: 272.w,

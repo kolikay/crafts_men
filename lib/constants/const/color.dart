@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 
 
-const Color kMainColor = Color(0xff043864);
+const Color kMainColor = Color(0xff033766);
 
  const Color kDullMainColor = Color(0xff043864);
 
@@ -15,6 +15,8 @@ const Color kMainColor = Color(0xff043864);
  const Color kBlackDull = Colors.black54;
 
  const Color kWhite = Colors.white;
+
+ //0xff043864
 
 
 
