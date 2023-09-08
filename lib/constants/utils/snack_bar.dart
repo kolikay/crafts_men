@@ -33,4 +33,21 @@ class ShowSnackBar {
       ),
     );
   }
+
+   static buildErrorSnackbar(BuildContext context, String message, Color color) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: color,
+        duration: const Duration(seconds: 2),
+        content: SizedBox(
+          height: 40.h,
+          child: NormalText(
+            text: message,
+            color: Colors.black,
+            size: 16.sp,
+          ),
+        ),
+      ),
+    );
+ }
 }

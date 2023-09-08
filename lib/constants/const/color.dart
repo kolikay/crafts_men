@@ -16,6 +16,8 @@ const Color kMainColor = Color(0xff033766);
 
  const Color kWhite = Colors.white;
 
+ const Color kDarkContainer = Color(0xffE5E5E5);
+
  //0xff043864
 
 

@@ -68,6 +68,14 @@ dependencies:
   # flutter_shimmer: ^2.1.2
   shimmer: ^2.0.0
 
+  #manage local state
+  shared_preferences: ^2.0.15
+
+  #sending request
+  dio: ^5.3.2
+  universal_io: ^2.0.4
+  jwt_decoder: ^2.0.1
+
 
  
 

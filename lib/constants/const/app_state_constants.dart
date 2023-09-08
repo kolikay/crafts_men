@@ -4,7 +4,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-
+const baseApi = 'https://scholarspadi.com/api';
 
 // final authViewModelProvider = ChangeNotifierProvider<AuthViewModel>((ref) {
 //   return AuthViewModel();

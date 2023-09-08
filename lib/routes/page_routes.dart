@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../screens/landing_page/landing_page_screen2.dart';
+import '../screens/landing_page/no_internet.dart';
 
 pushToLandingPage2(BuildContext context) async {
   Navigator.of(context).pushNamed(LandingPage2.id);
@@ -10,14 +11,14 @@ pushToLandingPage2(BuildContext context) async {
 
 
 
-// pushToNoInternetPage(BuildContext context) async {
-//   Navigator.push(
-//     context,
-//     MaterialPageRoute(
-//       builder: (context) => const NoInternetScreen(),
-//     ),
-//   );
-// }
+pushToNoInternetPage(BuildContext context) async {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => const NoInternetScreen(),
+    ),
+  );
+}
 
 // // pushToOnboardingPage(BuildContext context) async {
 // //   Navigator.of(context).push(
