@@ -3,6 +3,7 @@ import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusaable_textformfield.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
+import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,7 +47,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 36.h,
+                          height: 15.h,
                         ),
                         NormalText(
                           text: 'Sign In',
@@ -115,7 +116,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   labelText: 'Email Address',
                                 ),
                                 SizedBox(
-                                  height: 24.h,
+                                  height: 15.h,
                                 ),
                                 MyTextField(
                                     key: const Key('testKeyPassword'),
@@ -167,7 +168,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           ],
                         ),
                         SizedBox(
-                          height: 40.h,
+                          height: 20.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -241,11 +242,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       height: 10,
                     ),
                     Row(
-               
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, LoginScreen.id);
+                            Navigator.pushNamed(context, SignUpScreen.id);
                           },
                           child: RichText(
                             text: TextSpan(
@@ -255,10 +256,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                    text: 'Already have an account? ',
+                                    text: 'Dont have an account? ',
                                     style: TextStyle(fontSize: 14.sp)),
                                 TextSpan(
-                                  text: 'Sign In',
+                                  text: 'Sign Up',
                                   style: TextStyle(
                                       fontSize: 16.sp,
                                       color: kMainColor,

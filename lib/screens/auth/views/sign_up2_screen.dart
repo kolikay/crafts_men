@@ -181,10 +181,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                                       ),
                                       children: <TextSpan>[
                                         TextSpan(
-                                            text: 'By clicking I agree to the ',
-                                            style: TextStyle(
-                                                color: kBlack,
-                                                fontSize: 14.sp),),
+                                          text: 'By clicking I agree to the ',
+                                          style: TextStyle(
+                                              color: kBlack, fontSize: 14.sp),
+                                        ),
                                         TextSpan(
                                           text: 'Terms & Conditions',
                                           style: TextStyle(
@@ -207,8 +207,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                                     TextSpan(
                                         text: 'and ',
                                         style: TextStyle(
-                                            color: kBlack,
-                                            fontSize: 14.sp)),
+                                            color: kBlack, fontSize: 14.sp)),
                                     TextSpan(
                                       text: 'Privacy Policy.',
                                       style: TextStyle(
@@ -243,7 +242,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                       height: 70.h,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextButton(
                           onPressed: () {

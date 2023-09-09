@@ -167,7 +167,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       height: 20.h,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ReuseableButton(
                           width: 312.w,
@@ -239,6 +239,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 10,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(
                       onPressed: () {
