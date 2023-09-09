@@ -1,15 +1,13 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
+import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:shimmer/shimmer.dart';
-
 import '../../constants/const/cachedNetworkImage.dart';
-import '../../routes/page_routes.dart';
-import 'landing_page_screen2.dart';
+
+
 
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -80,7 +78,9 @@ class _LandingPageState extends State<LandingPage> {
             height: 150,
             child: Column(
               children: [
-               const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 Center(
                   child: SmoothPageIndicator(
                     controller: pageController,
@@ -106,7 +106,7 @@ class _LandingPageState extends State<LandingPage> {
                         duration: const Duration(milliseconds: 500),
                         curve: Curves.easeOut);
                     isLastPage
-                        ? Navigator.of(context).pushNamed(LandingPage2.id)
+                        ? Navigator.pushNamed(context, SignUpScreen.id)
                         : null;
                   },
                 ),
@@ -146,7 +146,7 @@ class _LandingPageState extends State<LandingPage> {
           ),
           Positioned(
             bottom: 0.0,
-            child: Container(          
+            child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(31.r),
@@ -162,7 +162,7 @@ class _LandingPageState extends State<LandingPage> {
                 SizedBox(
                   height: 60.h,
                   width: 60.w,
-                  child: Image.asset('assets/images/logo.png'),
+                  child: Image.asset('lib/assets/logoTrans.png'),
                 ),
                 SizedBox(
                   height: 20.h,

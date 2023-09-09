@@ -15,10 +15,6 @@ import 'package:craftsmen/constants/const/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
 
-
-
-
-
 class AuthViewModel extends ChangeNotifier {
 
   Dio dio = Dio();

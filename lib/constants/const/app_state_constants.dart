@@ -1,14 +1,21 @@
 // ignore_for_file: non_constant_identifier_names
 
 
+
+
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../screens/auth/auth_view_models/auth_view_model.dart';
 
 const baseApi = 'https://scholarspadi.com/api';
 
-// final authViewModelProvider = ChangeNotifierProvider<AuthViewModel>((ref) {
-//   return AuthViewModel();
-// });
+final authViewModelProvider = ChangeNotifierProvider<AuthViewModel>((ref) {
+  return AuthViewModel.instance;
+});
+
+
+
 
 
 

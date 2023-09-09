@@ -1,16 +1,16 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
+import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 import '../../constants/const/cachedNetworkImage.dart';
 
 class LandingPage2 extends StatelessWidget {
- const LandingPage2({Key? key}) : super(key: key);
+  const LandingPage2({Key? key}) : super(key: key);
   static const id = "landingPage2";
 
   @override
@@ -27,7 +27,7 @@ class LandingPage2 extends StatelessWidget {
             SizedBox(
               height: 90.h,
               width: 70.w,
-              child: Image.asset('assets/images/logo.png'),
+              child: Image.asset('lib/assets/logoTrans.png'),
             ),
             SizedBox(
               height: 20.h,
@@ -75,7 +75,9 @@ class LandingPage2 extends StatelessWidget {
                   backGroundColor: kMainColor,
                   textColor: kWhite,
                   text: 'Skill provider',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, SignUpScreen.id);
+                  },
                   width: 137.w,
                 ),
                 ReuseableButton(

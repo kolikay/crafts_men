@@ -1,3 +1,7 @@
+import 'package:craftsmen/constants/const/color.dart';
+import 'package:craftsmen/screens/auth/views/login_screen.dart';
+import 'package:craftsmen/screens/auth/views/sign_up2_screen.dart';
+import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
 import 'package:craftsmen/screens/landing_page/landing_page_screen2.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -36,12 +40,16 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Craftsmen',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
+          theme: Theme.of(context).copyWith(
+            colorScheme: Theme.of(context).colorScheme.copyWith(
+                  primary: kMainColor,
+                ),
           ),
-          home: const LandingPage(),
+          home: const SignUpScreen(),
           routes: {
-            LandingPage2.id: (context) => LandingPage2(),
+            LandingPage2.id: (context) => const LandingPage2(),
+            SignUpScreen.id: (context) => const SignUpScreen(),
+            LoginScreen.id: (context) => const LoginScreen(),
             // CatergoriesSearchScreen.id: (context) => const CatergoriesSearchScreen(),
             // CategoriesPage.id: (context) => const CategoriesPage(),
             //  OnBoardingScreen.id: (context) => const OnBoardingScreen(),

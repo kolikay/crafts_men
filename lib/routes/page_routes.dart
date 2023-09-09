@@ -1,14 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../screens/landing_page/landing_page_screen2.dart';
 import '../screens/landing_page/no_internet.dart';
-
-pushToLandingPage2(BuildContext context) async {
-  Navigator.of(context).pushNamed(LandingPage2.id);
-}
-
-
-
 
 
 pushToNoInternetPage(BuildContext context) async {

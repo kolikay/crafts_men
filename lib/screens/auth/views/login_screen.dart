@@ -1,4 +1,3 @@
-import 'package:craftsmen/constants/const/app_state_constants.dart';
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusaable_textformfield.dart';
@@ -7,7 +6,6 @@ import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -37,12 +35,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 child: Column(
                   children: [
                     SizedBox(
-                        height: 125.h,
-                        width: 121.21.w,
-                        child: Image.asset(
-                          'lib/assets/logo.png',
-                          fit: BoxFit.contain,
-                        )),
+                      height: 125.h,
+                      width: 121.21.w,
+                      child: Image.asset(
+                        'lib/assets/logotrans.png',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -58,7 +57,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           height: 5.h,
                         ),
                         NormalText(
-                          text: 'Enter your info to continue',
+                          text: 'Glad to meet you again',
                         ),
                         SizedBox(
                           height: 35.h,
@@ -119,7 +118,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   height: 24.h,
                                 ),
                                 MyTextField(
-                                  key: const Key('testKeyPassword'),
+                                    key: const Key('testKeyPassword'),
                                     validator: (val) {
                                       if (val!.isEmpty) {
                                         return 'The password Field is required';
@@ -151,7 +150,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextButton(
-                               key: const Key('testKeyloginButton'),
+                              key: const Key('testKeyloginButton'),
                               onPressed: () {
                                 // pushEmailPasswordChangeScreen(context);
                               },
@@ -197,15 +196,56 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 70.h,
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    NormalText(
+                      text: 'Or Continue with',
+                      size: 14.sp,
+                      fontWeight: FontWeight.w400,
+                      color: kBlackDull,
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
+                        SizedBox(
+                          height: 30.h,
+                          width: 30.w,
+                          child: Image.asset(
+                            'lib/assets/google.png',
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                          width: 30.w,
+                          child: Image.asset(
+                            'lib/assets/facebook.png',
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                          width: 30.w,
+                          child: Image.asset(
+                            'lib/assets/twitter.png',
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+               
+                      children: [
                         TextButton(
                           onPressed: () {
-                            // pushSignUpScreen1(context);
+                            Navigator.pushNamed(context, LoginScreen.id);
                           },
                           child: RichText(
                             text: TextSpan(
@@ -215,16 +255,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                    text: 'Dont have an account? ',
-                                    style: TextStyle(
-                                        color: kBlackDull,
-                                        fontSize: 14.sp)),
+                                    text: 'Already have an account? ',
+                                    style: TextStyle(fontSize: 14.sp)),
                                 TextSpan(
-                                  text: 'Sign Up',
+                                  text: 'Sign In',
                                   style: TextStyle(
+                                      fontSize: 16.sp,
                                       color: kMainColor,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16.sp),
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
@@ -247,9 +285,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             // ),
           ],
         ),
-        // : const ProgressDialog(
-        //     message: 'Loading....',
-        //   ),
       ),
     );
   }

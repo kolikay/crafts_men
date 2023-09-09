@@ -1,22 +1,26 @@
+import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusaable_textformfield.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
+import 'package:craftsmen/screens/auth/views/login_screen.dart';
+import 'package:craftsmen/screens/auth/views/sign_up2_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SignUpScreen1 extends StatefulWidget {
-  const SignUpScreen1({Key? key}) : super(key: key);
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
+  static const String id = 'sign_up_screen';
 
   @override
-  State<SignUpScreen1> createState() => _SignUpScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen1> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _fullnameCont = TextEditingController();
+  final _firstNameCont = TextEditingController();
+  final _lastNameCont = TextEditingController();
   final _usernameCont = TextEditingController();
-  final _facultyCont = TextEditingController();
-  final _departmentCont = TextEditingController();
+  final _phoneNumber = TextEditingController();
 
 // Initial Selected Value
   String dropdownvalue = 'Male';
@@ -41,7 +45,7 @@ class _SignUpScreenState extends State<SignUpScreen1> {
                     height: 125.h,
                     width: 121.w,
                     child: Image.asset(
-                      'lib/assets/logo.png',
+                      'lib/assets/logoTrans.png',
                       fit: BoxFit.contain,
                     )),
                 Column(
@@ -51,12 +55,12 @@ class _SignUpScreenState extends State<SignUpScreen1> {
                       height: 36.h,
                     ),
                     NormalText(
-                      text: 'Create an account',
+                      text: 'Create Account',
                       size: 23.sp,
                       fontWeight: FontWeight.w600,
                     ),
                     SizedBox(
-                      height: 32.h,
+                      height: 15.h,
                     ),
                     Form(
                         key: _formKey,
@@ -69,15 +73,32 @@ class _SignUpScreenState extends State<SignUpScreen1> {
                                 }
                                 return null;
                               },
-                              controller: _fullnameCont,
+                              controller: _firstNameCont,
                               obcureText: false,
                               keyBoardType: TextInputType.text,
                               isPassword: false,
                               isReadOnly: false,
-                              labelText: 'Full Name',
+                              labelText: 'First Name',
                             ),
                             SizedBox(
-                              height: 24.h,
+                              height: 15.h,
+                            ),
+                            MyTextField(
+                              validator: (val) {
+                                if (val!.isEmpty) {
+                                  return 'Field Cannot be empty';
+                                }
+                                return null;
+                              },
+                              controller: _lastNameCont,
+                              obcureText: false,
+                              keyBoardType: TextInputType.text,
+                              isPassword: false,
+                              isReadOnly: false,
+                              labelText: 'Last Name',
+                            ),
+                            SizedBox(
+                              height: 15.h,
                             ),
                             MyTextField(
                               validator: (val) {
@@ -91,38 +112,21 @@ class _SignUpScreenState extends State<SignUpScreen1> {
                               keyBoardType: TextInputType.text,
                               isPassword: false,
                               isReadOnly: false,
-                              labelText: 'Username',
+                              labelText: 'User Name',
                             ),
                             SizedBox(
-                              height: 24.h,
+                              height: 15.h,
                             ),
                             MyTextField(
-                                validator: (val) {
-                                if (val!.isEmpty) {
-                                  return 'Field Cannot be empty';
-                                }
-                                return null;
-                              },
-                              controller: _facultyCont,
+                              controller: _phoneNumber,
                               obcureText: false,
-                              keyBoardType: TextInputType.text,
+                              keyBoardType: TextInputType.number,
                               isPassword: false,
                               isReadOnly: false,
-                              labelText: 'Faculty',
+                              labelText: 'Phone Number',
                             ),
                             SizedBox(
-                              height: 24.h,
-                            ),
-                            MyTextField(
-                              controller: _departmentCont,
-                              obcureText: false,
-                              keyBoardType: TextInputType.text,
-                              isPassword: false,
-                              isReadOnly: false,
-                              labelText: 'Department',
-                            ),
-                            SizedBox(
-                              height: 24.h,
+                              height: 15.h,
                             ),
                             Container(
                               padding: const EdgeInsets.only(left: 10),
@@ -160,36 +164,109 @@ class _SignUpScreenState extends State<SignUpScreen1> {
                           ],
                         )),
                     SizedBox(
-                      height: 40.h,
+                      height: 20.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         ReuseableButton(
+                          width: 312.w,
                           text: 'Next',
-                          textSize: 14.sp,
+                          textSize: 16.sp,
                           onPressed: () {
-                            // if (_formKey.currentState!.validate()) {
-                            //   Navigator.of(context).push(
-                            //     MaterialPageRoute(
-                            //       builder: (context) => SignUpScreen2(
-                            //         fullName: _fullnameCont.text,
-                            //         userName: _usernameCont.text,
-                            //         department: _departmentCont.text,
-                            //         faculty: _facultyCont.text,
-                            //         gender: dropdownvalue,
-                            //       ),
-                            //     ),
-                            //   );
-                            // }
-                            // FocusScope.of(context).unfocus();
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => SignUpScreen2(
+                                    fullName:
+                                        "${_firstNameCont.text} ${_lastNameCont.text}",
+                                    userName: _usernameCont.text,
+                                    phoneNumber: _phoneNumber.text,
+                                    gender: dropdownvalue,
+                                  ),
+                                ),
+                              );
+                            }
+                            FocusScope.of(context).unfocus();
                           },
-                          width: 90.w,
                         ),
                       ],
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
+                NormalText(
+                  text: 'Or Continue with',
+                  size: 14.sp,
+                  fontWeight: FontWeight.w400,
+                  color: kBlackDull,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      height: 30.h,
+                      width: 30.w,
+                      child: Image.asset(
+                        'lib/assets/google.png',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30.h,
+                      width: 30.w,
+                      child: Image.asset(
+                        'lib/assets/facebook.png',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30.h,
+                      width: 30.w,
+                      child: Image.asset(
+                        'lib/assets/twitter.png',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, LoginScreen.id);
+                      },
+                      child: RichText(
+                        text: TextSpan(
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontSize: 16.sp,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: 'Already have an account? ',
+                                style: TextStyle(fontSize: 14.sp)),
+                            TextSpan(
+                              text: 'Sign In',
+                              style: TextStyle(
+                                  fontSize: 16.sp,
+                                  color: kMainColor,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
