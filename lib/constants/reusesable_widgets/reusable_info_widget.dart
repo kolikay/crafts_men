@@ -1,3 +1,4 @@
+import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:flutter/material.dart';
@@ -25,38 +26,45 @@ class ReuseableInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            SizedBox(
-              height: 40.h,
+        body: Dialog(
+          backgroundColor: kDarkContainer,
+          child: SizedBox(
+            height: 410.h,
+            width: 335.w,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30.h,
+                ),
+                SizedBox(
+                  height: 80.h,
+                  width: 80.w,
+                  child: Image.asset(
+                    logo,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                NormalText(
+                  text: maintext,
+                  size: 20.h,
+                  fontWeight: FontWeight.w500,
+                ),
+                 SizedBox(
+                  height: 10.h,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 18.h , horizontal: 18.h),
+                  child: Text(detailsText, style: TextStyle(fontSize: 14.sp, ), textAlign: TextAlign.center, ),
+                ),  SizedBox(
+                  height: 25.h,
+                ),
+                ReuseableButton(text: bottonText,textSize: 14, onPressed: onPressed, width: 200.w,),
+              ],
             ),
-            SizedBox(
-              height: 140.h,
-              width: 140.w,
-              child: Image.asset(
-                logo,
-                fit: BoxFit.contain,
-              ),
-            ),
-            SizedBox(
-              height: 32.h,
-            ),
-            NormalText(
-              text: maintext,
-              size: 23.h,
-              fontWeight: FontWeight.w600,
-            ),
-             SizedBox(
-              height: 28.h,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 18.h , horizontal: 18.h),
-              child: NormalText(text: detailsText, size: 14.sp,),
-            ),  SizedBox(
-              height: 48.h,
-            ),
-            ReuseableButton(text: bottonText,textSize: 14, onPressed: onPressed),
-          ],
+          ),
         ),
       ),
     );

@@ -1,13 +1,20 @@
-import 'package:craftsmen/constants/const/app_state_constants.dart';
+
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusaable_textformfield.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
-import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:craftsmen/constants/reusesable_widgets/reusable_info_widget.dart';
+import 'package:craftsmen/screens/auth/views/verify_otp_screen.dart';
+
+
+
+
+
+
 
 class SignUpScreen2 extends ConsumerStatefulWidget {
   final String fullName;
@@ -229,6 +236,27 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                           text: 'Sign Up',
                           onPressed: () {
                             print(getInputedData());
+
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => ReuseableInfoWidget(
+                                  bottonText: 'Confirm Email',
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const VerifyOtpScreen(),
+                                      ),
+                                    );
+                                  },
+                                  logo: 'lib/assets/logoTrans.png',
+                                  maintext: 'Congratulations',
+                                  detailsText:
+                                      'Your account has been successfully created. Kindly go to your email to verify your account. If you did not receive an email, you can resend one',
+                                ),
+                              ),
+                            );
+
                             // if (_formKey.currentState!.validate()) {
                             //   authViewModel.registerUser(
                             //       getInputedData(), context);
@@ -261,7 +289,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                                 TextSpan(
                                   text: 'Sign In',
                                   style: TextStyle(
-                                      fontSize: 16.sp,
+                                      fontSize: 14.sp,
                                       color: kMainColor,
                                       fontWeight: FontWeight.bold),
                                 ),

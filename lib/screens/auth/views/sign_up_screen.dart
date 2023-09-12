@@ -7,6 +7,10 @@ import 'package:craftsmen/screens/auth/views/sign_up2_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+
+
+
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
   static const String id = 'sign_up_screen';
