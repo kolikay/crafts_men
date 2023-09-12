@@ -116,24 +116,26 @@ class AuthViewModel extends ChangeNotifier {
         '$baseApi/account/register/', body, context);
 
     if (response is Success) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => ReuseableInfoWidget(
-            bottonText: 'Confirm Email',
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const VerifyOtpScreen(),
-                ),
-              );
-            },
-            logo: 'lib/assets/verifyIcon.png',
-            maintext: 'Congratulations',
-            detailsText:
-                'Your account has been successfully created. Kindly go to your email to verify your account. If you did not receive an email, you can resend one',
-          ),
-        ),
-      );
+
+
+      // Navigator.of(context).push(
+      //   MaterialPageRoute(
+      //     builder: (context) => ReuseableInfoWidget(
+      //       bottonText: 'Confirm Email',
+      //       onPressed: () {
+      //         Navigator.of(context).push(
+      //           MaterialPageRoute(
+      //             builder: (context) => const VerifyOtpScreen(),
+      //           ),
+      //         );
+      //       },
+      //       logo: 'lib/assets/verifyIcon.png',
+      //       maintext: 'Congratulations',
+      //       detailsText:
+      //           'Your account has been successfully created. Kindly go to your email to verify your account. If you did not receive an email, you can resend one',
+      //     ),
+      //   ),
+      // );
 
       // pushOnBoardingScreen(context);
       setLoading(false);

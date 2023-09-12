@@ -122,6 +122,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               height: 15.h,
                             ),
                             MyTextField(
+                                   validator: (val) {
+                                if (val!.isEmpty) {
+                                  return 'Field Cannot be empty';
+                                }
+                                return null;
+                              },
                               controller: _phoneNumber,
                               obcureText: false,
                               keyBoardType: TextInputType.number,

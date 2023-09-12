@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class VerifyOtpScreen extends StatefulWidget {
   const VerifyOtpScreen({
     Key? key,
@@ -48,21 +47,21 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
         children: [
           Container(
             padding: EdgeInsets.only(left: 24.w),
-            color: kMainColor,
             height: 80.h,
             child: Row(
               children: [
                 const Icon(
                   Icons.arrow_back_ios,
-                  color: Colors.white,
+                  color: kMainColor,
                 ),
                 SizedBox(
                   width: 28.w,
                 ),
                 NormalText(
                   text: 'Verification',
-                  color: Colors.white,
+                  color: kMainColor,
                   size: 19.2.sp,
+                  fontWeight: FontWeight.w800,
                 )
               ],
             ),
@@ -71,7 +70,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
             height: 2.h,
           ),
           Padding(
-            padding: EdgeInsets.only(left: 26.w, right: 25.w),
+            padding: EdgeInsets.only(left: 26.w, right: 25.w, bottom: 20.h),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -79,7 +78,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                   text: 'Enter verification code to reset your',
                   size: 16.sp,
                 ),
-                 NormalText(
+                NormalText(
                   text: 'Password',
                   size: 16.sp,
                 ),
@@ -89,7 +88,6 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
           SizedBox(
             height: 25.h,
           ),
-    
           Padding(
             padding: EdgeInsets.only(left: 50.w, right: 50.w),
             child: PinCodeTextField(
@@ -103,7 +101,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 shape: PinCodeFieldShape.box,
                 selectedColor: kMainColor,
                 activeColor: kMainColor,
-                inactiveColor:kBlackDull,
+                inactiveColor: kBlackDull,
                 borderRadius: BorderRadius.circular(5.r),
                 fieldHeight: 46.h,
                 fieldWidth: 53.w,
@@ -119,7 +117,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
             ),
           ),
           Padding(
-            padding:EdgeInsets.only(right: 50.w),
+            padding: EdgeInsets.only(right: 50.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -139,18 +137,15 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                   fontSize: 16.sp,
                 ),
                 children: <TextSpan>[
-                   TextSpan(
+                  TextSpan(
                       text: 'Didn\'t you receive an Otp? ',
-                      style:
-                          TextStyle(color: kBlackDull, fontSize: 16.sp)),
+                      style: TextStyle(color: kBlackDull, fontSize: 16.sp)),
                   TextSpan(
                     text: 'Resend Code',
                     style: TextStyle(
-                        color: enableResend
-                            ? kMainColor
-                            : kBlackDull,
+                        color: enableResend ? kMainColor : kBlackDull,
                         fontWeight: FontWeight.w500,
-                        fontSize: 18.sp),
+                        fontSize: 16.sp),
                   ),
                 ],
               ),
@@ -160,31 +155,23 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
             height: 45.h,
           ),
           ReuseableButton(
-            backGroundColor:
-                kMainColor,
+            backGroundColor: kMainColor,
             isActive: _isActive,
             text: 'Verify',
             textSize: 14.sp,
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => 
-                 ReuseableInfoWidget(
-                    bottonText: 'Proceed to login',
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const LoginScreen()
-                        ),
-                      );
-                    },
-                    logo: 'lib/assets/emailVerifyIcon.png',
-                    maintext: 'Email Verified',
-                    detailsText:
-                        'Your account has been verified successfully, Please login to continue.',
+              dialogBuilder(
+                  context,
+                  'lib/assets/emailverifiedicon.png',
+                  'Email Verified',
+                  'Your account has been verified successfully, Please login to continue.',
+                  'Proceed to login', () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const LoginScreen(),
                   ),
-                ),
-              );
+                );
+              });
             },
           ),
         ],
