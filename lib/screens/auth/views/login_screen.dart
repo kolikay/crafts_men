@@ -5,6 +5,7 @@ import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
 import 'package:craftsmen/screens/change_password/email_password_change_screen.dart';
+import 'package:craftsmen/screens/location/location_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -182,17 +183,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               text: 'Sign In',
                               textSize: 14.sp,
                               onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  // authViewModel.loginUser(
-                                  //     '$baseApi/account/login/',
-                                  //     {
-                                  //       "email": emailController.text.trim(),
-                                  //       "password":
-                                  //           passwordController.text.trim(),
-                                  //     },
-                                  //     context);
-                                }
-                                FocusScope.of(context).unfocus();
+                                Navigator.pushNamed(context, LocationScreen.id);
+                                // if (_formKey.currentState!.validate()) {
+                                // authViewModel.loginUser(
+                                //     '$baseApi/account/login/',
+                                //     {
+                                //       "email": emailController.text.trim(),
+                                //       "password":
+                                //           passwordController.text.trim(),
+                                //     },
+                                //     context);
+                                // }
+                                // FocusScope.of(context).unfocus();
                                 // pushOnBoardingScreen(context);
                               },
                             ),

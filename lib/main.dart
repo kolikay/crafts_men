@@ -6,6 +6,8 @@ import 'package:craftsmen/screens/change_password/email_password_change_screen.d
 import 'package:craftsmen/screens/change_password/enter_newpassword_screen.dart';
 import 'package:craftsmen/screens/change_password/passord_resetpin_screen.dart';
 import 'package:craftsmen/screens/landing_page/landing_page_screen2.dart';
+import 'package:craftsmen/screens/location/location_screen.dart';
+import 'package:craftsmen/screens/location/location_screen2.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -48,7 +50,7 @@ class MyApp extends StatelessWidget {
                   primary: kMainColor,
                 ),
           ),
-          home: const SignUpScreen(),
+          home: const LoginScreen(),
           routes: {
             LandingPage2.id: (context) => const LandingPage2(),
             SignUpScreen.id: (context) => const SignUpScreen(),
@@ -56,6 +58,9 @@ class MyApp extends StatelessWidget {
             EmailPasswordChangeScreen.id: (context) => const EmailPasswordChangeScreen(),
             PasswordResetPinScreen.id: (context) => const PasswordResetPinScreen(),
             NewPasswordScreen.id: (context) => const NewPasswordScreen(),
+            LocationScreen2.id: (context) => const LocationScreen2(),
+            LocationScreen.id: (context) => const LocationScreen(),  
+        
           
           },
         );
