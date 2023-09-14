@@ -185,7 +185,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                                       ),
                                       children: <TextSpan>[
                                         TextSpan(
-                                          text: 'By clicking I agree to the ',
+                                          text: ' By clicking I agree to the ',
                                           style: TextStyle(
                                               color: kBlack, fontSize: 14.sp),
                                         ),

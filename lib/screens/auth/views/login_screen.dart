@@ -4,6 +4,7 @@ import 'package:craftsmen/constants/reusesable_widgets/reusaable_textformfield.d
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
+import 'package:craftsmen/screens/change_password/email_password_change_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -154,6 +155,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               key: const Key('testKeyloginButton'),
                               onPressed: () {
                                 // pushEmailPasswordChangeScreen(context);
+                                Navigator.pushNamed(
+                                    context, EmailPasswordChangeScreen.id);
                               },
                               style: TextButton.styleFrom(
                                 padding: EdgeInsets.zero,
