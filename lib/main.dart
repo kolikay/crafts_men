@@ -1,6 +1,5 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
-import 'package:craftsmen/screens/auth/views/sign_up2_screen.dart';
 import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
 import 'package:craftsmen/screens/change_password/email_password_change_screen.dart';
 import 'package:craftsmen/screens/change_password/enter_newpassword_screen.dart';
@@ -8,12 +7,19 @@ import 'package:craftsmen/screens/change_password/passord_resetpin_screen.dart';
 import 'package:craftsmen/screens/landing_page/landing_page_screen2.dart';
 import 'package:craftsmen/screens/location/location_screen.dart';
 import 'package:craftsmen/screens/location/location_screen2.dart';
+import 'package:craftsmen/screens/on_boarding/home_screens/home_page.dart';
+import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'screens/landing_page/landing_page_screen.dart';
 import 'screens/landing_page/landing_page_screen2.dart';
+
+
+
+
+
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,7 +56,7 @@ class MyApp extends StatelessWidget {
                   primary: kMainColor,
                 ),
           ),
-          home: const LandingPage(),
+          home: const OnBoardingScreen(),
           routes: {
             LandingPage2.id: (context) => const LandingPage2(),
             SignUpScreen.id: (context) => const SignUpScreen(),
