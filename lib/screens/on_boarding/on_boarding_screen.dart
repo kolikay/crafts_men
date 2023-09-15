@@ -8,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class OnBoardingScreen extends StatefulWidget {
-  // static String id = 'onBordingScreen';
+  static String id = 'onBordingScreen';
   const OnBoardingScreen({Key? key}) : super(key: key);
 
   @override

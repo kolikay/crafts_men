@@ -1,15 +1,13 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
+import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
-
-
 class LocationScreen2 extends StatefulWidget {
   const LocationScreen2({Key? key}) : super(key: key);
-   static const String id = 'location_screen2';
+  static const String id = 'location_screen2';
 
   @override
   State<LocationScreen2> createState() => _LocationScreen2State();
@@ -22,10 +20,10 @@ class _LocationScreen2State extends State<LocationScreen2> {
       child: SafeArea(
         child: Scaffold(
           body: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
             child: Column(
               children: [
-                   SizedBox(
+                SizedBox(
                   height: 15.h,
                 ),
                 SizedBox(
@@ -58,7 +56,11 @@ class _LocationScreen2State extends State<LocationScreen2> {
                 SizedBox(
                   height: 25.h,
                 ),
-                ReuseableButton(text: 'Start', onPressed: () {})
+                ReuseableButton(
+                    text: 'Start',
+                    onPressed: () {
+                      Navigator.pushNamed(context, OnBoardingScreen.id);
+                    })
               ],
             ),
           ),

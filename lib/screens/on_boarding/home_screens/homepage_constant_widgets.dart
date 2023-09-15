@@ -15,10 +15,14 @@ class HomeConstants {
 
   static Widget buildImage(String image, int index) {
     return Container(
+      height: 176.h,
+      width: 355.w,
       decoration: BoxDecoration(
+        color: Colors.red,
         borderRadius: BorderRadius.circular(5.r),
         image: DecorationImage(image: AssetImage(image), fit: BoxFit.fill),
       ),
+      
     );
   }
 

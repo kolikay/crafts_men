@@ -63,7 +63,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           text: 'Glad to meet you again',
                         ),
                         SizedBox(
-                          height: 35.h,
+                          height: 15.h,
                         ),
                         Visibility(
                           // visible: authViewModel.loginError,

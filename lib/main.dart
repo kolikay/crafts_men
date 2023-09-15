@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
                   primary: kMainColor,
                 ),
           ),
-          home: const OnBoardingScreen(),
+          home: const LoginScreen(),
           routes: {
             LandingPage2.id: (context) => const LandingPage2(),
             SignUpScreen.id: (context) => const SignUpScreen(),
@@ -66,6 +66,7 @@ class MyApp extends StatelessWidget {
             NewPasswordScreen.id: (context) => const NewPasswordScreen(),
             LocationScreen2.id: (context) => const LocationScreen2(),
             LocationScreen.id: (context) => const LocationScreen(),  
+             OnBoardingScreen.id: (context) => const OnBoardingScreen(),  
         
           
           },

@@ -23,7 +23,6 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          dragStartBehavior: DragStartBehavior.start,
           child: SizedBox(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -31,30 +30,32 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 30.h,
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      NormalText(text: 'Hello Fatimah'),
+                      NormalText(
+                        text: 'Hello Fatimah',
+                        size: 20.sp,
+                        fontWeight: FontWeight.w600,
+                        color: kMainColor,
+                      ),
                       IconButton(
                         onPressed: () {},
                         icon: Icon(
                           Icons.add_alert_sharp,
-                          color: Colors.black,
-                          size: 20.h,
+                          color: kMainColor,
+                          size: 30.h,
                         ),
                       ),
                     ],
                   ),
                   NormalText(
                     text: '27, Kenneth Street, Ikoyi, Lagos',
-                    size: 12.sp,
+                    size: 14.sp,
                     color: kBlackDull,
                   ),
                   SizedBox(
-                    height: 20.h,
+                    height: 10.h,
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -83,13 +84,11 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                 prefixIcon: const Icon(
                                   Icons.search,
                                   color: kBlackDull,
-                                  size: 16,
+                                  size: 24,
                                 ),
-                                contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 20.w),
-                                label: const Text('Search For Anything'),
-                                labelStyle: TextStyle(
-                                    color: kBlackDull, fontSize: 14.sp),
+                                hintText: 'Search For Anything',
+                                hintStyle: TextStyle(
+                                    color: kBlackDull, fontSize: 16.sp),
                               ),
                             ),
                           ),
@@ -109,7 +108,6 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 16.h),
                       Container(
                         width: 343.w,
                         height: 176.h,
@@ -171,6 +169,9 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                           final image = HomeConstants.images[index];
                           return HomeConstants.buildImage(image, index);
                         },
+                      ),
+                      SizedBox(
+                        height: 10.h,
                       ),
                       HomeConstants.buildIndicator(),
                     ],
