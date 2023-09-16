@@ -7,6 +7,7 @@ import 'package:craftsmen/screens/change_password/passord_resetpin_screen.dart';
 import 'package:craftsmen/screens/landing_page/landing_page_screen2.dart';
 import 'package:craftsmen/screens/location/location_screen.dart';
 import 'package:craftsmen/screens/location/location_screen2.dart';
+import 'package:craftsmen/screens/on_boarding/bookings/bookings.dart';
 import 'package:craftsmen/screens/on_boarding/home_screens/home_page.dart';
 import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,7 @@ class MyApp extends StatelessWidget {
                   primary: kMainColor,
                 ),
           ),
-          home: const LoginScreen(),
+          home:  Bookings(),
           routes: {
             LandingPage2.id: (context) => const LandingPage2(),
             SignUpScreen.id: (context) => const SignUpScreen(),

@@ -18,7 +18,6 @@ class HomeConstants {
       height: 176.h,
       width: 355.w,
       decoration: BoxDecoration(
-        color: Colors.red,
         borderRadius: BorderRadius.circular(5.r),
         image: DecorationImage(image: AssetImage(image), fit: BoxFit.fill),
       ),

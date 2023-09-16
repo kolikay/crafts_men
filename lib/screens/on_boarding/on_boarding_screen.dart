@@ -1,11 +1,8 @@
 import 'package:craftsmen/constants/const/color.dart';
+import 'package:craftsmen/screens/on_boarding/notifications/views/notification_screen1.dart';
 import 'package:flutter/material.dart';
 import 'home_screens/home_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-
-
-
 
 class OnBoardingScreen extends StatefulWidget {
   static String id = 'onBordingScreen';
@@ -23,8 +20,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final screens = [
     const HomePageScreen(),
     const HomePageScreen(),
+    const NotificationScreen1(),
     const HomePageScreen(),
-     const HomePageScreen(),
   ];
 
   @override
@@ -44,8 +41,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favourite',
+            icon: Icon(Icons.bookmark_add),
+            label: 'Bookings',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
