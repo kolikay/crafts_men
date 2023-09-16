@@ -55,11 +55,19 @@ class _BookingsState extends State<Bookings> {
         body: SizedBox(
           height: 812.h,
           width: 375.w,
-          child: const TabBarView(children: [
-            MyTabView(),
-            MyTabView(),
-            MyTabView(),
-            MyTabView(),
+          child: TabBarView(children: [
+            MyTabView(
+              tab: tabs,
+            ),
+            MyTabView(
+              tab: tabs,
+            ),
+            MyTabView(
+              tab: tabs,
+            ),
+            MyTabView(
+              tab: tabs,
+            ),
           ]),
         ),
       ),
@@ -67,8 +75,16 @@ class _BookingsState extends State<Bookings> {
   }
 }
 
+List<Widget> tabs = const [
+  BookingsCards(),
+  BookingsCards(),
+  BookingsCards(),
+];
+
 class MyTabView extends StatefulWidget {
-  const MyTabView({Key? key}) : super(key: key);
+  final List<Widget> tab;
+
+  const MyTabView({Key? key, required this.tab}) : super(key: key);
 
   @override
   State<MyTabView> createState() => _MyTabViewState();
@@ -78,19 +94,21 @@ class _MyTabViewState extends State<MyTabView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SizedBox(
-        width: 375.w,
-        height: 812.h,
-        child: Column(
-          children: const [BookingsTabs(), BookingsTabs(), BookingsTabs()],
+      body: SingleChildScrollView(
+        child: SizedBox(
+          width: 375.w,
+          height: 812.h,
+          child: Column(
+            children: widget.tab,
+          ),
         ),
       ),
     );
   }
 }
 
-class BookingsTabs extends StatelessWidget {
-  const BookingsTabs({
+class BookingsCards extends StatelessWidget {
+  const BookingsCards({
     Key? key,
   }) : super(key: key);
 
@@ -118,7 +136,7 @@ class BookingsTabs extends StatelessWidget {
                     text: 'Require Electricity service',
                     color: kMainColor,
                     size: 16.sp,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w700,
                   ),
                   const Icon(
                     Icons.close,
@@ -128,7 +146,7 @@ class BookingsTabs extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 15.h,
+                height: 10.h,
               ),
               Row(
                 children: [
@@ -142,7 +160,7 @@ class BookingsTabs extends StatelessWidget {
                     width: 15,
                   ),
                   SizedBox(
-                    height: 60.h,
+                    height: 70.h,
                     width: 200.w,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -172,7 +190,7 @@ class BookingsTabs extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 15.h,
+                height: 10.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -185,20 +203,20 @@ class BookingsTabs extends StatelessWidget {
                   ),
                   NormalText(
                     text: 'completed',
-                    color: Colors.green,
+                    color: Colors.green[500],
                     size: 14.sp,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w700,
                   ),
                 ],
               ),
               const SizedBox(
-                height: 15,
+                height: 10,
               ),
               ReuseableButton(
                 text: 'View Details',
                 onPressed: () {},
                 width: 160.w,
-                height: 40.h,
+                height: 50.h,
               )
             ],
           ),

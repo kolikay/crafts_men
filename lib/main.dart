@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
                   primary: kMainColor,
                 ),
           ),
-          home:  Bookings(),
+          home:  LoginScreen(),
           routes: {
             LandingPage2.id: (context) => const LandingPage2(),
             SignUpScreen.id: (context) => const SignUpScreen(),
