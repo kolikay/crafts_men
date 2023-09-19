@@ -46,7 +46,7 @@ class _LogOutScreenState extends State<LogOutScreen> {
                 NormalText(
                   text: 'Are you sure you want to log out?',
                   fontWeight: FontWeight.w600,
-                  color: kDarkContainer,
+                  color: kBlack,
                 ),
                 SizedBox(
                   height: 14.h,
@@ -61,7 +61,7 @@ class _LogOutScreenState extends State<LogOutScreen> {
                     decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: kDarkContainer),
+                      border: Border.all(color: kBlack),
                     ),
                     child: Center(
                       child: NormalText(
@@ -83,7 +83,7 @@ class _LogOutScreenState extends State<LogOutScreen> {
                     height: 50.h,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        border: Border.all(color:kDarkContainer)),
+                        border: Border.all(color:kBlack)),
                     child: Center(
                       child: NormalText(
                         text: 'No',

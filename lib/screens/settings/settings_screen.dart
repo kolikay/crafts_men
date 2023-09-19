@@ -39,9 +39,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   NormalText(
                     text: 'Accounts',
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                     color: Colors.white,
-                    size: 20.sp,
+                    size: 24.sp,
                   ),
                   SizedBox(
                     height: 30.h,

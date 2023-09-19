@@ -28,7 +28,10 @@ class _FaqsScreenState extends State<FaqsScreen> {
         child: ReusesableAppBar2(
           appBarTitle: 'FAQs',
           firstButton: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: kMainColor,),
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: kMainColor,
+            ),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -49,13 +52,16 @@ class _FaqsScreenState extends State<FaqsScreen> {
                   size: 16.sp,
                 ),
                 SizedBox(height: 24.h),
-                faqsCards('How do I pay for the service provider \nafter getting the service done?',
+                faqsCards(
+                    'How do I pay for the service provider \nafter getting the service done?',
                     () {
                   setState(() {
                     showAnswer1 = !showAnswer1;
                   });
                 }, showAnswer1),
-                SizedBox(height: 10.h,),
+                SizedBox(
+                  height: 10.h,
+                ),
                 Visibility(
                   visible: showAnswer1,
                   child: Container(
@@ -83,7 +89,9 @@ class _FaqsScreenState extends State<FaqsScreen> {
                     showAnswer2 = !showAnswer2;
                   });
                 }, showAnswer2),
-                    SizedBox(height: 10.h,),
+                SizedBox(
+                  height: 10.h,
+                ),
                 Visibility(
                   visible: showAnswer2,
                   child: Container(
@@ -113,7 +121,9 @@ class _FaqsScreenState extends State<FaqsScreen> {
                     showAnswer3 = !showAnswer3;
                   });
                 }, showAnswer3),
-                    SizedBox(height: 10.h,),
+                SizedBox(
+                  height: 10.h,
+                ),
                 Visibility(
                   visible: showAnswer3,
                   child: Container(
@@ -135,14 +145,16 @@ class _FaqsScreenState extends State<FaqsScreen> {
                     ),
                   ),
                 ),
-                   faqsCards(
+                faqsCards(
                     'How do I get notified that the service \nprovider has accepted my request?',
                     () {
                   setState(() {
                     showAnswer4 = !showAnswer4;
                   });
                 }, showAnswer4),
-                    SizedBox(height: 10.h,),
+                SizedBox(
+                  height: 10.h,
+                ),
                 Visibility(
                   visible: showAnswer4,
                   child: Container(
@@ -164,7 +176,6 @@ class _FaqsScreenState extends State<FaqsScreen> {
                     ),
                   ),
                 ),
-                
               ],
             ),
           ),
@@ -174,32 +185,32 @@ class _FaqsScreenState extends State<FaqsScreen> {
   }
 
   faqsCards(String cardMessage, GestureTapCallback onPressed, bool showAnswer) {
-    return Container(
-      height: 65.h,
-      width: 325.w,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: Colors.black12)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-            child: NormalText(
-              text: cardMessage,
-              fontWeight: FontWeight.w400,
-              size: 14.sp,
-              color: Colors.black54,
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        height: 65.h,
+        width: 335.w,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(color: Colors.black12)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+              child: NormalText(
+                text: cardMessage,
+                fontWeight: FontWeight.w400,
+                size: 14.sp,
+                color: Colors.black54,
+              ),
             ),
-          ),
-          IconButton(
-            onPressed: onPressed,
-            icon: Icon(
+            Icon(
               showAnswer ? Icons.arrow_drop_down : Icons.arrow_drop_up,
               color: Colors.black54,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

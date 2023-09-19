@@ -22,10 +22,14 @@ class _NotificationScreen1State extends State<NotificationScreen1> {
             height: 80.h,
             child: Row(
               children: [
-                const Icon(
-                  Icons.arrow_back_ios,
-                  color: kMainColor,
-                ),
+                IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      size: 20.w,
+                    )),
                 SizedBox(
                   width: 28.w,
                 ),

@@ -127,13 +127,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   top: 10.0.h,
                 ),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   icon: !onEdit
                       ? Icon(
                           Icons.arrow_back_ios,
-                          size: 30.w,
+                          size: 20.w,
                         )
-                      : Icon(Icons.close, size: 30.w),
+                      : Icon(Icons.close, size: 20.w),
                 ),
               ),
             ),
