@@ -28,11 +28,11 @@ class ReusesableAppBar2 extends StatelessWidget {
         child: NormalText(
           text: appBarTitle,
           fontWeight: FontWeight.w500,
-          color: Colors.white,
+          color: kMainColor,
         ),
       ),
       toolbarHeight: 103.h,
-      backgroundColor: kMainColor,
+       backgroundColor: Colors.white,
       leading: Center(
         child: Padding(
             padding: EdgeInsets.only(

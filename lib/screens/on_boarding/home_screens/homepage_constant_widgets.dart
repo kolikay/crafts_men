@@ -21,7 +21,6 @@ class HomeConstants {
         borderRadius: BorderRadius.circular(5.r),
         image: DecorationImage(image: AssetImage(image), fit: BoxFit.fill),
       ),
-      
     );
   }
 
@@ -65,6 +64,77 @@ class HomeConstants {
               size: 10.sp,
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class DrawerIcons extends StatefulWidget {
+  final IconData icon;
+  final String imageName;
+  final GestureTapCallback? onPressed;
+  Color? iconColor;
+
+  DrawerIcons(
+      {Key? key,
+      required this.icon,
+      required this.imageName,
+      this.onPressed,
+      this.iconColor})
+      : super(key: key);
+
+  @override
+  State<DrawerIcons> createState() => _DrawerIconsState();
+}
+
+class _DrawerIconsState extends State<DrawerIcons> {
+  @override
+  Widget build(
+    BuildContext context,
+  ) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        highlightColor: const Color(0xffC4C4C4),
+        splashColor: const Color(0xffC4C4C4),
+        onTap: widget.onPressed,
+        child: SizedBox(
+          height: 46.h,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  SizedBox(
+                    width: 24.w,
+                  ),
+                  Icon(
+                    widget.icon,
+                    size: 30.w,
+                    color: widget.iconColor,
+                  ),
+                  SizedBox(
+                    width: 20.w,
+                  ),
+                  NormalText(
+                    text: widget.imageName,
+                    size: 16.sp,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 25),
+                child: Icon(
+                  Icons.arrow_forward_ios,
+                  size: 15.w,
+                  color: widget.iconColor,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

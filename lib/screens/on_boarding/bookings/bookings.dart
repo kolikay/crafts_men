@@ -82,6 +82,7 @@ List<Widget> tabs = const [
 ];
 
 class MyTabView extends StatefulWidget {
+  
   final List<Widget> tab;
 
   const MyTabView({Key? key, required this.tab}) : super(key: key);
@@ -136,7 +137,7 @@ class BookingsCards extends StatelessWidget {
                     text: 'Require Electricity service',
                     color: kMainColor,
                     size: 16.sp,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w500,
                   ),
                   const Icon(
                     Icons.close,
@@ -190,7 +191,7 @@ class BookingsCards extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 10.h,
+                height: 8.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

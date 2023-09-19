@@ -1,5 +1,6 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/screens/on_boarding/notifications/views/notification_screen1.dart';
+import 'package:craftsmen/screens/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'bookings/bookings.dart';
 import 'home_screens/home_page.dart';
@@ -22,7 +23,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     const HomePageScreen(),
     const Bookings(),
     const NotificationScreen1(),
-    const HomePageScreen(),
+    const SettingsScreen()
   ];
 
   @override
@@ -51,7 +52,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Profile',
+            label: 'Accounts',
           ),
         ],
       ),

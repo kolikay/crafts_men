@@ -4,6 +4,8 @@
 
 
 
+import 'package:craftsmen/models/models.dart';
+import 'package:craftsmen/screens/on_boarding/profile_screens/profile_view_model/profile_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../screens/auth/auth_view_models/auth_view_model.dart';
@@ -19,10 +21,18 @@ final authViewModelProvider = ChangeNotifierProvider<AuthViewModel>((ref) {
 
 
 
-// final profileViewModelProvider =
-//     ChangeNotifierProvider<ProfileModelView>((ref) {
-//   return ProfileModelView();
-// });
+final profileViewModelProvider =
+    ChangeNotifierProvider<ProfileModelView>((ref) {
+  return ProfileModelView();
+});
+
+
+
+//provider for logged in user api data
+final userProvider = Provider<UserModel>((ref) {
+  return AuthViewModel.instance.userApiData;
+});
+
 
 
 
