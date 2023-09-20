@@ -15,6 +15,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'screens/landing_page/landing_page_screen2.dart';
+import 'screens/search/displayAllsearchScreen.dart';
 
 
 
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
                   primary: kMainColor,
                 ),
           ),
-          home:  LoginScreen(),
+          home:  OnBoardingScreen(),
           routes: {
             LandingPage2.id: (context) => const LandingPage2(),
             SignUpScreen.id: (context) => const SignUpScreen(),

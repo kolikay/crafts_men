@@ -1,5 +1,7 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
+import 'package:craftsmen/screens/on_boarding/notifications/views/notification_screen1.dart';
+import 'package:craftsmen/screens/search/displayAllsearchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +40,14 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                         color: kMainColor,
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: ((context) =>
+                                  const NotificationScreen1()),
+                            ),
+                          );
+                        },
                         icon: Icon(
                           Icons.add_alert_sharp,
                           color: kMainColor,
@@ -127,7 +136,14 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                               HomeConstants.newInkwell(context, 'Painting ',
                                   'lib/assets/painter.png', () {}),
                               HomeConstants.newInkwell(context, 'Electrician',
-                                  'lib/assets/electrician.png', () {}),
+                                  'lib/assets/electrician.png', () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: ((context) =>
+                                        const DisplayAllSearchScreen()),
+                                  ),
+                                );
+                              }),
                               HomeConstants.newInkwell(context, 'Barber',
                                   'lib/assets/barber.png', () {}),
                               HomeConstants.newInkwell(context, 'Engineer',

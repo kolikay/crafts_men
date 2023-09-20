@@ -1,5 +1,6 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/screens/on_boarding/notifications/views/notification_screen1.dart';
+import 'package:craftsmen/screens/search/displayAllsearchScreen.dart';
 import 'package:craftsmen/screens/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'bookings/bookings.dart';

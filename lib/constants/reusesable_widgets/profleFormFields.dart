@@ -7,24 +7,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ProfileFormField extends StatefulWidget {
   final TextEditingController? controller;
   final String? hintText;
-  final String? labelText;
-  final bool isPassword;
-  final bool obcureText;
-  final bool isReadOnly;
-  final Color borderColor;
-  final TextInputType keyBoardType;
-   final bool enable;
+  final String labelText;
+  final bool? isPassword;
+  final bool? obcureText;
+  final bool? isReadOnly;
+  final Color? borderColor;
+  final TextInputType? keyBoardType;
+  final bool? enable;
 
   const ProfileFormField({
     Key? key,
     this.borderColor = kMainColor,
     this.controller,
     this.hintText,
-    required this.isPassword,
-    required this.obcureText,
-    required this.isReadOnly,
+    this.isPassword = false,
+    this.obcureText = false,
+    this.isReadOnly = false,
     required this.labelText,
-    required this.keyBoardType,
+    this.keyBoardType,
     this.enable = true,
   }) : super(key: key);
 
@@ -39,24 +39,17 @@ class _ProfileFormFieldState extends State<ProfileFormField> {
       width: 327.w,
       child: TextFormField(
         controller: widget.controller,
-        readOnly: widget.isReadOnly,
-        obscureText: widget.obcureText,
+        readOnly: widget.isReadOnly!,
+        obscureText: widget.obcureText!,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-          // focusedBorder: widget.enable? OutlineInputBorder(
-          //   borderSide: BorderSide(color: kMainColor, width: 2.0.w),
-          // ) : OutlineInputBorder(),
-          // enabledBorder: OutlineInputBorder(
-          //   borderSide: BorderSide(color: Colors.black, width: 1.0.w),
-          // ),
-          // border: OutlineInputBorder(
-          //   borderSide: BorderSide(color: Colors.pink, width: 1.0.w),
-          // ),
+          contentPadding:
+              EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
           labelText: widget.labelText,
-          labelStyle: TextStyle(color: Colors.black, fontSize: 14.sp, fontWeight: FontWeight.w400),
-     
+          labelStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w400),
         ),
-     
       ),
     );
   }
