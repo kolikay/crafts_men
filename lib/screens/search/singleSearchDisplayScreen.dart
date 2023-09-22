@@ -1,7 +1,8 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
-import 'package:craftsmen/constants/reusesable_widgets/profleFormFields.dart';
+import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/screens/search/searchScreensContants.dart';
+import 'package:craftsmen/screens/search/serviceDetailsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,7 +21,7 @@ class _SingleSearchScreenState extends State<SingleSearchScreen> {
       length: 3,
       child: Scaffold(
         body: SizedBox(
-          height: 812.h,
+          height: 800.h,
           child: Column(
             children: [
               const SizedBox(
@@ -85,16 +86,30 @@ class _SingleSearchScreenState extends State<SingleSearchScreen> {
                 ],
               ),
               SizedBox(
-                height: 500.h,
+                height: 450.h,
                 child: TabBarView(children: [
-                  About(),
+                  const AboutTabView(),
                   ReviwTabView(
                     tab: tabs,
                   ),
-                  About(),
+                  const WorkPhotoTabView(),
                 ]),
               ),
             ],
+          ),
+        ),
+        bottomSheet: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: ReuseableButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) =>  ServiceDetailsScreen()),
+                ),
+              );
+            },
+            text: "Book",
+            width: double.infinity,
           ),
         ),
       ),

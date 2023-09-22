@@ -1,18 +1,20 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/profleFormFields.dart';
-import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class About extends StatefulWidget {
-  const About({Key? key}) : super(key: key);
+
+
+
+class AboutTabView extends StatefulWidget {
+  const AboutTabView({Key? key}) : super(key: key);
 
   @override
-  State<About> createState() => _AboutState();
+  State<AboutTabView> createState() => _AboutTabViewState();
 }
 
-class _AboutState extends State<About> {
+class _AboutTabViewState extends State<AboutTabView> {
   final _fullnameCont = TextEditingController();
   final _awayFromYouCont = TextEditingController();
   final _phone = TextEditingController();
@@ -36,72 +38,85 @@ class _AboutState extends State<About> {
     _jobCompleted.text = "47";
 
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 15.h,
-          ),
-          ProfileFormField(
-            labelText: 'Full Name',
-            controller: _fullnameCont,
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          ProfileFormField(
-            labelText: 'Email',
-            controller: _email,
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          ProfileFormField(
-            labelText: 'Away From You',
-            controller: _awayFromYouCont,
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          ProfileFormField(
-            labelText: 'Address',
-            controller: _address,
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          ProfileFormField(
-            labelText: 'Years Of Experience',
-            controller: _yOE,
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          ProfileFormField(
-            labelText: 'Phone Number',
-            controller: _phone,
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          ProfileFormField(
-            labelText: 'Year Started Business',
-            controller: _started,
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          ProfileFormField(
-            labelText: 'Ratings',
-            controller: _ratings,
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          ProfileFormField(
-            labelText: 'Jobs Completed',
-            controller: _jobCompleted,
-          ),
-        ],
+      child: SizedBox(
+         width: 375.w,
+          height: 700.h,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 15.h,
+            ),
+            ProfileFormField(
+              labelText: 'Full Name',
+              controller: _fullnameCont,
+              isReadOnly: true,
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            ProfileFormField(
+              labelText: 'Email',
+              controller: _email,
+              isReadOnly: true,
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            ProfileFormField(
+              labelText: 'Away From You',
+              controller: _awayFromYouCont,
+              isReadOnly: true,
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            ProfileFormField(
+              labelText: 'Address',
+              controller: _address,
+              isReadOnly: true,
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            ProfileFormField(
+              labelText: 'Years Of Experience',
+              isReadOnly: true,
+              controller: _yOE,
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            ProfileFormField(
+              labelText: 'Phone Number',
+              controller: _phone,
+              isReadOnly: true,
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            ProfileFormField(
+              labelText: 'Year Started Business',
+              controller: _started,
+              isReadOnly: true,
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            ProfileFormField(
+              labelText: 'Ratings',
+              controller: _ratings,
+              isReadOnly: true,
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            ProfileFormField(
+              labelText: 'Jobs Completed',
+              controller: _jobCompleted,
+              isReadOnly: true,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -129,7 +144,7 @@ class _ReviwTabViewState extends State<ReviwTabView> {
       body: SingleChildScrollView(
         child: SizedBox(
           width: 375.w,
-          height: 812.h,
+          height: 800.h,
           child: Column(
             children: widget.tab,
           ),
@@ -147,10 +162,12 @@ class ReviewCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left:20.0, right: 20),
+      padding: const EdgeInsets.only(left: 20.0, right: 20),
       child: Column(
         children: [
-          SizedBox(height: 15.h,),
+          SizedBox(
+            height: 15.h,
+          ),
           Row(
             children: [
               SizedBox(
@@ -244,9 +261,83 @@ class ReviewCards extends StatelessWidget {
               ),
             ],
           ),
-          Divider(color: kBlackDull, thickness: 1,),
+        const  Divider(
+            color: kBlackDull,
+            thickness: 1,
+          ),
         ],
       ),
     );
+  }
+}
+
+class WorkPhotoTabView extends StatelessWidget {
+  const WorkPhotoTabView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: SizedBox(
+          height: 600.h,
+          width: 335.w,
+          child: GridView.count(
+            primary: false,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 7,
+            crossAxisCount: 3,
+            children: <Widget>[
+              SizedBox(
+                height: 100.h,
+                width: 100.w,
+                child: Image.asset('lib/assets/worker1.png', fit: BoxFit.fill,),
+              ),
+               SizedBox(
+                height: 100.h,
+                width: 100.w,
+                child: Image.asset('lib/assets/worker2.png', fit: BoxFit.fill,),
+              ),
+                 SizedBox(
+                height: 100.h,
+                width: 100.w,
+                child: Image.asset('lib/assets/worker3.png', fit: BoxFit.fill,),
+              ),
+               SizedBox(
+                height: 100.h,
+                width: 100.w,
+                child: Image.asset('lib/assets/worker4.png', fit: BoxFit.fill,),
+              ),
+                SizedBox(
+                height: 100.h,
+                width: 100.w,
+                child: Image.asset('lib/assets/worker5.png', fit: BoxFit.fill,),
+              ),
+             SizedBox(
+                height: 100.h,
+                width: 100.w,
+                child: Image.asset('lib/assets/worker6.png', fit: BoxFit.fill,),
+              ),
+                  SizedBox(
+                height: 100.h,
+                width: 100.w,
+                child: Image.asset('lib/assets/worker7.png', fit: BoxFit.fill,),
+              ),
+                  SizedBox(
+                height: 100.h,
+                width: 100.w,
+                child: Image.asset('lib/assets/worker8.png', fit: BoxFit.fill,),
+              ),
+                  SizedBox(
+                height: 100.h,
+                width: 100.w,
+                child: Image.asset('lib/assets/worker9.png', fit: BoxFit.fill,),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ));
   }
 }

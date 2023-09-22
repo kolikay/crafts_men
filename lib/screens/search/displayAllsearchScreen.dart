@@ -1,7 +1,7 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusesable_appBar2.dart';
 import 'package:craftsmen/constants/reusesable_widgets/searchDisplayCards.dart';
-import 'package:craftsmen/screens/search/singleSearchScreen.dart';
+import 'package:craftsmen/screens/search/singleSearchDisplayScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
