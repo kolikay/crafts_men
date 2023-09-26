@@ -21,7 +21,7 @@ class ServiceDetailsScreen extends ConsumerStatefulWidget {
 
 class _ServiceDetailsScreenState extends ConsumerState<ServiceDetailsScreen> {
   // TextEditingController dateInput = TextEditingController();
-  String? dateInput;
+  String? dateInpute;
   @override
   Widget build(BuildContext context) {
     final authViewModel = ref.watch(authViewModelProvider);
@@ -83,7 +83,7 @@ class _ServiceDetailsScreenState extends ConsumerState<ServiceDetailsScreen> {
                                   lastDate: DateTime(2100));
 
                               setState(() {
-                                dateInput =
+                                dateInpute =
                                     pickedDate.toString().substring(0, 10);
                               });
                             },
@@ -101,7 +101,7 @@ class _ServiceDetailsScreenState extends ConsumerState<ServiceDetailsScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     NormalText(
-                                      text: dateInput ?? 'Select Date',
+                                      text: dateInpute ?? 'Select Date',
                                       color: kBlack,
                                       size: 15,
                                     ),

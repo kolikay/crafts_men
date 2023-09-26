@@ -15,7 +15,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'screens/on_boarding/craftsMen/craftsmen_fill_details_screen.dart';
+import 'screens/on_boarding/craftsMen/details/craftsmen_fill_details_screen.dart';
 
 
 void main() async {

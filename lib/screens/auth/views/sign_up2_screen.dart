@@ -38,7 +38,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
   final _emailCont = TextEditingController();
   final _password1Cont = TextEditingController();
 
-  bool? isChecked = false;
+  bool? _isChecked = false;
 
   getInputedData() {
     final body = {
@@ -175,10 +175,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                                   SizedBox(
                                     width: 25.w,
                                     child: Checkbox(
-                                        value: isChecked,
+                                        value: _isChecked,
                                         onChanged: (check) {
                                           setState(() {
-                                            isChecked = check;
+                                            _isChecked = check;
                                           });
                                         }),
                                   ),
