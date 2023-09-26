@@ -1,8 +1,9 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
+import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
+import 'package:craftsmen/screens/auth/views/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 
 class LogOutScreen extends StatefulWidget {
   const LogOutScreen({
@@ -51,47 +52,30 @@ class _LogOutScreenState extends State<LogOutScreen> {
                 SizedBox(
                   height: 14.h,
                 ),
-                InkWell(
-                  onTap: () {
-                  
-                  },
-                  child: Container(
+                ReuseableButton(
+                    bordercolor: Colors.red,
+                    backGroundColor: Colors.red,
+                    textColor: Colors.white,
                     width: 220.w,
                     height: 50.h,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: kBlack),
-                    ),
-                    child: Center(
-                      child: NormalText(
-                        text: 'Yes',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
+                    text: 'Yes',
+                    onPressed: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          LoginScreen.id, (Route<dynamic> route) => false);
+                    }),
                 SizedBox(
                   height: 15.h,
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Container(
+                ReuseableButton(
+                    bordercolor: kMainColor,
+                    backGroundColor: kWhite,
+                    textColor: kMainColor,
                     width: 220.w,
                     height: 50.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(color:kBlack)),
-                    child: Center(
-                      child: NormalText(
-                        text: 'No',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
+                    text: 'No',
+                    onPressed: () {
+                      Navigator.pop(context);
+                    })
               ],
             ),
           ),

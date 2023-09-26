@@ -1,13 +1,18 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:craftsmen/constants/const/app_state_constants.dart';
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusaable_textformfield.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
+import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
+import 'package:craftsmen/screens/auth/views/verify_otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusable_info_widget.dart';
-import 'package:craftsmen/screens/auth/views/verify_otp_screen.dart';
+
 
 class SignUpScreen2 extends ConsumerStatefulWidget {
   final String fullName;
@@ -49,7 +54,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
 
   @override
   Widget build(BuildContext context) {
-    // final authViewModel = ref.watch(authViewModelProvider);
+    final authViewModel = ref.watch(authViewModelProvider);
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -231,20 +236,24 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                         ReuseableButton(
                           textSize: 14.sp,
                           text: 'Sign Up',
-                          onPressed: () {
-                            // print(getInputedData());
-                            dialogBuilder(
-                                context,
-                                'lib/assets/verifiedIcon.png',
-                                'Congratulations',
-                                'Your account has been successfully created. Kindly go to your email to verify your account',
-                                'Confirm Email', () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => const VerifyOtpScreen(),
-                                ),
-                              );
-                            });
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              await authViewModel.request();
+                              // print(getInputedData());
+                              dialogBuilder(
+                                  context,
+                                  'lib/assets/verifiedIcon.png',
+                                  'Congratulations',
+                                  'Your account has been successfully created. Kindly go to your email to verify your account',
+                                  'Confirm Email', () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const VerifyOtpScreen(),
+                                  ),
+                                );
+                              });
+                            }
 
                             // if (_formKey.currentState!.validate()) {
                             //   authViewModel.registerUser(
@@ -292,15 +301,15 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                 ),
               ),
             ),
-            // Positioned(
-            //   child: authViewModel.loading
-            //       ? const Center(
-            //           child: ProgressDialog(
-            //             message: 'Loading....',
-            //           ),
-            //         )
-            //       : const SizedBox(),
-            // ),
+            Positioned(
+              child: authViewModel.loading
+                  ? const Center(
+                      child: ProgressDialog(
+                        message: 'Loading....',
+                      ),
+                    )
+                  : const SizedBox(),
+            ),
           ],
         ),
       ),

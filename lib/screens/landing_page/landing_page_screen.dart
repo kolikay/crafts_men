@@ -1,11 +1,13 @@
+import 'package:craftsmen/constants/const/cachedNetworkImage.dart';
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
+
 import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../constants/const/cachedNetworkImage.dart';
+
 
 
 
@@ -118,7 +120,7 @@ class _LandingPageState extends State<LandingPage> {
                     pageController.jumpToPage(2);
                   },
                   child: NormalText(
-                    text: 'Skip',
+                    text: !isLastPage ? 'Skip' : '',
                     size: 14.sp,
                     color: kMainColor,
                   ),

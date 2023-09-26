@@ -8,12 +8,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ReuseableButton extends StatelessWidget {
   final String text;
   final GestureTapCallback onPressed;
-  final double? width ;
+  final double? width;
   double? height = 50.h;
   final double textSize;
   final bool isActive;
   final Color backGroundColor;
   final Color textColor;
+  final bordercolor;
 
   ReuseableButton({
     Key? key,
@@ -25,15 +26,16 @@ class ReuseableButton extends StatelessWidget {
     this.isActive = true,
     this.backGroundColor = kMainColor,
     this.textColor = Colors.white,
+    this.bordercolor = kMainColor
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(),
+        border: Border.all(color: bordercolor),
         borderRadius: BorderRadius.circular(5.r),
-        color: kMainColor,
+        color: bordercolor,
       ),
       // margin: EdgeInsets.fromLTRB(20.0.w, 0.0.h, 20.0.w, 0.0.h),
       height: height,

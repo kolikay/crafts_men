@@ -1,8 +1,8 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
-import 'package:craftsmen/screens/on_boarding/home_screens/homepage_constant_widgets.dart';
-import 'package:craftsmen/screens/on_boarding/notifications/views/notification_screen1.dart';
-import 'package:craftsmen/screens/on_boarding/profile_screens/profile_view/profile_screen.dart';
+import 'package:craftsmen/screens/on_boarding/user/home_screens/homepage_constant_widgets.dart';
+import 'package:craftsmen/screens/on_boarding/user/notifications/views/notification_screen1.dart';
+import 'package:craftsmen/screens/on_boarding/user/profile_screens/profile_view/profile_screen.dart';
 import 'package:craftsmen/screens/settings/about_us_screen.dart';
 import 'package:craftsmen/screens/settings/contact_screen.dart';
 import 'package:craftsmen/screens/settings/faqs_screen.dart';
@@ -10,6 +10,7 @@ import 'package:craftsmen/screens/settings/feed_back_screen.dart';
 import 'package:craftsmen/screens/settings/log_out_screen.dart';
 import 'package:craftsmen/screens/settings/rate_us_screen.dart';
 import 'package:craftsmen/screens/settings/themes._settings.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

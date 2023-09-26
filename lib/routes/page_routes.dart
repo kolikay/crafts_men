@@ -1,5 +1,7 @@
+
+import 'package:craftsmen/screens/landing_page/no_internet.dart';
 import 'package:flutter/material.dart';
-import '../screens/landing_page/no_internet.dart';
+
 
 
 pushToNoInternetPage(BuildContext context) async {

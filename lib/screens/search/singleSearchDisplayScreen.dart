@@ -2,6 +2,7 @@ import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/screens/search/searchScreensContants.dart';
+
 import 'package:craftsmen/screens/search/serviceDetailsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,7 +34,7 @@ class _SingleSearchScreenState extends State<SingleSearchScreen> {
                     icon: Icon(
                       Icons.arrow_back_ios,
                       color: kMainColor,
-                      size: 14.sp,
+                      size: 20.sp,
                     ),
                     onPressed: () {
                       Navigator.pop(context);
@@ -45,7 +46,7 @@ class _SingleSearchScreenState extends State<SingleSearchScreen> {
                   NormalText(
                     text: 'Service Provider Profile',
                     color: kMainColor,
-                    size: 18.sp,
+                    size: 20.sp,
                     fontWeight: FontWeight.w500,
                   )
                 ],
@@ -98,18 +99,26 @@ class _SingleSearchScreenState extends State<SingleSearchScreen> {
             ],
           ),
         ),
-        bottomSheet: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: ReuseableButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: ((context) =>  ServiceDetailsScreen()),
+        bottomSheet: SizedBox(
+          height: 60.h,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              children: [
+                ReuseableButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: ((context) => ServiceDetailsScreen()),
+                      ),
+                    );
+                  },
+                  text: "Book",
+                  width: double.infinity,
                 ),
-              );
-            },
-            text: "Book",
-            width: double.infinity,
+                
+              ],
+            ),
           ),
         ),
       ),

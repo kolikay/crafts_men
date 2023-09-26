@@ -2,21 +2,18 @@
 
 import 'dart:io';
 
+import 'package:craftsmen/constants/const/app_state_constants.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusable_info_widget.dart';
 import 'package:craftsmen/constants/utils/snack_bar.dart';
 import 'package:craftsmen/models/models.dart';
-import 'package:craftsmen/screens/auth/views/verify_otp_screen.dart';
 import 'package:flutter/material.dart';
-import '../../../constants/const/app_state_constants.dart';
 import '../views/login_screen.dart';
 import 'package:craftsmen/services/web_service.dart';
 import 'package:craftsmen/constants/const/status_codes.dart';
 import 'package:craftsmen/constants/const/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-
 class AuthViewModel extends ChangeNotifier {
-
   Dio dio = Dio();
 
   final userPref = UserPreferences();
@@ -49,6 +46,13 @@ class AuthViewModel extends ChangeNotifier {
   setLoginError(bool loginError) {
     _loginError = loginError;
     notifyListeners();
+  }
+
+  //fake api call
+  Future request() async {
+    setLoading(true);
+    await Future.delayed(const Duration(seconds: 2));
+    setLoading(false);
   }
 
 //store user data
@@ -100,7 +104,7 @@ class AuthViewModel extends ChangeNotifier {
 
       // if (response is SocketException) {
       //   pushToNoInternetPage(context);
-      //   setLoading(false);
+      //   setLoading(false);f
       // }
       // setLoading(false);
     } on HttpException catch (e) {
@@ -116,8 +120,6 @@ class AuthViewModel extends ChangeNotifier {
         '$baseApi/account/register/', body, context);
 
     if (response is Success) {
-
-
       // Navigator.of(context).push(
       //   MaterialPageRoute(
       //     builder: (context) => ReuseableInfoWidget(
