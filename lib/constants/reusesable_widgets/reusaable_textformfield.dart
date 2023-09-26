@@ -53,7 +53,7 @@ class _MyTextFieldState extends State<MyTextField> {
             borderSide: BorderSide(color: kMainColor, width: 2.0.w),
           ) : OutlineInputBorder(),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black, width: 1.0.w),
+            borderSide: BorderSide(color: widget.borderColor, width: 1.0.w),
           ),
           border: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.pink, width: 1.0.w),

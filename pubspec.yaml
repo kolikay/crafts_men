@@ -76,6 +76,9 @@ dependencies:
   universal_io: ^2.0.4
   jwt_decoder: ^2.0.1
 
+  #dotted container border
+  dotted_border: ^2.1.0
+
 
  
 
