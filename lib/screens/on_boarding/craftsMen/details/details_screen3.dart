@@ -16,7 +16,7 @@ class DetailsPage3 extends StatelessWidget {
     return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
       SizedBox(
         width: 335.w,
-        height: 107.h,
+        height: 120.h,
         child: DottedBorder(
           strokeWidth: 1.sp,
           color: kDullMainColor,

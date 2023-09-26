@@ -29,7 +29,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
       children: [
         SizedBox(
           width: 335.w,
-          height: 107.h,
+          height: 120.h,
           child: DottedBorder(
             strokeWidth: 1.sp,
             color: kDullMainColor,
