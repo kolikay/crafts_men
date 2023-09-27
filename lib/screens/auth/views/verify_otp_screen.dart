@@ -9,6 +9,7 @@ import 'package:craftsmen/constants/reusesable_widgets/reusable_info_widget.dart
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
+import 'package:craftsmen/screens/on_boarding/craftsMen/details/craftsmen_fill_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -177,7 +178,7 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                       'Proceed to login', () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const LoginScreen(),
+                        builder: (context) => const CraftmenFillDetailsScreen(),
                       ),
                     );
                   });
