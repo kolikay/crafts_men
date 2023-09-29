@@ -1,16 +1,11 @@
 import 'package:craftsmen/constants/const/color.dart';
-import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
-import 'package:craftsmen/constants/reusesable_widgets/reusaable_textformfield.dart';
-import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/screens/on_boarding/craftsMen/details/detail_screen1.dart';
 import 'package:craftsmen/screens/on_boarding/craftsMen/details/details_screen2.dart';
 import 'package:craftsmen/screens/on_boarding/craftsMen/details/details_screen3.dart';
-import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:dotted_border/dotted_border.dart';
 
 class CraftmenFillDetailsScreen extends ConsumerStatefulWidget {
   const CraftmenFillDetailsScreen({Key? key}) : super(key: key);
@@ -54,33 +49,34 @@ class _CraftmenFillDetailsScreenState
       child: Stack(
         children: [
           Scaffold(
-            body: SingleChildScrollView(
-              child: SizedBox(
-                height: 800,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 30.w, right: 20.w),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40.0),
-                        child: SmoothPageIndicator(
-                          controller: pageController,
-                          count: 3,
-                          effect: WormEffect(
-                              dotWidth: 60.w,
-                              dotHeight: 3.h,
-                              activeDotColor: kMainColor,
-                              dotColor: kDullMainColor),
-                          onDotClicked: (index) => pageController.animateToPage(
-                              index,
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.easeOut),
-                        ),
+            body: Padding(
+              padding: EdgeInsets.only(left: 30.w, right: 20.w),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40.0),
+                      child: SmoothPageIndicator(
+                        controller: pageController,
+                        count: 3,
+                        effect: WormEffect(
+                            dotWidth: 60.w,
+                            dotHeight: 3.h,
+                            activeDotColor: kMainColor,
+                            dotColor: kDullMainColor),
+                        onDotClicked: (index) => pageController.animateToPage(
+                            index,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeOut),
                       ),
-                      SizedBox(
-                        height: 30.h,
-                      ),
-                      Expanded(
+                    ),
+                    SizedBox(
+                      height: 30.h,
+                    ),
+                    Flexible(
+                      child: SizedBox(
+                        height: 800,
                         child: PageView(
                           controller: pageController,
                           onPageChanged: (index) {
@@ -96,13 +92,13 @@ class _CraftmenFillDetailsScreenState
                               compPhoneCont: _compPhoneCont,
                               compAddCont: _compAdd,
                             ),
-                            DetailsPage2(),
-                            DetailsPage3(),
+                            const DetailsPage2(),
+                            const DetailsPage3(),
                           ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -112,7 +108,3 @@ class _CraftmenFillDetailsScreenState
     );
   }
 }
-
-
-
-

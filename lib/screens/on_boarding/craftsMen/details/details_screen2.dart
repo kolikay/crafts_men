@@ -1,12 +1,14 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
-import 'package:craftsmen/constants/reusesable_widgets/profleFormFields.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusaable_textformfield.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
-import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+
+
+
 
 class DetailsPage2 extends StatefulWidget {
   const DetailsPage2({
@@ -18,10 +20,13 @@ class DetailsPage2 extends StatefulWidget {
 }
 
 class _DetailsPage2State extends State<DetailsPage2> {
+
   int employee = 0;
   int experince = 0;
 
   String? proffession;
+  
+  final othersCont = TextEditingController();
 
   bool? _isChecked1 = false;
   bool? _isChecked2 = false;
@@ -101,7 +106,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
               color: Colors.black,
             ),
             SizedBox(
-              height: 15.h,
+              height: 10.h,
             ),
             Row(
               children: [
@@ -182,7 +187,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
               color: Colors.black,
             ),
             SizedBox(
-              height: 15.h,
+              height: 10.h,
             ),
             Row(
               children: [
@@ -337,14 +342,16 @@ class _DetailsPage2State extends State<DetailsPage2> {
 
   bottomSheet(BuildContext context) {
     return showModalBottomSheet(
+        enableDrag: true,
         backgroundColor: Colors.transparent,
+        isDismissible: true,
         context: context,
         builder: (context) {
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setModalState) {
             return SingleChildScrollView(
               child: Container(
-                height: 700,
+                height: 850,
                 padding: EdgeInsets.all(20.w),
                 decoration: const BoxDecoration(
                   color: kDarkContainer,
@@ -380,6 +387,17 @@ class _DetailsPage2State extends State<DetailsPage2> {
                         onChanged: (check) {
                           setModalState(() {
                             _isChecked1 = check;
+                            _isChecked2 = false;
+                            _isChecked3 = false;
+                            _isChecked4 = false;
+                            _isChecked5 = false;
+                            _isChecked6 = false;
+                            _isChecked7 = false;
+                            _isChecked8 = false;
+                            _isChecked9 = false;
+                          });
+                          setState(() {
+                            proffession = 'Barbing';
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -396,7 +414,18 @@ class _DetailsPage2State extends State<DetailsPage2> {
                         value: _isChecked2,
                         onChanged: (check) {
                           setModalState(() {
+                            _isChecked1 = false;
                             _isChecked2 = check;
+                            _isChecked3 = false;
+                            _isChecked4 = false;
+                            _isChecked5 = false;
+                            _isChecked6 = false;
+                            _isChecked7 = false;
+                            _isChecked8 = false;
+                            _isChecked9 = false;
+                          });
+                          setState(() {
+                            proffession = 'Teaching';
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -413,7 +442,18 @@ class _DetailsPage2State extends State<DetailsPage2> {
                         value: _isChecked3,
                         onChanged: (check) {
                           setModalState(() {
+                            _isChecked1 = false;
+                            _isChecked2 = false;
                             _isChecked3 = check;
+                            _isChecked4 = false;
+                            _isChecked5 = false;
+                            _isChecked6 = false;
+                            _isChecked7 = false;
+                            _isChecked8 = false;
+                            _isChecked9 = false;
+                          });
+                          setState(() {
+                            proffession = 'Electricity';
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -430,7 +470,18 @@ class _DetailsPage2State extends State<DetailsPage2> {
                         value: _isChecked4,
                         onChanged: (check) {
                           setModalState(() {
+                            _isChecked1 = false;
+                            _isChecked2 = false;
+                            _isChecked3 = false;
                             _isChecked4 = check;
+                            _isChecked5 = false;
+                            _isChecked6 = false;
+                            _isChecked7 = false;
+                            _isChecked8 = false;
+                            _isChecked9 = false;
+                          });
+                          setState(() {
+                            proffession = 'Baking';
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -447,7 +498,18 @@ class _DetailsPage2State extends State<DetailsPage2> {
                         value: _isChecked5,
                         onChanged: (check) {
                           setModalState(() {
+                            _isChecked1 = false;
+                            _isChecked2 = false;
+                            _isChecked3 = false;
+                            _isChecked4 = false;
                             _isChecked5 = check;
+                            _isChecked6 = false;
+                            _isChecked7 = false;
+                            _isChecked8 = false;
+                            _isChecked9 = false;
+                          });
+                          setState(() {
+                            proffession = 'Plumbing';
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -464,7 +526,18 @@ class _DetailsPage2State extends State<DetailsPage2> {
                         value: _isChecked6,
                         onChanged: (check) {
                           setModalState(() {
+                            _isChecked1 = false;
+                            _isChecked2 = false;
+                            _isChecked3 = false;
+                            _isChecked4 = false;
+                            _isChecked5 = false;
                             _isChecked6 = check;
+                            _isChecked7 = false;
+                            _isChecked8 = false;
+                            _isChecked9 = false;
+                          });
+                          setState(() {
+                            proffession = 'Catering & Food Service';
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -481,7 +554,18 @@ class _DetailsPage2State extends State<DetailsPage2> {
                         value: _isChecked7,
                         onChanged: (check) {
                           setModalState(() {
+                            _isChecked1 = false;
+                            _isChecked2 = false;
+                            _isChecked3 = false;
+                            _isChecked4 = false;
+                            _isChecked5 = false;
+                            _isChecked6 = false;
                             _isChecked7 = check;
+                            _isChecked8 = false;
+                            _isChecked9 = false;
+                          });
+                          setState(() {
+                            proffession = 'Engineering';
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -498,7 +582,18 @@ class _DetailsPage2State extends State<DetailsPage2> {
                         value: _isChecked8,
                         onChanged: (check) {
                           setModalState(() {
+                            _isChecked1 = false;
+                            _isChecked2 = false;
+                            _isChecked3 = false;
+                            _isChecked4 = false;
+                            _isChecked5 = false;
+                            _isChecked6 = false;
+                            _isChecked7 = false;
                             _isChecked8 = check;
+                            _isChecked9 = false;
+                          });
+                          setState(() {
+                            proffession = 'Medicine';
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -515,6 +610,14 @@ class _DetailsPage2State extends State<DetailsPage2> {
                         value: _isChecked9,
                         onChanged: (check) {
                           setModalState(() {
+                            _isChecked1 = false;
+                            _isChecked2 = false;
+                            _isChecked3 = false;
+                            _isChecked4 = false;
+                            _isChecked5 = false;
+                            _isChecked6 = false;
+                            _isChecked7 = false;
+                            _isChecked8 = false;
                             _isChecked9 = check;
                             visible = !visible;
                           });
@@ -528,7 +631,8 @@ class _DetailsPage2State extends State<DetailsPage2> {
                     ),
                     Visibility(
                       visible: visible,
-                      child: const MyTextField(
+                      child: MyTextField(
+                        controller: othersCont,
                         isPassword: false,
                         isReadOnly: false,
                         keyBoardType: TextInputType.text,
@@ -550,15 +654,17 @@ class _DetailsPage2State extends State<DetailsPage2> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        SizedBox(width: 10.w,),
-                       InkWell(
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        InkWell(
                           onTap: () {
                             Navigator.pop(context);
                           },
                           child: NormalText(
                             text: 'OK',
                             color: kMainColor,
-                             size: 16,
+                            size: 16,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -573,13 +679,12 @@ class _DetailsPage2State extends State<DetailsPage2> {
         });
   }
 
-  Widget items(String name, Widget Check) {
-    bool? isChecked = false;
+  Widget items(String name, Widget check) {
     return Column(
       children: [
         Row(
           children: [
-            Check,
+            check,
             NormalText(
               text: name,
               size: 16.sp,
@@ -596,211 +701,3 @@ class _DetailsPage2State extends State<DetailsPage2> {
     );
   }
 }
-
-
-
-
-    //  showModalBottomSheet(
-    //   isScrollControlled: true,
-    //   backgroundColor: Colors.transparent,
-    //   context: context,
-    //   builder: (context) {
-    //     return Container(
-    //       padding: EdgeInsets.all(20.w),
-    //       decoration: const BoxDecoration(
-    //         color: kDarkContainer,
-    //         borderRadius: BorderRadius.only(
-    //           topLeft: Radius.circular(20),
-    //           topRight: Radius.circular(20),
-    //         ),
-    //       ),
-    //       height: 700.h,
-    //       width: 375,
-    //       child: Column(
-    //         children: [
-    //           Container(
-    //             width: 80,
-    //             height: 5,
-    //             color: Colors.grey,
-    //           ),
-    //           const SizedBox(
-    //             height: 20,
-    //           ),
-    //           NormalText(
-    //             text: 'Choose your Profession Category',
-    //             color: kMainColor,
-    //             size: 18,
-    //             fontWeight: FontWeight.w600,
-    //           ),
-    //           const SizedBox(
-    //             height: 20,
-    //           ),
-    //           items(
-    //             'Barbing',
-    //             Checkbox(
-    //               checkColor: kMainColor,
-    //               value: _isChecked1,
-    //               onChanged: (check) {
-    //                 setState(() {
-    //                   _isChecked1 = check;
-    //                 });
-    //               },
-    //               shape: RoundedRectangleBorder(
-    //                   borderRadius: BorderRadius.circular(5)),
-    //             ),
-    //           ),
-    //           const SizedBox(
-    //             height: 20,
-    //           ),
-    //           items(
-    //             'Teaching',
-    //             Checkbox(
-    //               checkColor: kMainColor,
-    //               value: _isChecked2,
-    //               onChanged: (check) {
-    //                 setState(() {
-    //                   _isChecked2 = check;
-    //                 });
-    //               },
-    //               shape: RoundedRectangleBorder(
-    //                   borderRadius: BorderRadius.circular(5)),
-    //             ),
-    //           ),
-    //           const SizedBox(
-    //             height: 20,
-    //           ),
-    //           items(
-    //             'Electricity',
-    //             Checkbox(
-    //               checkColor: kMainColor,
-    //               value: _isChecked3,
-    //               onChanged: (check) {
-    //                 setState(() {
-    //                   _isChecked3 = check;
-    //                 });
-    //               },
-    //               shape: RoundedRectangleBorder(
-    //                   borderRadius: BorderRadius.circular(5)),
-    //             ),
-    //           ),
-    //           const SizedBox(
-    //             height: 20,
-    //           ),
-    //           items(
-    //             'Baking',
-    //             Checkbox(
-    //               checkColor: kMainColor,
-    //               value: _isChecked4,
-    //               onChanged: (check) {
-    //                 setState(() {
-    //                   _isChecked4 = check;
-    //                 });
-    //               },
-    //               shape: RoundedRectangleBorder(
-    //                   borderRadius: BorderRadius.circular(5)),
-    //             ),
-    //           ),
-    //           const SizedBox(
-    //             height: 20,
-    //           ),
-    //           items(
-    //             'Plumbing',
-    //             Checkbox(
-    //               checkColor: kMainColor,
-    //               value: _isChecked5,
-    //               onChanged: (check) {
-    //                 setState(() {
-    //                   _isChecked5 = check;
-    //                 });
-    //               },
-    //               shape: RoundedRectangleBorder(
-    //                   borderRadius: BorderRadius.circular(5)),
-    //             ),
-    //           ),
-    //           const SizedBox(
-    //             height: 20,
-    //           ),
-    //           items(
-    //             'Catering & Food Service',
-    //             Checkbox(
-    //               checkColor: kMainColor,
-    //               value: _isChecked6,
-    //               onChanged: (check) {
-    //                 setState(() {
-    //                   _isChecked6 = check;
-    //                 });
-    //               },
-    //               shape: RoundedRectangleBorder(
-    //                   borderRadius: BorderRadius.circular(5)),
-    //             ),
-    //           ),
-    //           const SizedBox(
-    //             height: 20,
-    //           ),
-    //           items(
-    //             'Engineering',
-    //             Checkbox(
-    //               checkColor: kMainColor,
-    //               value: _isChecked7,
-    //               onChanged: (check) {
-    //                 setState(() {
-    //                   _isChecked7 = check;
-    //                 });
-    //               },
-    //               shape: RoundedRectangleBorder(
-    //                   borderRadius: BorderRadius.circular(5)),
-    //             ),
-    //           ),
-    //           const SizedBox(
-    //             height: 20,
-    //           ),
-    //           items(
-    //             'Medicine',
-    //             Checkbox(
-    //               checkColor: kMainColor,
-    //               value: _isChecked8,
-    //               onChanged: (check) {
-    //                 setState(() {
-    //                   _isChecked8 = check;
-    //                 });
-    //               },
-    //               shape: RoundedRectangleBorder(
-    //                   borderRadius: BorderRadius.circular(5)),
-    //             ),
-    //           ),
-    //           const SizedBox(
-    //             height: 20,
-    //           ),
-    //           items(
-    //             'Other',
-    //             Checkbox(
-    //               checkColor: kMainColor,
-    //               value: _isChecked9,
-    //               onChanged: (check) {
-    //                 setState(() {
-    //                   _isChecked9 = check;
-    //                   visible = !visible;
-    //                 });
-    //               },
-    //               shape: RoundedRectangleBorder(
-    //                   borderRadius: BorderRadius.circular(5)),
-    //             ),
-    //           ),
-    //           Visibility(
-    //             visible: visible,
-    //             child: const MyTextField(
-    //               isPassword: false,
-    //               isReadOnly: false,
-    //               keyBoardType: TextInputType.text,
-    //               labelText: 'Enter other Proffesion',
-    //               obcureText: false,
-    //             ),
-    //           ),
-    //           Row(
-    //             children: [],
-    //           )
-    //         ],
-    //       ),
-    //     );
-    //   },
-    // );

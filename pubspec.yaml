@@ -79,6 +79,9 @@ dependencies:
   #dotted container border
   dotted_border: ^2.1.0
 
+  #group button
+  group_button: 4.6.0
+
 
  
 

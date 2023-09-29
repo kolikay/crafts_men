@@ -13,7 +13,7 @@ Future<void> dialogBuilder(BuildContext context, String logo, String maintext,
       return Dialog(
         child: SizedBox(
           height: 410.h,
-          width: 335.w,
+          width: 340.w,
           child: Column(
             children: [
               SizedBox(

@@ -1,13 +1,14 @@
-
-
-
-
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusaable_textformfield.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+
+
+
+
 
 class DetailsPage1 extends StatelessWidget {
   const DetailsPage1(
@@ -23,7 +24,6 @@ class DetailsPage1 extends StatelessWidget {
         _compPhoneCont = compPhoneCont,
         _compAddCont = compAddCont,
         super(key: key);
-
   final GlobalKey<FormState> _formKey;
   final TextEditingController _compNameCont;
   final TextEditingController _compEmailCont;

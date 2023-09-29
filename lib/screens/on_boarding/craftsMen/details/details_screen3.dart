@@ -14,6 +14,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+
+
+
+
+
+
 class DetailsPage3 extends ConsumerStatefulWidget {
   const DetailsPage3({
     Key? key,

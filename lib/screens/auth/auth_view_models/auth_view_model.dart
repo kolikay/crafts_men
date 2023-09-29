@@ -29,7 +29,12 @@ class AuthViewModel extends ChangeNotifier {
   bool _loading = false;
   bool get loading => _loading;
 
+
+  bool _userState = false;
+  bool get userState => _userState;
+
   bool _loginError = false;
+
   bool get loginError => _loginError;
 
   // empty list to save user data from api
@@ -45,6 +50,11 @@ class AuthViewModel extends ChangeNotifier {
 
   setLoginError(bool loginError) {
     _loginError = loginError;
+    notifyListeners();
+  }
+
+  setUserState(bool userState) {
+    _userState = userState;
     notifyListeners();
   }
 

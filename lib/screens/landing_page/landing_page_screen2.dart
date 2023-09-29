@@ -2,14 +2,16 @@ import 'package:craftsmen/constants/const/cachedNetworkImage.dart';
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
+import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
 import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class LandingPage2 extends StatelessWidget {
-  const LandingPage2({Key? key}) : super(key: key);
+  LandingPage2({Key? key}) : super(key: key);
   static const id = "landingPage2";
+
+  final auth = AuthViewModel.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +76,8 @@ class LandingPage2 extends StatelessWidget {
                   textColor: kWhite,
                   text: 'Skill provider',
                   onPressed: () {
+                    auth.setUserState(true);
+
                     Navigator.pushNamed(context, SignUpScreen.id);
                   },
                   width: 137.w,
@@ -82,7 +86,11 @@ class LandingPage2 extends StatelessWidget {
                   backGroundColor: kWhite,
                   textColor: kMainColor,
                   text: 'User',
-                  onPressed: () {},
+                  onPressed: () {
+                    auth.setUserState(false);
+
+                    Navigator.pushNamed(context, SignUpScreen.id);
+                  },
                   width: 137.w,
                 ),
               ],

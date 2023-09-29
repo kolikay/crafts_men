@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
           ),
           home: const LandingPage(),
           routes: {
-            LandingPage2.id: (context) => const LandingPage2(),
+            LandingPage2.id: (context) =>  LandingPage2(),
             SignUpScreen.id: (context) => const SignUpScreen(),
             LoginScreen.id: (context) => const LoginScreen(),
             EmailPasswordChangeScreen.id: (context) =>

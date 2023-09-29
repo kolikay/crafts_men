@@ -170,18 +170,34 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                 onPressed: () async {
                   await authViewModel.request();
 
-                  dialogBuilder(
-                      context,
-                      'lib/assets/emailverifiedicon.png',
-                      'Email Verified',
-                      'Your account has been verified successfully, Please login to continue.',
-                      'Proceed to login', () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const CraftmenFillDetailsScreen(),
-                      ),
-                    );
-                  });
+                  if (authViewModel.userState == true) {
+                    dialogBuilder(
+                        context,
+                        'lib/assets/emailverifiedicon.png',
+                        'Email Verified',
+                        'Your account has been verified successfully, please tell us a bit more about your services.',
+                        'Proceed', () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const CraftmenFillDetailsScreen(),
+                        ),
+                      );
+                    });
+                  } else {
+                    dialogBuilder(
+                        context,
+                        'lib/assets/emailverifiedicon.png',
+                        'Email Verified',
+                        'Your account has been verified successfully, Please login to continue.',
+                        'Proceed to login', () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const LoginScreen(),
+                        ),
+                      );
+                    });
+                  }
                 },
               ),
             ],

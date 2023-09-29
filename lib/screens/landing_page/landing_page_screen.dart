@@ -4,6 +4,7 @@ import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 
 import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
+import 'package:craftsmen/screens/landing_page/landing_page_screen2.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -108,7 +109,7 @@ class _LandingPageState extends State<LandingPage> {
                         duration: const Duration(milliseconds: 500),
                         curve: Curves.easeOut);
                     isLastPage
-                        ? Navigator.pushNamed(context, SignUpScreen.id)
+                        ? Navigator.pushNamed(context, LandingPage2.id)
                         : null;
                   },
                 ),
