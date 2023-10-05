@@ -40,11 +40,13 @@ class ShowSnackBar {
         backgroundColor: color,
         duration: const Duration(seconds: 2),
         content: SizedBox(
-          height: 40.h,
-          child: NormalText(
-            text: message,
-            color: Colors.black,
-            size: 16.sp,
+          height: 50.h,
+          child: Center(
+            child: NormalText(
+              text: message,
+              color: Colors.black,
+              size: 16.sp,
+            ),
           ),
         ),
       ),

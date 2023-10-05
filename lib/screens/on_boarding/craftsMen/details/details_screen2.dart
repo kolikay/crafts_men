@@ -6,13 +6,12 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
-
-
-
 class DetailsPage2 extends StatefulWidget {
-  const DetailsPage2({
+   final PageController control;
+  
+   DetailsPage2({
     Key? key,
+        required this.control,
   }) : super(key: key);
 
   @override
@@ -20,12 +19,11 @@ class DetailsPage2 extends StatefulWidget {
 }
 
 class _DetailsPage2State extends State<DetailsPage2> {
-
   int employee = 0;
   int experince = 0;
 
   String? proffession;
-  
+
   final othersCont = TextEditingController();
 
   bool? _isChecked1 = false;
@@ -324,16 +322,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
             SizedBox(
               height: 25.h,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ReuseableButton(
-                    width: 96.w,
-                    text: 'Next',
-                    textSize: 16.sp,
-                    onPressed: () {}),
-              ],
-            ),
+
           ],
         ),
       ],
@@ -345,13 +334,14 @@ class _DetailsPage2State extends State<DetailsPage2> {
         enableDrag: true,
         backgroundColor: Colors.transparent,
         isDismissible: true,
+        // isScrollControlled: true,
         context: context,
         builder: (context) {
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setModalState) {
             return SingleChildScrollView(
               child: Container(
-                height: 850,
+                height: 1050,
                 padding: EdgeInsets.all(20.w),
                 decoration: const BoxDecoration(
                   color: kDarkContainer,
@@ -368,7 +358,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                       color: Colors.grey,
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     NormalText(
                       text: 'Choose your Profession Category',
@@ -620,6 +610,9 @@ class _DetailsPage2State extends State<DetailsPage2> {
                             _isChecked8 = false;
                             _isChecked9 = check;
                             visible = !visible;
+                          });
+                          setState(() {
+                            proffession = 'Others';
                           });
                         },
                         shape: RoundedRectangleBorder(

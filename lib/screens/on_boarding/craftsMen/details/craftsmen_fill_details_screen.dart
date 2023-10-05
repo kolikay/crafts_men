@@ -86,14 +86,15 @@ class _CraftmenFillDetailsScreenState
                           },
                           children: [
                             DetailsPage1(
+                              control: pageController,
                               formKey: _formKey,
                               compNameCont: _compNameCont,
                               compEmailCont: _compEmailCont,
                               compPhoneCont: _compPhoneCont,
                               compAddCont: _compAdd,
                             ),
-                            const DetailsPage2(),
-                            const DetailsPage3(),
+                             DetailsPage2(control: pageController,),
+                             DetailsPage3(control: pageController,),
                           ],
                         ),
                       ),

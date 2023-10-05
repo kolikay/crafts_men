@@ -6,6 +6,7 @@ import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusaable_textformfield.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
+import 'package:craftsmen/constants/utils/snack_bar.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
 import 'package:craftsmen/screens/auth/views/verify_otp_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +14,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusable_info_widget.dart';
 
-
 class SignUpScreen2 extends ConsumerStatefulWidget {
   final String fullName;
   final String userName;
   final String phoneNumber;
   final String gender;
+  final String address;
 
   const SignUpScreen2({
     Key? key,
@@ -26,6 +27,7 @@ class SignUpScreen2 extends ConsumerStatefulWidget {
     required this.userName,
     required this.phoneNumber,
     required this.gender,
+    required this.address,
   }) : super(key: key);
   @override
   ConsumerState<SignUpScreen2> createState() => _SignUpScreenState();
@@ -39,18 +41,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
   final _password1Cont = TextEditingController();
 
   bool? _isChecked = false;
-
-  getInputedData() {
-    final body = {
-      "full_name": widget.fullName.trim(),
-      "username": widget.userName.trim(),
-      "gender": widget.gender.trim(),
-      "email": _emailCont.text.trim(),
-      "phone": widget.phoneNumber.trim(),
-      "password_hash": _password1Cont.text.trim(),
-    };
-    return body;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -238,28 +228,34 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                           text: 'Sign Up',
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
-                              await authViewModel.request();
-                              // print(getInputedData());
-                              dialogBuilder(
-                                  context,
-                                  'lib/assets/verifiedIcon.png',
-                                  'Congratulations',
-                                  'Your account has been successfully created. Kindly go to your email to verify your account',
-                                  'Confirm Email', () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const VerifyOtpScreen(),
-                                  ),
-                                );
-                              });
-                            }
+                              final response = await authViewModel.signUpUser(
+                                  username: widget.userName.trim(),
+                                  fullname: widget.fullName.trim(),
+                                  address: widget.address.trim(),
+                                  phoneNumber: widget.phoneNumber.trim(),
+                                  gender: widget.gender,
+                                  email: _emailCont.text,
+                                  password: _password1Cont.text);
 
-                            // if (_formKey.currentState!.validate()) {
-                            //   authViewModel.registerUser(
-                            //       getInputedData(), context);
-                            // }
-                            // FocusScope.of(context).unfocus();
+                              if (response == 'Success') {
+                                dialogBuilder(
+                                    context,
+                                    'lib/assets/verifiedIcon.png',
+                                    'Congratulations',
+                                    'Your account has been successfully created. Kindly go to your email to verify your account',
+                                    'Confirm Email', () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const VerifyOtpScreen(),
+                                    ),
+                                  );
+                                });
+                              } else {
+                                ShowSnackBar.buildErrorSnackbar(
+                                    context, response.toString(), Colors.red);
+                              }
+                            }
                           },
                         ),
                       ],

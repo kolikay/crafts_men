@@ -195,6 +195,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                                       userName: _usernameCont.text,
                                       phoneNumber: _phoneNumber.text,
                                       gender: dropdownvalue,
+                                      address:  '',
                                     ),
                                   ),
                                 );

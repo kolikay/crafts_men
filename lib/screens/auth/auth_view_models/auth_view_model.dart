@@ -1,11 +1,14 @@
 // import 'dart:io';
 
 import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:craftsmen/constants/const/app_state_constants.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusable_info_widget.dart';
 import 'package:craftsmen/constants/utils/snack_bar.dart';
 import 'package:craftsmen/models/models.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../views/login_screen.dart';
 import 'package:craftsmen/services/web_service.dart';
@@ -22,13 +25,16 @@ class AuthViewModel extends ChangeNotifier {
 
   AuthViewModel._();
 
+  // firebase ref
+  final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+
   static AuthViewModel get instance {
     return _instance;
   }
 
   bool _loading = false;
   bool get loading => _loading;
-
 
   bool _userState = false;
   bool get userState => _userState;
@@ -63,6 +69,47 @@ class AuthViewModel extends ChangeNotifier {
     setLoading(true);
     await Future.delayed(const Duration(seconds: 2));
     setLoading(false);
+  }
+
+// User Registration
+  Future<String> signUpUser({
+    required String email,
+    required String fullname,
+    required String username,
+    required String phoneNumber,
+    required String address,
+    required String password,
+    required String gender,
+    // required Uint8List file,
+  }) async {
+    setLoading(true);
+    try {
+      if (email.isNotEmpty ||
+          fullname.isNotEmpty ||
+          username.isNotEmpty ||
+          phoneNumber.isNotEmpty ||
+          address.isNotEmpty ||
+          password.isNotEmpty ||
+          gender.isNotEmpty) {
+        UserCredential credential = await _auth.createUserWithEmailAndPassword(
+            email: email, password: password);
+        _firestore.collection('Users').doc(credential.user!.uid).set({
+          "username": username,
+          "fullname": fullname,
+          "phone": phoneNumber,
+          "address": address,
+          "id": credential.user!.uid,
+          'reviews': []
+        });
+      }
+
+      setLoading(false);
+      return 'Success';
+    } catch (e) {
+      setLoading(false);
+
+      return e.toString();
+    }
   }
 
 //store user data

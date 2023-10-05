@@ -8,21 +8,18 @@ import 'package:craftsmen/constants/reusesable_widgets/reusable_info_widget.dart
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/screens/auth/views/verify_otp_screen.dart';
+import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
 import 'package:craftsmen/screens/settings/settings_screen.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
-
-
-
-
-
 class DetailsPage3 extends ConsumerStatefulWidget {
+  final PageController control;
   const DetailsPage3({
     Key? key,
+    required this.control,
   }) : super(key: key);
 
   @override
@@ -76,7 +73,7 @@ class _DetailsPage3State extends ConsumerState<DetailsPage3> {
               maxLength: 150,
               maxLines: null,
               decoration: InputDecoration(
-                hintText: 'Enter Business Address',
+                hintText: 'More about your business',
                 hintStyle: TextStyle(color: kBlackDull, fontSize: 16.sp),
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
@@ -107,11 +104,12 @@ class _DetailsPage3State extends ConsumerState<DetailsPage3> {
                     'Thank You',
                     'Thanks for taking your time to fill the details. Once your service is needed, you will be notify  ',
                     'View Details', () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const SettingsScreen(),
-                    ),
-                  );
+                  Navigator.pushNamed(context, OnBoardingScreen.id);
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => OnBoardingScreen.id,
+                  //   ),
+                  // );
                 });
               }),
         ]),

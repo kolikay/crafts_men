@@ -5,14 +5,10 @@ import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
-
-
-
-
 class DetailsPage1 extends StatelessWidget {
   const DetailsPage1(
       {Key? key,
+      required this.control,
       required GlobalKey<FormState> formKey,
       required TextEditingController compNameCont,
       required TextEditingController compEmailCont,
@@ -29,6 +25,7 @@ class DetailsPage1 extends StatelessWidget {
   final TextEditingController _compEmailCont;
   final TextEditingController _compPhoneCont;
   final TextEditingController _compAddCont;
+  final PageController control;
 
   @override
   Widget build(BuildContext context) {
@@ -127,13 +124,7 @@ class DetailsPage1 extends StatelessWidget {
       SizedBox(
         height: 25.h,
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          ReuseableButton(
-              width: 96.w, text: 'Next', textSize: 16.sp, onPressed: () {}),
-        ],
-      ),
+
     ]);
   }
 }
