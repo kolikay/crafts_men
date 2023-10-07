@@ -26,14 +26,14 @@ class UserModel extends ChangeNotifier {
     var snapShot = snap.data() as Map<String, dynamic>;
 
     return UserModel(
-      id: snapShot["id"],
+      id: snapShot["ID"],
       email: snapShot["email"],
       fullName: snapShot["Full Name"],
       userName: snapShot["User Name"],
       phoneNumber: snapShot["Phone Number"],
       gender: snapShot["Gender"],
-      address: snapShot["Address"],
-      reviews: snapShot['reviews'],
+      address: snapShot["Gender"],
+      reviews: snapShot['Reviews'],
     );
   }
 }

@@ -189,11 +189,10 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                         body: widget.body,
                         email: widget.email,
                         password: widget.password);
-
                     dialogBuilder(
                         context,
                         'lib/assets/emailverifiedicon.png',
-                        'Email Verified',
+                        'Account Created',
                         'Your account has been Created and verified successfully,',
                         'Proceed', () {
                       Navigator.of(context).push(

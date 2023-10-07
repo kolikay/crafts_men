@@ -58,9 +58,10 @@ class MyApp extends StatelessWidget {
           home: StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: ((context, snapshot) {
+              print(snapshot.data);
               if (snapshot.connectionState == ConnectionState.active) {
                 if (snapshot.hasData) {
-                  return const OnBoardingScreen(user: 'user');
+                  return SignUpScreen();
                 } else if (snapshot.hasError) {
                   return Center(
                       child: NormalText(
@@ -69,9 +70,9 @@ class MyApp extends StatelessWidget {
                 }
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                AuthViewModel.instance.setLoading(true);
-              } else {
-                AuthViewModel.instance.setLoading(false);
+                return const Center(
+                  child: CircularProgressIndicator(color: kMainColor),
+                );
               }
               return const LoginScreen();
             }),

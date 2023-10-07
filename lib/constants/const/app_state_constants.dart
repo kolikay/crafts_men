@@ -16,6 +16,13 @@ final profileViewModelProvider =
   return ProfileModelView();
 });
 
+//provider for logged in user api data
+final userProvider = Provider<UserModel>((ref) {
+  return AuthViewModel.instance.user;
+});
+
+
+
 
 
 // // Update state and notify Notification screen app bar

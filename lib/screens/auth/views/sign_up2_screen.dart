@@ -14,7 +14,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusable_info_widget.dart';
 
-
 class SignUpScreen2 extends ConsumerStatefulWidget {
   final String fullName;
   final String userName;
@@ -51,17 +50,19 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
   Widget build(BuildContext context) {
     final authViewModel = ref.watch(authViewModelProvider);
 
-  getInputedData() {
-    final body = {
-      "full_name": widget.fullName.trim(),
-      "username": widget.userName.trim(),
-      "gender": widget.gender.trim(),
-      "email": _emailCont.text.trim(),
-      "password_hash": _password1Cont.text.trim(),
-    };
-    return body;
+    getInputedData() {
+      final body = {
+        "ID": '',
+        "email": _emailCont.text.trim(),
+        "Full Name": widget.fullName.trim(),
+        "User Name": widget.userName.trim(),
+        'Phone Number': '',
+        "Gender": widget.gender.trim(),
+        'Reviews': '',
+      };
+      return body;
+    }
 
-  }
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -244,7 +245,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                           textSize: 14.sp,
                           text: 'Sign Up',
                           onPressed: () async {
-                          bool sentOtp = await authViewModel.sendOtp(_emailCont.text);
+                            bool sentOtp =
+                                await authViewModel.sendOtp(_emailCont.text);
                             if (sentOtp) {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
@@ -261,30 +263,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                               ShowSnackBar.buildErrorSnackbar(
                                   context, 'Could not send OTP', Colors.red);
                             }
-
-                            // if (_formKey.currentState!.validate()) {
-                            //   final response = await authViewModel.signUpUser(
-                            //       username: widget.userName.trim(),
-                            //       fullname: widget.fullName.trim(),
-                            //       address: widget.address.trim(),
-                            //       phoneNumber: widget.phoneNumber.trim(),
-                            //       gender: widget.gender,
-                            //       email: _emailCont.text,
-                            //       password: _password1Cont.text);
-
-                            //   if (response == 'Success') {
-                            //     dialogBuilder(
-                            //         context,
-                            //         'lib/assets/verifiedIcon.png',
-                            //         'Congratulations',
-                            //         'Your account has been successfully created. Kindly go to your email to verify your account',
-                            //         'Confirm Email',
-                            //         () {});
-                            //   } else {
-                            //     ShowSnackBar.buildErrorSnackbar(
-                            //         context, response.toString(), Colors.red);
-                            //   }
-                            // }
                           },
                         ),
                       ],
