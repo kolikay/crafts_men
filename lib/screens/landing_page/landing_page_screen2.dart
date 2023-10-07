@@ -76,7 +76,7 @@ class LandingPage2 extends StatelessWidget {
                   textColor: kWhite,
                   text: 'Skill provider',
                   onPressed: () {
-                    auth.setUserState(true);
+                    // auth.setUserState(true);
 
                     Navigator.pushNamed(context, SignUpScreen.id);
                   },
@@ -87,7 +87,7 @@ class LandingPage2 extends StatelessWidget {
                   textColor: kMainColor,
                   text: 'User',
                   onPressed: () {
-                    auth.setUserState(false);
+                  //  auth.setUserState(false);
 
                     Navigator.pushNamed(context, SignUpScreen.id);
                   },

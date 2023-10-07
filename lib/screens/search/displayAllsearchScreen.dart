@@ -57,7 +57,7 @@ class _DisplayAllSearchScreenState
                     rating: '4.5',
                     distance: '500m away',
                     tapped: () async {
-                      await authViewModel.request();
+                      // await authViewModel.request();
 
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -72,7 +72,7 @@ class _DisplayAllSearchScreenState
                     rating: '4.5',
                     distance: '3 KM away',
                     tapped: () async {
-                      await authViewModel.request();
+                       await authViewModel.request();
 
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -87,7 +87,7 @@ class _DisplayAllSearchScreenState
                     rating: '4.5',
                     distance: '1 KM away',
                     tapped: () async {
-                      await authViewModel.request();
+                       await authViewModel.request();
 
                       Navigator.of(context).push(
                         MaterialPageRoute(

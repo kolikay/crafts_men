@@ -75,6 +75,7 @@ dependencies:
   dio: ^5.3.2
   universal_io: ^2.0.4
   jwt_decoder: ^2.0.1
+  auth_handler: ^1.0.0
 
   #dotted container border
   dotted_border: ^2.1.0

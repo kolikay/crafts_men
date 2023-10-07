@@ -14,6 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusable_info_widget.dart';
 
+
 class SignUpScreen2 extends ConsumerStatefulWidget {
   final String fullName;
   final String userName;
@@ -39,8 +40,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
   final _formKey = GlobalKey<FormState>();
   final _emailCont = TextEditingController();
   final _password1Cont = TextEditingController();
-
   bool? _isChecked = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -227,35 +232,45 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                           textSize: 14.sp,
                           text: 'Sign Up',
                           onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                              final response = await authViewModel.signUpUser(
-                                  username: widget.userName.trim(),
-                                  fullname: widget.fullName.trim(),
-                                  address: widget.address.trim(),
-                                  phoneNumber: widget.phoneNumber.trim(),
-                                  gender: widget.gender,
-                                  email: _emailCont.text,
-                                  password: _password1Cont.text);
-
-                              if (response == 'Success') {
-                                dialogBuilder(
-                                    context,
-                                    'lib/assets/verifiedIcon.png',
-                                    'Congratulations',
-                                    'Your account has been successfully created. Kindly go to your email to verify your account',
-                                    'Confirm Email', () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const VerifyOtpScreen(),
-                                    ),
-                                  );
-                                });
-                              } else {
-                                ShowSnackBar.buildErrorSnackbar(
-                                    context, response.toString(), Colors.red);
-                              }
+                            authViewModel.sendOtp(_emailCont.text);
+                            if (authViewModel.otp) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => VerifyOtpScreen(
+                                    email: _emailCont.text,
+                                  ),
+                                ),
+                              );
+                              ShowSnackBar.buildErrorSnackbar(
+                                  context, 'OTP Sent  ', Colors.greenAccent);
+                            } else {
+                              ShowSnackBar.buildErrorSnackbar(
+                                  context, 'Could not send OTP', Colors.red);
                             }
+
+                            // if (_formKey.currentState!.validate()) {
+                            //   final response = await authViewModel.signUpUser(
+                            //       username: widget.userName.trim(),
+                            //       fullname: widget.fullName.trim(),
+                            //       address: widget.address.trim(),
+                            //       phoneNumber: widget.phoneNumber.trim(),
+                            //       gender: widget.gender,
+                            //       email: _emailCont.text,
+                            //       password: _password1Cont.text);
+
+                            //   if (response == 'Success') {
+                            //     dialogBuilder(
+                            //         context,
+                            //         'lib/assets/verifiedIcon.png',
+                            //         'Congratulations',
+                            //         'Your account has been successfully created. Kindly go to your email to verify your account',
+                            //         'Confirm Email',
+                            //         () {});
+                            //   } else {
+                            //     ShowSnackBar.buildErrorSnackbar(
+                            //         context, response.toString(), Colors.red);
+                            //   }
+                            // }
                           },
                         ),
                       ],

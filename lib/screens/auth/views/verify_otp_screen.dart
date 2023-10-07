@@ -8,6 +8,7 @@ import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusable_info_widget.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
+import 'package:craftsmen/constants/utils/snack_bar.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
 import 'package:craftsmen/screens/on_boarding/craftsMen/details/craftsmen_fill_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,10 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VerifyOtpScreen extends ConsumerStatefulWidget {
+  final String email;
   const VerifyOtpScreen({
     Key? key,
+    required this.email,
   }) : super(key: key);
   @override
   ConsumerState<VerifyOtpScreen> createState() => _VerifyOtpScreenState();
@@ -28,10 +31,14 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
   int secondsRemaining = 30;
   bool enableResend = false;
   Timer? timer;
+  final otpValue = TextEditingController();
+
+  var res;
 
   @override
   initState() {
     super.initState();
+
     timer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (secondsRemaining != 0) {
         setState(() {
@@ -99,6 +106,7 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
               Padding(
                 padding: EdgeInsets.only(left: 50.w, right: 50.w),
                 child: PinCodeTextField(
+                  controller: otpValue,
                   keyboardType: TextInputType.number,
                   length: 4,
                   appContext: context,
@@ -168,35 +176,27 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                 text: 'Verify',
                 textSize: 14.sp,
                 onPressed: () async {
-                  await authViewModel.request();
+                  bool verified = await authViewModel.verify(otpValue.text);
+                  if (verified == true) {
+                    ShowSnackBar.buildErrorSnackbar(
+                        context, 'OTP verified', Colors.green);
 
-                  if (authViewModel.userState == true) {
-                    dialogBuilder(
-                        context,
-                        'lib/assets/emailverifiedicon.png',
-                        'Email Verified',
-                        'Your account has been verified successfully, please tell us a bit more about your services.',
-                        'Proceed', () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const CraftmenFillDetailsScreen(),
-                        ),
-                      );
-                    });
+                    // dialogBuilder(
+                    //     context,
+                    //     'lib/assets/emailverifiedicon.png',
+                    //     'Email Verified',
+                    //     'Your account has been verified successfully, please tell us a bit more about your services.',
+                    //     'Proceed', () {
+                    //   Navigator.of(context).push(
+                    //     MaterialPageRoute(
+                    //       builder: (context) =>
+                    //           const CraftmenFillDetailsScreen(),
+                    //     ),
+                    //   );
+                    // });
                   } else {
-                    dialogBuilder(
-                        context,
-                        'lib/assets/emailverifiedicon.png',
-                        'Email Verified',
-                        'Your account has been verified successfully, Please login to continue.',
-                        'Proceed to login', () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const LoginScreen(),
-                        ),
-                      );
-                    });
+                    ShowSnackBar.buildErrorSnackbar(
+                        context, 'Incorrect OTP', Colors.red);
                   }
                 },
               ),

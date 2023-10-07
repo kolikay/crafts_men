@@ -17,9 +17,9 @@ final profileViewModelProvider =
 });
 
 //provider for logged in user api data
-final userProvider = Provider<UserModel>((ref) {
-  return AuthViewModel.instance.userApiData;
-});
+// final userProvider = Provider<UserModel>((ref) {
+//   return AuthViewModel.instance.userApiData;
+// });
 
 
 
