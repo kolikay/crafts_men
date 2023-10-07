@@ -25,7 +25,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
   @override
   Widget build(BuildContext context) {
     final authViewModel = ref.watch(authViewModelProvider);
-     final loginUser = ref.watch(userProvider);
+    // final loginUser = ref.watch(userProvider);
 
     return SafeArea(
       child: Stack(children: [
@@ -42,14 +42,16 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         NormalText(
-                          text: "${loginUser.fullName}",
+                          text: "",
                           size: 20.sp,
                           fontWeight: FontWeight.w600,
                           color: kMainColor,
                         ),
                         IconButton(
-                          onPressed: () {
-                            authViewModel.getLoggedinUserDetails();
+                          onPressed: ()  {
+                             
+                         
+
                             // Navigator.of(context).push(
                             //   MaterialPageRoute(
                             //     builder: ((context) =>

@@ -122,6 +122,8 @@ class AuthViewModel extends ChangeNotifier {
 
     notifyListeners();
 
+    print(_user);
+
     return _user;
   }
 }

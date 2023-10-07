@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
           home: StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: ((context, snapshot) {
-              print(snapshot.data);
+        
               if (snapshot.connectionState == ConnectionState.active) {
                 if (snapshot.hasData) {
                   return SignUpScreen();
