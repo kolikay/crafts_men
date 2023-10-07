@@ -50,6 +50,18 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
   @override
   Widget build(BuildContext context) {
     final authViewModel = ref.watch(authViewModelProvider);
+
+  getInputedData() {
+    final body = {
+      "full_name": widget.fullName.trim(),
+      "username": widget.userName.trim(),
+      "gender": widget.gender.trim(),
+      "email": _emailCont.text.trim(),
+      "password_hash": _password1Cont.text.trim(),
+    };
+    return body;
+
+  }
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -232,12 +244,14 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                           textSize: 14.sp,
                           text: 'Sign Up',
                           onPressed: () async {
-                            authViewModel.sendOtp(_emailCont.text);
-                            if (authViewModel.otp) {
+                          bool sentOtp = await authViewModel.sendOtp(_emailCont.text);
+                            if (sentOtp) {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => VerifyOtpScreen(
                                     email: _emailCont.text,
+                                    password: _password1Cont.text,
+                                    body: getInputedData(),
                                   ),
                                 ),
                               );

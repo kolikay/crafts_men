@@ -1,60 +1,51 @@
-// To parse this JSON data, do
-//
-//     final userDataModel = userDataModelFromJson(jsonString);
-
-// ignore_for_file: file_names
-
-import 'dart:convert';
-
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
-UserModel userDataModelFromJson(String str) =>
-    UserModel.fromJson(json.decode(str));
-
-String userDataModelToJson(UserModel data) => json.encode(data.toJson());
-
-class UserModel  extends ChangeNotifier{
+class UserModel extends ChangeNotifier {
   UserModel({
     this.id,
     this.email,
-    this.username,
-    this.fullname,
-    this.confirmed,
-    // this.active,
-    // this.about,
-    // this.gender,
-    // this.interest,
-    // this.location,
-    // this.name,
-    // this.occupation,
-    // this.surname,
-    // this.photo,
-    // this.dob,
+    this.fullName,
+    this.userName,
+    this.phoneNumber,
+    this.gender,
+    this.address,
+    this.reviews
   });
 
   String? id;
   String? email;
-  String? username;
-  String? fullname;
-  bool? confirmed;
-  // bool? active;
-  // String? about;
-  // String? gender;
-  // String? interest;
-  // String? location;
-  // String? name;
-  // String? occupation;
-  // String? surname;
-  // String? photo;
-  // String? dob;
+  String? fullName;
+  String? userName;
+  String? phoneNumber;
+  String? gender;
+  String? address;
+  List? reviews;
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        id: json["_id"],
-        email: json["email"],
-        username: json["username"],
-        fullname: json["full_name"],
-        confirmed: json["confirmed"],
+  static UserModel fromSnapshot(DocumentSnapshot snap) {
+    var snapShot = snap.data() as Map<String, dynamic>;
+
+    return UserModel(
+      id: snapShot["id"],
+      email: snapShot["email"],
+      fullName: snapShot["Full Name"],
+      userName: snapShot["User Name"],
+      phoneNumber: snapShot["Phone Number"],
+      gender: snapShot["Gender"],
+      address: snapShot["Address"],
+      reviews: snapShot['reviews'],
+    );
+  }
+}
+
+  // factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+  //       id: json["_id"],
+  //       email: json["email"],
+  //       fullName: json["Full Name"],
+  //       userName: json["User Name"],
+  //       phoneNumber: json["Phone Number"],
+  //       gender: json["Gender"],
+  //       address: json["Address"],
         // active: json["active"],
         // about: json["about"],
         // gender: json["gender"],
@@ -65,23 +56,15 @@ class UserModel  extends ChangeNotifier{
         // surname: json["surname"],
         // photo: json["photo"],
         // dob: json["dob"],
-      );
+      // );
 
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "email": email,
-        "username": username,
-        "full_name": fullname,
-        "confirmed": confirmed,
-        // "active": active,
-        // "about": about,
-        // "gender": gender,
-        // "interest": interest,
-        // "location": location,
-        // "name": name,
-        // "occupation": occupation,
-        // "surname": surname,
-        // "photo": photo,
-        // "dob": dob,
-      };
-}
+  // Map<String, dynamic> toJson() => {
+  //       "_id": id,
+  //       "email": email,
+  //       "Full Name": fullName,
+  //       "User Name": userName,
+  //       "Phone Number": phoneNumber,
+  //       "Gender": gender,
+  //       "Address": address,
+  //     };
+

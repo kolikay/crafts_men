@@ -11,6 +11,7 @@ import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/constants/utils/snack_bar.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
 import 'package:craftsmen/screens/on_boarding/craftsMen/details/craftsmen_fill_details_screen.dart';
+import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -18,10 +19,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VerifyOtpScreen extends ConsumerStatefulWidget {
   final String email;
-  const VerifyOtpScreen({
-    Key? key,
-    required this.email,
-  }) : super(key: key);
+  final String password;
+  final Map<String, dynamic> body;
+  const VerifyOtpScreen(
+      {Key? key,
+      required this.email,
+      required this.body,
+      required this.password})
+      : super(key: key);
   @override
   ConsumerState<VerifyOtpScreen> createState() => _VerifyOtpScreenState();
 }
@@ -179,21 +184,25 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                   bool verified = await authViewModel.verify(otpValue.text);
                   if (verified == true) {
                     ShowSnackBar.buildErrorSnackbar(
-                        context, 'OTP verified', Colors.green);
+                        context, 'OTP verified', Colors.greenAccent);
+                    await authViewModel.signUpUser(
+                        body: widget.body,
+                        email: widget.email,
+                        password: widget.password);
 
-                    // dialogBuilder(
-                    //     context,
-                    //     'lib/assets/emailverifiedicon.png',
-                    //     'Email Verified',
-                    //     'Your account has been verified successfully, please tell us a bit more about your services.',
-                    //     'Proceed', () {
-                    //   Navigator.of(context).push(
-                    //     MaterialPageRoute(
-                    //       builder: (context) =>
-                    //           const CraftmenFillDetailsScreen(),
-                    //     ),
-                    //   );
-                    // });
+                    dialogBuilder(
+                        context,
+                        'lib/assets/emailverifiedicon.png',
+                        'Email Verified',
+                        'Your account has been Created and verified successfully,',
+                        'Proceed', () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const OnBoardingScreen(user: 'user'),
+                        ),
+                      );
+                    });
                   } else {
                     ShowSnackBar.buildErrorSnackbar(
                         context, 'Incorrect OTP', Colors.red);

@@ -1,4 +1,5 @@
 import 'package:craftsmen/constants/const/color.dart';
+import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
 
 import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
 import 'package:craftsmen/screens/change_password/email_password_change_screen.dart';
@@ -9,14 +10,16 @@ import 'package:craftsmen/screens/landing_page/landing_page_screen2.dart';
 import 'package:craftsmen/screens/location/location_screen.dart';
 import 'package:craftsmen/screens/location/location_screen2.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
+import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'constants/reusesable_widgets/normal_text.dart';
 import 'screens/on_boarding/craftsMen/details/craftsmen_fill_details_screen.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,9 +55,29 @@ class MyApp extends StatelessWidget {
                   primary: kMainColor,
                 ),
           ),
-          home: const LandingPage(),
+          home: StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: ((context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.active) {
+                if (snapshot.hasData) {
+                  return const OnBoardingScreen(user: 'user');
+                } else if (snapshot.hasError) {
+                  return Center(
+                      child: NormalText(
+                    text: 'Error Occured',
+                  ));
+                }
+              }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                AuthViewModel.instance.setLoading(true);
+              } else {
+                AuthViewModel.instance.setLoading(false);
+              }
+              return const LoginScreen();
+            }),
+          ),
           routes: {
-            LandingPage2.id: (context) =>  LandingPage2(),
+            LandingPage2.id: (context) => LandingPage2(),
             SignUpScreen.id: (context) => const SignUpScreen(),
             LoginScreen.id: (context) => const LoginScreen(),
             EmailPasswordChangeScreen.id: (context) =>
@@ -64,7 +87,6 @@ class MyApp extends StatelessWidget {
             NewPasswordScreen.id: (context) => const NewPasswordScreen(),
             LocationScreen2.id: (context) => const LocationScreen2(),
             LocationScreen.id: (context) => const LocationScreen(),
-          
           },
         );
       },
