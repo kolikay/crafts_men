@@ -1,9 +1,8 @@
 // import 'dart:io';
 
-import 'dart:io';
-import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:craftsmen/models/models.dart';
+import 'package:craftsmen/providers/user_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:craftsmen/constants/const/shared_preferences.dart';
@@ -35,9 +34,9 @@ class AuthViewModel extends ChangeNotifier {
 
   AuthHandler authHandler = AuthHandler();
 
-  //Log in User
   UserModel? _user;
-  UserModel get user => _user!;
+  UserModel userApiData = UserModel();
+  UserModel get getUser => _user!;
 
   setLoading(bool loading) async {
     _loading = loading;
@@ -88,12 +87,10 @@ class AuthViewModel extends ChangeNotifier {
   }
 
 // User Registration
-  Future<String> signUpUser({
-    required Map<String, dynamic> body,
-    required String password,
-    required String email,
-    // required Uint8List file,
-  }) async {
+  Future<String> signUpUser(
+      {required Map<String, dynamic> body,
+      required String password,
+      required String email}) async {
     setLoading(true);
     try {
       if (body.isNotEmpty) {
@@ -102,7 +99,27 @@ class AuthViewModel extends ChangeNotifier {
         _firestore.collection('Users').doc(credential.user!.uid).set(body);
       }
       //get login user details upon sign up
-      await getLoggedinUserDetails();
+      await UserProvider().refreshUser();
+      setLoading(false);
+      return 'Success';
+    } catch (e) {
+      setLoading(false);
+      return e.toString();
+    }
+  }
+
+// User Login
+  Future<String> signIn(
+      {required String password, required String email}) async {
+    setLoading(true);
+    try {
+      if (password.isNotEmpty || email.isNotEmpty) {
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+      }
+      //get login user details upon sign up
+      await UserProvider().refreshUser();
+
       setLoading(false);
       return 'Success';
     } catch (e) {
@@ -113,17 +130,28 @@ class AuthViewModel extends ChangeNotifier {
 
   //Get Loggen In User Details
   Future<UserModel?> getLoggedinUserDetails() async {
+    setLoading(true);
     User currentUser = _auth.currentUser!;
-
     DocumentSnapshot snap =
         await _firestore.collection('Users').doc(currentUser.uid).get();
-
-    _user = UserModel.fromSnapshot(snap);
-
-    notifyListeners();
-
-    print(_user);
-
+    UserModel user = UserModel.fromSnapshot(snap);
+    _user = user;
+    await addUserdata(user);
+       setLoading(true);
     return _user;
+  }
+
+
+  Future addUserdata(UserModel user) async {
+    userApiData.fullName = user.fullName;
+    userApiData.email = user.email;
+    userApiData.userName = user.userName;
+  }
+  
+
+  Future logOut() async {
+    setLoading(true);
+    await _auth.signOut();
+    setLoading(false);
   }
 }

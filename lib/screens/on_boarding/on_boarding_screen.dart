@@ -9,10 +9,13 @@ import 'user/bookings/bookings.dart';
 import 'user/home_screens/home_page.dart';
 
 class OnBoardingScreen extends StatefulWidget {
-  final String? user;
+  // final String? user;
   static String id = 'onBordingScreen';
 
-  const OnBoardingScreen({Key? key, required this.user}) : super(key: key);
+  const OnBoardingScreen({Key? key,
+  // required this.user
+  
+  }) : super(key: key);
 
   @override
   _OnBoardingScreenState createState() => _OnBoardingScreenState();
@@ -109,28 +112,29 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     List<StatefulWidget> showScreen = [];
     List<BottomNavigationBarItem> onboardingIcons = [];
 
-    switch (widget.user) {
-      case 'kola':
-        setState(() {
-          showScreen = skillScreens;
-          onboardingIcons = skillIcons;
-        });
-        break;
-      case 'ayo':
-        setState(() {
-          showScreen = userScreens;
-          onboardingIcons = userOnboardingIcons;
-        });
-        break;
+    // switch (widget.user) {
+    //   case 'kola':
+    //     setState(() {
+    //       showScreen = skillScreens;
+    //       onboardingIcons = skillIcons;
+    //     });
+    //     break;
+    //   case 'ayo':
+    //     setState(() {
+    //       showScreen = userScreens;
+    //       onboardingIcons = userOnboardingIcons;
+    //     });
+    //     break;
 
-      default:
-        setState(() {
-          showScreen = bothScreens;
-          onboardingIcons = bothIcons;
-        });
-    }
+    //   default:
+    //     setState(() {
+    //       showScreen = bothScreens;
+    //       onboardingIcons = bothIcons;
+    //     });
+    // }
     return Scaffold(
-      body: showScreen[currentIndex],
+      // body: showScreen[currentIndex],
+      body: userScreens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           iconSize: 25.0.w,
           backgroundColor: Colors.white70,
@@ -138,7 +142,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           type: BottomNavigationBarType.fixed,
           onTap: (index) => setState(() => currentIndex = index),
           currentIndex: currentIndex,
-          items: onboardingIcons),
+          // items: onboardingIcons
+          items: userOnboardingIcons,
+          
+          ),
     );
   }
 }

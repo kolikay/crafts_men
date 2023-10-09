@@ -1,6 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
+
 import 'package:craftsmen/models/models.dart';
+import 'package:craftsmen/providers/user_provider.dart';
 import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
 import 'package:craftsmen/screens/on_boarding/user/profile_screens/profile_view_model/profile_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,9 +18,11 @@ final profileViewModelProvider =
   return ProfileModelView();
 });
 
+
+
 //provider for logged in user api data
-final userProvider = Provider<UserModel>((ref) {
-  return AuthViewModel.instance.user;
+final userProvider = Provider<UserProvider>((ref) {
+  return UserProvider();
 });
 
 

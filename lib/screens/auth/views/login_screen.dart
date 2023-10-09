@@ -6,6 +6,7 @@ import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusaable_textformfield.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
+import 'package:craftsmen/constants/utils/snack_bar.dart';
 import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
 import 'package:craftsmen/screens/change_password/email_password_change_screen.dart';
 import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
@@ -187,27 +188,24 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               textSize: 14.sp,
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  await authViewModel.request();
-
+                                  String res = await authViewModel.signIn(
+                                      password: passwordController.text,
+                                      email: emailController.text);
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (builder) {
-                                    return OnBoardingScreen(
-                                        user: emailController.text);
+                                    return const OnBoardingScreen();
                                   }));
-                                  // Navigator.pushNamed(
-                                  //     context, OnBoardingScreen.id);
 
-                                  // authViewModel.loginUser(
-                                  //     '$baseApi/account/login/',
-                                  //     {
-                                  //       "email": emailController.text.trim(),
-                                  //       "password":
-                                  //           passwordController.text.trim(),
-                                  //     },
-                                  //     context);
+                                  // if (res == "Success") {
+                                  //   Navigator.push(context,
+                                  //       MaterialPageRoute(builder: (builder) {
+                                  //     return const OnBoardingScreen();
+                                  //   }));
+                                  // } else {
+                                  //   ShowSnackBar.buildErrorSnackbar(
+                                  //       context, res, Colors.red);
+                                  // }
                                 }
-                                // FocusScope.of(context).unfocus();
-                                // pushOnBoardingScreen(context);
                               },
                             ),
                           ],

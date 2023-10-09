@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
+import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -59,7 +62,8 @@ class _LogOutScreenState extends State<LogOutScreen> {
                     width: 220.w,
                     height: 50.h,
                     text: 'Yes',
-                    onPressed: () {
+                    onPressed: () async {
+                      await AuthViewModel.instance.logOut();
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           LoginScreen.id, (Route<dynamic> route) => false);
                     }),

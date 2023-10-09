@@ -183,12 +183,12 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                 onPressed: () async {
                   bool verified = await authViewModel.verify(otpValue.text);
                   if (verified == true) {
-                    ShowSnackBar.buildErrorSnackbar(
-                        context, 'OTP verified', Colors.greenAccent);
                     await authViewModel.signUpUser(
                         body: widget.body,
-                        email: widget.email,
-                        password: widget.password);
+                        password: widget.password,
+                        email: widget.email);
+                    ShowSnackBar.buildErrorSnackbar(
+                        context, 'OTP verified', Colors.greenAccent);
                     dialogBuilder(
                         context,
                         'lib/assets/emailverifiedicon.png',
@@ -197,8 +197,7 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                         'Proceed', () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) =>
-                              const OnBoardingScreen(user: 'user'),
+                          builder: (context) => const OnBoardingScreen(),
                         ),
                       );
                     });

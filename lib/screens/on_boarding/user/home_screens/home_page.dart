@@ -4,7 +4,8 @@ import 'package:craftsmen/constants/const/app_state_constants.dart';
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
-import 'package:craftsmen/screens/on_boarding/user/notifications/views/notification_screen1.dart';
+import 'package:craftsmen/models/models.dart';
+import 'package:craftsmen/providers/user_provider.dart';
 import 'package:craftsmen/screens/search/displayAllsearchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -23,9 +24,19 @@ class HomePageScreen extends ConsumerStatefulWidget {
 
 class _HomePageScreenState extends ConsumerState<HomePageScreen> {
   @override
+  void initState() {
+    super.initState();
+    addData();
+  }
+
+  addData() async {
+    await UserProvider().refreshUser();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final authViewModel = ref.watch(authViewModelProvider);
-    // final loginUser = ref.watch(userProvider);
+    final loginUser = ref.watch(userProvider);
 
     return SafeArea(
       child: Stack(children: [
@@ -42,22 +53,14 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         NormalText(
-                          text: "",
+                          text: authViewModel.getUser.fullName ?? '',
                           size: 20.sp,
                           fontWeight: FontWeight.w600,
                           color: kMainColor,
                         ),
                         IconButton(
                           onPressed: ()  {
-                             
-                         
-
-                            // Navigator.of(context).push(
-                            //   MaterialPageRoute(
-                            //     builder: ((context) =>
-                            //         const NotificationScreen1()),
-                            //   ),
-                            // );
+                
                           },
                           icon: Icon(
                             Icons.add_alert_sharp,
