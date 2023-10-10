@@ -33,7 +33,7 @@ class UserModel extends ChangeNotifier {
       phoneNumber: snapShot["Phone Number"],
       gender: snapShot["Gender"],
       address: snapShot["Address"],
-      reviews: [],
+      reviews: ["Reviews"],
     );
   }
 }

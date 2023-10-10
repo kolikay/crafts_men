@@ -30,7 +30,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
   }
 
   addData() async {
-    await UserProvider().refreshUser();
+    await UserProvider.instance.getLoggedinUserDetails();
   }
 
   @override
@@ -53,7 +53,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         NormalText(
-                          text: authViewModel.getUser.fullName ?? '',
+                          text: loginUser.userApiData.userName ?? '',
                           size: 20.sp,
                           fontWeight: FontWeight.w600,
                           color: kMainColor,

@@ -9,6 +9,7 @@ import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/constants/utils/snack_bar.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
 import 'package:craftsmen/screens/auth/views/verify_otp_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -52,13 +53,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
 
     getInputedData() {
       final body = {
-        "ID": '',
         "email": _emailCont.text.trim(),
         "Full Name": widget.fullName.trim(),
         "User Name": widget.userName.trim(),
-        'Phone Number': '',
+        'Phone Number': widget.phoneNumber.trim(),
         "Gender": widget.gender.trim(),
-        'Reviews': '',
+        'Reviews': [],
       };
       return body;
     }

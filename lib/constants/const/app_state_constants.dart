@@ -13,16 +13,16 @@ final authViewModelProvider = ChangeNotifierProvider<AuthViewModel>((ref) {
   return AuthViewModel.instance;
 });
 
-final profileViewModelProvider =
-    ChangeNotifierProvider<ProfileModelView>((ref) {
-  return ProfileModelView();
-});
+// final profileViewModelProvider =
+//     ChangeNotifierProvider<ProfileModelView>((ref) {
+//   return ProfileModelView();
+// });
 
 
 
 //provider for logged in user api data
-final userProvider = Provider<UserProvider>((ref) {
-  return UserProvider();
+final userProvider = ChangeNotifierProvider<UserProvider>((ref) {
+  return UserProvider.instance;
 });
 
 

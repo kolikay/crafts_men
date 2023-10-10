@@ -86,6 +86,8 @@ class AuthViewModel extends ChangeNotifier {
     }
   }
 
+
+
 // User Registration
   Future<String> signUpUser(
       {required Map<String, dynamic> body,
@@ -99,7 +101,7 @@ class AuthViewModel extends ChangeNotifier {
         _firestore.collection('Users').doc(credential.user!.uid).set(body);
       }
       //get login user details upon sign up
-      await UserProvider().refreshUser();
+      await UserProvider.instance.getLoggedinUserDetails();
       setLoading(false);
       return 'Success';
     } catch (e) {
@@ -107,6 +109,7 @@ class AuthViewModel extends ChangeNotifier {
       return e.toString();
     }
   }
+
 
 // User Login
   Future<String> signIn(
@@ -116,38 +119,20 @@ class AuthViewModel extends ChangeNotifier {
       if (password.isNotEmpty || email.isNotEmpty) {
         await _auth.signInWithEmailAndPassword(
             email: email, password: password);
+
+        //get login user details upon sign up
+        await UserProvider.instance.getLoggedinUserDetails();
       }
-      //get login user details upon sign up
-      await UserProvider().refreshUser();
 
       setLoading(false);
       return 'Success';
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
+      setLoginError(true);
+
       setLoading(false);
-      return e.toString();
+      return 'failed';
     }
   }
-
-  //Get Loggen In User Details
-  Future<UserModel?> getLoggedinUserDetails() async {
-    setLoading(true);
-    User currentUser = _auth.currentUser!;
-    DocumentSnapshot snap =
-        await _firestore.collection('Users').doc(currentUser.uid).get();
-    UserModel user = UserModel.fromSnapshot(snap);
-    _user = user;
-    await addUserdata(user);
-       setLoading(true);
-    return _user;
-  }
-
-
-  Future addUserdata(UserModel user) async {
-    userApiData.fullName = user.fullName;
-    userApiData.email = user.email;
-    userApiData.userName = user.userName;
-  }
-  
 
   Future logOut() async {
     setLoading(true);

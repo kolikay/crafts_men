@@ -1,3 +1,4 @@
+import 'package:craftsmen/constants/const/app_state_constants.dart';
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/screens/on_boarding/user/home_screens/homepage_constant_widgets.dart';
@@ -12,19 +13,22 @@ import 'package:craftsmen/screens/settings/rate_us_screen.dart';
 import 'package:craftsmen/screens/settings/themes._settings.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
   static const String id = 'settings_screen';
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
+
   @override
   Widget build(BuildContext context) {
+      final userInfoProvider = ref.watch(userProvider);
     return SafeArea(
         child: Scaffold(
       appBar: PreferredSize(
@@ -71,13 +75,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             NormalText(
-                              text: 'Kolawole Johnson',
+                              text:userInfoProvider.userApiData.fullName ?? '',
                               size: 16.sp,
                               fontWeight: FontWeight.w400,
                               color: Colors.white,
                             ),
                             NormalText(
-                              text: 'Kolikay@gmail.com',
+                              text:userInfoProvider.userApiData.email ?? '',
                               size: 12.sp,
                               fontWeight: FontWeight.w200,
                               color: Colors.white,

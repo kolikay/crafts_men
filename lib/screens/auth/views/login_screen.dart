@@ -70,7 +70,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           height: 15.h,
                         ),
                         Visibility(
-                          // visible: authViewModel.loginError,
+                          visible: authViewModel.loginError,
                           child: Container(
                             color: Colors.pink[100],
                             height: 100.h,
@@ -191,20 +191,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   String res = await authViewModel.signIn(
                                       password: passwordController.text,
                                       email: emailController.text);
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (builder) {
-                                    return const OnBoardingScreen();
-                                  }));
 
-                                  // if (res == "Success") {
-                                  //   Navigator.push(context,
-                                  //       MaterialPageRoute(builder: (builder) {
-                                  //     return const OnBoardingScreen();
-                                  //   }));
-                                  // } else {
-                                  //   ShowSnackBar.buildErrorSnackbar(
-                                  //       context, res, Colors.red);
-                                  // }
+                                  if (res == "Success") {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (builder) {
+                                      return const OnBoardingScreen();
+                                    }));
+                                  } else {
+                                    ShowSnackBar.buildErrorSnackbar(
+                                        context, res, Colors.red);
+                                  }
                                 }
                               },
                             ),

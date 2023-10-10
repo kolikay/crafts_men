@@ -28,7 +28,7 @@ class _CraftsMenProfileScreenState extends ConsumerState<CraftsMenProfileScreen>
   final _address = TextEditingController();
 
   bottomSheet(BuildContext context, WidgetRef ref) async {
-    final profileViewModel = ref.watch(profileViewModelProvider);
+    // final profileViewModel = ref.watch(profileViewModelProvider);
     return showModalBottomSheet(
       context: context,
       builder: (builder) {
@@ -54,7 +54,7 @@ class _CraftsMenProfileScreenState extends ConsumerState<CraftsMenProfileScreen>
                         color: kMainColor,
                         iconSize: 50.w,
                         onPressed: () {
-                          profileViewModel.pickImage(ImageSource.camera);
+                          // profileViewModel.pickImage(ImageSource.camera);
                           Navigator.pop(context);
                         },
                         icon: const Icon(Icons.add_a_photo_rounded),
@@ -68,7 +68,7 @@ class _CraftsMenProfileScreenState extends ConsumerState<CraftsMenProfileScreen>
                         color: kMainColor,
                         iconSize: 50.w,
                         onPressed: () {
-                          profileViewModel.pickImage(ImageSource.gallery);
+                          // profileViewModel.pickImage(ImageSource.gallery);
                           Navigator.pop(context);
                         },
                         icon: const Icon(Icons.image),
