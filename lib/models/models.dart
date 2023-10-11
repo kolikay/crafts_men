@@ -10,7 +10,8 @@ class UserModel extends ChangeNotifier {
     this.phoneNumber,
     this.gender,
     this.address,
-    this.reviews
+    this.reviews,
+    this.profilePic,
   });
 
   String? id;
@@ -20,6 +21,7 @@ class UserModel extends ChangeNotifier {
   String? phoneNumber;
   String? gender;
   String? address;
+  String? profilePic;
   List? reviews;
 
   static UserModel fromSnapshot(DocumentSnapshot snap) {
@@ -34,6 +36,7 @@ class UserModel extends ChangeNotifier {
       gender: snapShot["Gender"],
       address: snapShot["Address"],
       reviews: ["Reviews"],
+      profilePic: snapShot["Profile Pic"],
     );
   }
 }

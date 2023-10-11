@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:typed_data';
+
 import 'package:craftsmen/constants/const/app_state_constants.dart';
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
@@ -22,6 +24,8 @@ class SignUpScreen2 extends ConsumerStatefulWidget {
   final String gender;
   final String address;
 
+
+
   const SignUpScreen2({
     Key? key,
     required this.fullName,
@@ -29,6 +33,7 @@ class SignUpScreen2 extends ConsumerStatefulWidget {
     required this.phoneNumber,
     required this.gender,
     required this.address,
+
   }) : super(key: key);
   @override
   ConsumerState<SignUpScreen2> createState() => _SignUpScreenState();
@@ -41,6 +46,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
   final _emailCont = TextEditingController();
   final _password1Cont = TextEditingController();
   bool? _isChecked = false;
+
 
   @override
   void initState() {
@@ -59,6 +65,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
         'Phone Number': widget.phoneNumber.trim(),
         "Gender": widget.gender.trim(),
         'Reviews': [],
+
       };
       return body;
     }

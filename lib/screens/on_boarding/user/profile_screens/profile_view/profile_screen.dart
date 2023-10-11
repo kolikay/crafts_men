@@ -1,7 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:typed_data';
 import 'package:craftsmen/constants/const/app_state_constants.dart';
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/profleFormFields.dart';
+import 'package:craftsmen/constants/utils/image_storage_methods.dart';
+import 'package:craftsmen/constants/utils/pick_image.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +33,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   final _email = TextEditingController();
   final _password = TextEditingController();
   final _address = TextEditingController();
+  Uint8List? _image;
+  String? photo;
 
   bottomSheet(BuildContext context, WidgetRef ref) async {
-    final userInfoProvider = ref.watch(userProvider);
     return showModalBottomSheet(
       context: context,
       builder: (builder) {
@@ -55,8 +61,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       IconButton(
                         color: kMainColor,
                         iconSize: 50.w,
-                        onPressed: () {
-                          userInfoProvider.pickImage(ImageSource.camera);
+                        onPressed: () async {
+                          Uint8List im =
+                              await PickImage.pickImage(ImageSource.camera);
+                          setState(() {
+                            _image = im;
+                          });
+                          
                           Navigator.pop(context);
                         },
                         icon: const Icon(Icons.add_a_photo_rounded),
@@ -69,9 +80,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       IconButton(
                         color: kMainColor,
                         iconSize: 50.w,
-                        onPressed: () {
-                          userInfoProvider.pickImage(ImageSource.gallery);
+                        onPressed: () async {
+                          Uint8List im =
+                              await PickImage.pickImage(ImageSource.gallery);
                           Navigator.pop(context);
+                          setState(() {
+                            _image = im;
+                          });
                         },
                         icon: const Icon(Icons.image),
                       ),
@@ -94,7 +109,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     User currentUser = FirebaseAuth.instance.currentUser!;
     final authViewModel = ref.watch(authViewModelProvider);
 
-    getInputedData() {
+    getInputedData(String? photoUrl) {
       final body = {
         "ID": currentUser.uid,
         "email": _email.text.trim(),
@@ -104,6 +119,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         "Gender": _gender.text.trim(),
         "address": _address.text.trim(),
         'Reviews': [],
+        'Profile Pic': photoUrl,
       };
       return body;
     }
@@ -117,6 +133,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     _usernameCont.text = user.userName ?? '';
     _phone.text = user.phoneNumber ?? '';
     _gender.text = user.gender ?? '';
+    photo = user.profilePic;
     _address.text = user.address ?? 'No 27, Kenneth Street, Ikoyi,Lagos state';
 
     return Scaffold(
@@ -159,8 +176,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 child: IconButton(
                   onPressed: () async {
                     if (onEdit) {
+                      String photoUrl = await StorageMethods()
+                          .uploadImageTostorage(
+                              'UserProfilePicx', _image!, false);
+
                       await userInfoProvider
-                          .updateLoggedinUserDetails(getInputedData());
+                          .updateLoggedinUserDetails(getInputedData(photoUrl));
                     }
                     setState(() {
                       onEdit = !onEdit;
@@ -187,33 +208,17 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     ),
                     Stack(
                       children: [
-                        // ClipOval(child: Image.file(image!, width: 100.w, height: 100.h, fit: BoxFit.cover,), )
-                        // profileViewModel.image != null
-                        //     ?
-                        Container(
-                          height: 130.h,
-                          width: 130.w,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              fit: BoxFit.contain,
-                              image: AssetImage('lib/assets/logoTrans.png'),
-                            ),
-                          ),
-                        ),
-                        // : Container(
-                        //     height: 130.h,
-                        //     width: 130.w,
-                        //     decoration: const BoxDecoration(
-                        //       shape: BoxShape.circle,
-                        //       image: DecorationImage(
-                        //         fit: BoxFit.cover,
-                        //         image: AssetImage(
-                        //           'lib/assets/homepageimage.png',
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
+                        photo != null
+                            ? CircleAvatar(
+                                radius: 64,
+                                backgroundImage: NetworkImage(photo!),
+                              )
+                            :  const CircleAvatar(
+                                radius: 64,
+                                backgroundImage:
+                                    AssetImage('lib/assets/profileImage.jpeg'),
+                              ),
+                        // setPhoto(),
                         onEdit
                             ? Positioned(
                                 top: 35.h,
