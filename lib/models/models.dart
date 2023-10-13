@@ -41,6 +41,22 @@ class UserModel extends ChangeNotifier {
   }
 }
 
+
+  // body: loading
+  //         ? Container(
+  //             child: const Center(child: CircularProgressIndicator()),
+  //           )
+  //         : file != null?Container(child: Center(child: Image.memory(image),)) : Container(
+  //           child: const Center(child: Text('Pick an Image')),
+  //         ),
+  //         floatingActionButton: FloatingActionButton(
+  //           child: const Icon(
+  //             Icons.image,
+  //           ),
+  //           onPressed: (){
+  //             pickImage();
+  //           }),
+  //   );
   // factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
   //       id: json["_id"],
   //       email: json["email"],

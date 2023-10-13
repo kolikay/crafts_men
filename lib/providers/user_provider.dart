@@ -21,10 +21,8 @@ class UserProvider extends ChangeNotifier {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
 
-
   //instance of usermodel
   UserModel userApiData = UserModel();
-
 
   //Get Loggen In User Details
   Future getLoggedinUserDetails() async {
@@ -42,14 +40,30 @@ class UserProvider extends ChangeNotifier {
     userApiData.reviews = user.reviews;
     userApiData.profilePic = user.profilePic;
   }
+  
 
   // Update Login User Details
   Future updateLoggedinUserDetails(Map<String, dynamic> body) async {
-    AuthViewModel.instance.setLoading(true);
+
     User currentUser = _auth.currentUser!;
     await _firestore.collection('Users').doc(currentUser.uid).update(body);
     await getLoggedinUserDetails();
-    AuthViewModel.instance.setLoading(false);
+   
   }
 
+
+
+
+
+
+  Future updateLoggedinUserPassword(
+      String email, String userOtp, String newPassword) async {
+    await AuthViewModel.instance.sendOtp(email);
+
+    bool verify = await AuthViewModel.instance.verify(userOtp);
+    if (verify) {
+      _auth.confirmPasswordReset(code: userOtp, newPassword: newPassword);
+      await getLoggedinUserDetails();
+    }
+  }
 }

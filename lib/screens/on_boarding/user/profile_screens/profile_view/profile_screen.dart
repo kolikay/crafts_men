@@ -8,7 +8,9 @@ import 'package:craftsmen/constants/reusesable_widgets/profleFormFields.dart';
 import 'package:craftsmen/constants/utils/image_storage_methods.dart';
 import 'package:craftsmen/constants/utils/pick_image.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:craftsmen/models/models.dart';
+import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
+import 'package:craftsmen/screens/change_password/email_password_change_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,17 +28,19 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   bool readOnly = true;
   bool onEdit = false;
   final _formKey = GlobalKey<FormState>();
-  final _fullnameCont = TextEditingController();
-  final _usernameCont = TextEditingController();
-  final _phone = TextEditingController();
-  final _gender = TextEditingController();
-  final _email = TextEditingController();
-  final _password = TextEditingController();
-  final _address = TextEditingController();
-  Uint8List? _image;
+  String? email;
+  String? fullName;
+  String? userName;
+  String? phoneNumber;
+  String? gender;
+  String? address;
   String? photo;
+  String? photoUrl;
+  bool loading = false;
 
-  bottomSheet(BuildContext context, WidgetRef ref) async {
+  bottomSheet(
+    BuildContext context,
+  ) async {
     return showModalBottomSheet(
       context: context,
       builder: (builder) {
@@ -62,13 +66,19 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         color: kMainColor,
                         iconSize: 50.w,
                         onPressed: () async {
-                          Uint8List im =
-                              await PickImage.pickImage(ImageSource.camera);
                           setState(() {
-                            _image = im;
+                            loading = true;
                           });
-                          
+                          Uint8List im =
+                              await PickImage.pickImage(ImageSource.gallery);
                           Navigator.pop(context);
+                          String? image = await StorageMethods()
+                              .uploadImageTostorage(
+                                  'UserProfilePicx', im, false);
+                          setState(() {
+                            photo = image;
+                            loading = false;
+                          });
                         },
                         icon: const Icon(Icons.add_a_photo_rounded),
                       ),
@@ -81,11 +91,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         color: kMainColor,
                         iconSize: 50.w,
                         onPressed: () async {
+                          setState(() {
+                            loading = true;
+                          });
                           Uint8List im =
                               await PickImage.pickImage(ImageSource.gallery);
                           Navigator.pop(context);
+                          String? image = await StorageMethods()
+                              .uploadImageTostorage(
+                                  'UserProfilePicx', im, false);
                           setState(() {
-                            _image = im;
+                            photo = image;
+                            loading = false;
                           });
                         },
                         icon: const Icon(Icons.image),
@@ -105,36 +122,59 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    User currentUser = FirebaseAuth.instance.currentUser!;
-    final authViewModel = ref.watch(authViewModelProvider);
+  void didChangeDependencies() {
+    final userInfoProvider = ref.watch(userProvider);
+    final user = userInfoProvider.userApiData;
+    getApiData(user);
+    super.didChangeDependencies();
+  }
 
-    getInputedData(String? photoUrl) {
+  getApiData(UserModel user) async {
+    email = user.email ?? '';
+    fullName = user.fullName ?? '';
+    userName = user.userName ?? '';
+    phoneNumber = user.phoneNumber ?? '';
+    gender = user.gender ?? '';
+    photoUrl = user.profilePic ?? '';
+
+    address = user.address ??
+        'No 27, Kenneth Street, Ikoyi,Lagos state (Test Address)';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final authViewModel = ref.watch(authViewModelProvider);
+    final userInfoProvider = ref.watch(userProvider);
+
+    getInputedData() {
       final body = {
-        "ID": currentUser.uid,
-        "email": _email.text.trim(),
-        "Full Name": _fullnameCont.text.trim(),
-        "User Name": _usernameCont.text.trim(),
-        'Phone Number': _phone.text.trim(),
-        "Gender": _gender.text.trim(),
-        "address": _address.text.trim(),
+        "email": email,
+        "Full Name": fullName,
+        "User Name": userName,
+        'Phone Number': phoneNumber,
+        "Gender": gender,
+        "address": address,
         'Reviews': [],
-        'Profile Pic': photoUrl,
       };
       return body;
     }
 
-    //user data update notifire
-    final userInfoProvider = ref.watch(userProvider);
-    final user = userInfoProvider.userApiData;
+    Widget getProfileImage() {
+      if (photo != null && photoUrl != null) {
+        return CircleAvatar(radius: 64, backgroundImage: NetworkImage(photo!));
+      }
+      if (photoUrl != null) {
+        return CircleAvatar(
+          radius: 64,
+          backgroundImage: NetworkImage(photoUrl!),
+        );
+      }
 
-    _email.text = user.email ?? '';
-    _fullnameCont.text = user.fullName ?? '';
-    _usernameCont.text = user.userName ?? '';
-    _phone.text = user.phoneNumber ?? '';
-    _gender.text = user.gender ?? '';
-    photo = user.profilePic;
-    _address.text = user.address ?? 'No 27, Kenneth Street, Ikoyi,Lagos state';
+      return const CircleAvatar(
+        radius: 64,
+        backgroundImage: AssetImage('lib/assets/profileImage.jpeg'),
+      );
+    }
 
     return Scaffold(
         appBar: PreferredSize(
@@ -175,17 +215,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 padding: EdgeInsets.only(top: 10.0.h, right: 10.w),
                 child: IconButton(
                   onPressed: () async {
+                    AuthViewModel.instance.setLoading(true);
                     if (onEdit) {
-                      String photoUrl = await StorageMethods()
-                          .uploadImageTostorage(
-                              'UserProfilePicx', _image!, false);
-
                       await userInfoProvider
-                          .updateLoggedinUserDetails(getInputedData(photoUrl));
+                          .updateLoggedinUserDetails(getInputedData());
                     }
+
                     setState(() {
                       onEdit = !onEdit;
                     });
+                    AuthViewModel.instance.setLoading(false);
                   },
                   icon: onEdit
                       ? Icon(Icons.save, size: 30.w)
@@ -208,33 +247,25 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     ),
                     Stack(
                       children: [
-                        photo != null
-                            ? CircleAvatar(
-                                radius: 64,
-                                backgroundImage: NetworkImage(photo!),
-                              )
-                            :  const CircleAvatar(
-                                radius: 64,
-                                backgroundImage:
-                                    AssetImage('lib/assets/profileImage.jpeg'),
+                        !loading
+                            ? getProfileImage()
+                            : const CircularProgressIndicator(
+                                color: Colors.blueAccent,
                               ),
-                        // setPhoto(),
-                        onEdit
-                            ? Positioned(
-                                top: 35.h,
-                                left: 35.w,
-                                child: IconButton(
-                                  color: Colors.white,
-                                  iconSize: 40.w,
-                                  icon: const Icon(
-                                    Icons.camera_alt,
-                                  ),
-                                  onPressed: () {
-                                    bottomSheet(context, ref);
-                                  },
-                                ),
-                              )
-                            : const SizedBox(),
+                        Positioned(
+                          bottom: -10.h,
+                          left: 85.w,
+                          child: IconButton(
+                            color: kMainColor,
+                            iconSize: 30.w,
+                            icon: const Icon(
+                              Icons.camera_alt,
+                            ),
+                            onPressed: () {
+                              bottomSheet(context);
+                            },
+                          ),
+                        )
                       ],
                     ),
                     SizedBox(
@@ -245,8 +276,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       child: Column(
                         children: [
                           ProfileFormField(
+                            initialValue: fullName,
+                            onChanged: (val) {
+                              setState(() {
+                                fullName = val;
+                              });
+                            },
                             enable: onEdit,
-                            controller: _fullnameCont,
                             obcureText: false,
                             keyBoardType: TextInputType.text,
                             isPassword: false,
@@ -257,8 +293,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             height: 24.h,
                           ),
                           ProfileFormField(
+                            initialValue: userName,
+                            onChanged: (val) {
+                              setState(() {
+                                userName = val;
+                              });
+                            },
                             enable: onEdit,
-                            controller: _usernameCont,
                             obcureText: false,
                             keyBoardType: TextInputType.text,
                             isPassword: false,
@@ -269,8 +310,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             height: 24.h,
                           ),
                           ProfileFormField(
+                            initialValue: email,
+                            onChanged: (val) {
+                              setState(() {
+                                email = val;
+                              });
+                            },
                             enable: onEdit,
-                            controller: _email,
                             obcureText: false,
                             keyBoardType: TextInputType.text,
                             isPassword: false,
@@ -281,8 +327,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             height: 24.h,
                           ),
                           ProfileFormField(
+                            initialValue: gender,
+                            onChanged: (val) {
+                              setState(() {
+                                gender = val;
+                              });
+                            },
                             enable: onEdit,
-                            controller: _gender,
                             obcureText: false,
                             keyBoardType: TextInputType.text,
                             isPassword: false,
@@ -293,8 +344,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             height: 24.h,
                           ),
                           ProfileFormField(
+                            initialValue: address,
+                            onChanged: (val) {
+                              setState(() {
+                                address = val;
+                              });
+                            },
                             enable: onEdit,
-                            controller: _address,
                             obcureText: false,
                             keyBoardType: TextInputType.text,
                             isPassword: false,
@@ -305,8 +361,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             height: 24.h,
                           ),
                           ProfileFormField(
+                            initialValue: phoneNumber,
+                            onChanged: (val) {
+                              setState(() {
+                                phoneNumber = val;
+                              });
+                            },
                             enable: onEdit,
-                            controller: _phone,
                             obcureText: false,
                             keyBoardType: TextInputType.number,
                             isPassword: false,
@@ -317,44 +378,31 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             height: 24.h,
                           ),
                           onEdit
-                              ? ProfileFormField(
-                                  enable: onEdit,
-                                  controller: _password,
-                                  obcureText: false,
-                                  keyBoardType: TextInputType.text,
-                                  isPassword: false,
-                                  isReadOnly: !onEdit,
-                                  labelText: 'Password',
-                                )
+                              ? InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, EmailPasswordChangeScreen.id);
+                                  },
+                                  child: NormalText(
+                                    size: 18,
+                                    fontWeight: FontWeight.w600,
+                                    text: 'Change Password',
+                                    color: kMainColor,
+                                  ))
                               : const SizedBox(),
-                          SizedBox(
-                            height: 24.h,
-                          ),
-                          onEdit
-                              ? ProfileFormField(
-                                  controller: _password,
-                                  obcureText: false,
-                                  keyBoardType: TextInputType.text,
-                                  isPassword: false,
-                                  isReadOnly: !onEdit,
-                                  labelText: 'Confirm Password',
-                                )
-                              : const SizedBox()
                         ],
                       ),
                     ),
                   ],
                 ),
               ),
-              Positioned(
-                child: authViewModel.loading
-                    ? const Center(
-                        child: ProgressDialog(
-                          message: 'Loading....',
-                        ),
-                      )
-                    : const SizedBox(),
-              ),
+              authViewModel.loading
+                  ? const Center(
+                      child: ProgressDialog(
+                        message: 'Loading....',
+                      ),
+                    )
+                  : const SizedBox(),
             ],
           ),
         ));

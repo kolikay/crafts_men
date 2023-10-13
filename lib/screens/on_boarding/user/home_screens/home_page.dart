@@ -53,7 +53,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         NormalText(
-                          text: loginUser.userApiData.userName ?? '',
+                          text: "Hello ${loginUser.userApiData.userName ?? ''} !!! " ,
                           size: 20.sp,
                           fontWeight: FontWeight.w600,
                           color: kMainColor,

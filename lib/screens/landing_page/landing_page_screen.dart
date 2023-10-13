@@ -56,20 +56,20 @@ class _LandingPageState extends State<LandingPage> {
                 buildPage(
                   color: kWhite,
                   urlImage: 'https://i.imgur.com/FUQjrM7.png',
-                  title: 'Welcome to SkillConnect',
+                  title: 'Welcome to Crafts Men',
                   subTitle:
                       'SkillConnect help you get the best service you might need',
                 ),
                 buildPage(
                   color: kWhite,
                   urlImage: 'https://i.imgur.com/PPh1vo4.png',
-                  title: 'Welcome to SkillConnect',
+                  title: 'Welcome to Crafts Men',
                   subTitle: 'Giving out the best that will meet your demand',
                 ),
                 buildPage(
                   color: kWhite,
                   urlImage: 'https://i.imgur.com/RqaCElu.png',
-                  title: 'Welcome to SkillConnect',
+                  title: 'Welcome to Crafts Men',
                   subTitle:
                       'We can come to your house, office or wherever works for you to render the services',
                 ),

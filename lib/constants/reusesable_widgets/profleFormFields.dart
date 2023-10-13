@@ -14,8 +14,10 @@ class ProfileFormField extends StatefulWidget {
   final Color? borderColor;
   final TextInputType? keyBoardType;
   final bool? enable;
+   Function(String)? onChanged;
+   final String? initialValue;
 
-  const ProfileFormField({
+   ProfileFormField({
     Key? key,
     this.borderColor = kMainColor,
     this.controller,
@@ -26,6 +28,8 @@ class ProfileFormField extends StatefulWidget {
     required this.labelText,
     this.keyBoardType,
     this.enable = true,
+    this.onChanged,
+    this.initialValue
   }) : super(key: key);
 
   @override
@@ -38,12 +42,13 @@ class _ProfileFormFieldState extends State<ProfileFormField> {
     return SizedBox(
       width: 327.w,
       child: TextFormField(
+        initialValue: widget.initialValue,
+        onChanged: widget.onChanged,
         controller: widget.controller,
         readOnly: widget.isReadOnly!,
         obscureText: widget.obcureText!,
         decoration: InputDecoration(
-          contentPadding:
-              EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
+          contentPadding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
           labelText: widget.labelText,
           labelStyle: TextStyle(
               color: Colors.black,
