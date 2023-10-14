@@ -86,30 +86,54 @@ class AuthViewModel extends ChangeNotifier {
     }
   }
 
-
-
 // User Registration
-  Future<String> signUpUser(
+
+  Future<String?> signUpUser(
       {required Map<String, dynamic> body,
       required String password,
       required String email}) async {
+    String? error;
     setLoading(true);
-    try {
-      if (body.isNotEmpty) {
-        UserCredential credential = await _auth.createUserWithEmailAndPassword(
-            email: email, password: password);
-        _firestore.collection('Users').doc(credential.user!.uid).set(body);
-      }
-      //get login user details upon sign up
-      await UserProvider.instance.getLoggedinUserDetails();
-      setLoading(false);
-      return 'Success';
-    } catch (e) {
-      setLoading(false);
-      return e.toString();
+
+    if (body.isNotEmpty) {
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((res) async {
+        // do whatever you want to do with new user object
+        _firestore.collection('Users').doc(res.user!.uid).set(body);
+        //get login user details upon sign up
+        await UserProvider.instance.getLoggedinUserDetails();
+        setLoading(false);
+        return 'Success';
+      }).catchError((e) {
+        error = e.code;
+        setLoading(false);
+        return e.code; // code, message, details
+      });
+      return error;
     }
   }
 
+  // Future<String> signUpUser(
+  //     {required Map<String, dynamic> body,
+  //     required String password,
+  //     required String email}) async {
+  //   setLoading(true);
+  //   try {
+  //     if (body.isNotEmpty) {
+  //       UserCredential credential = await _auth.createUserWithEmailAndPassword(
+  //           email: email, password: password);
+  //       _firestore.collection('Users').doc(credential.user!.uid).set(body);
+  //     }
+  //     //get login user details upon sign up
+  //     await UserProvider.instance.getLoggedinUserDetails();
+  //     setLoading(false);
+  //     return 'Success';
+  //   } catch (e) {
+  //     setLoading(false);
+  //     return e.toString();
+  //   }
+  // }
 
 // User Login
   Future<String> signIn(

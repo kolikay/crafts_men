@@ -1,4 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:craftsmen/constants/reusesable_widgets/reusable_info_widget.dart';
+import 'package:craftsmen/constants/utils/snack_bar.dart';
+import 'package:craftsmen/providers/user_provider.dart';
+import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
+import 'package:craftsmen/screens/auth/views/login_screen.dart';
+import 'package:craftsmen/screens/change_password/enter_newpassword_screen.dart';
+
 import 'package:craftsmen/screens/change_password/passord_resetpin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,8 +14,6 @@ import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusaable_textformfield.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
-
-
 
 class EmailPasswordChangeScreen extends StatefulWidget {
   const EmailPasswordChangeScreen({Key? key}) : super(key: key);
@@ -19,6 +25,12 @@ class EmailPasswordChangeScreen extends StatefulWidget {
 
 class _EmailPasswordChangeScreenState extends State<EmailPasswordChangeScreen> {
   final _emailCont = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailCont;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,19 +87,30 @@ class _EmailPasswordChangeScreenState extends State<EmailPasswordChangeScreen> {
           ReuseableButton(
             text: 'Send Email',
             textSize: 16.sp,
-            onPressed: () {
-              dialogBuilder(
-                  context,
-                  'lib/assets/emaillockicon.png',
-                  'Email Sent',
-                  'Reset instructions has been sent to email adeyemifatimah1@gmail.com',
-                  'Proceed', () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const PasswordResetPinScreen(),
-                  ),
-                );
-              });
+            onPressed: () async {
+              AuthViewModel.instance.setLoading(true);
+              String? res = await UserProvider.instance
+                  .updateUserPassword(_emailCont.text);
+              AuthViewModel.instance.setLoading(false);
+              print(res);
+
+              if (res == 'Success') {
+                dialogBuilder(
+                    context,
+                    'lib/assets/emaillockicon.png',
+                    'Email Sent',
+                    'Reset instructions has been sent to email ${_emailCont.text}',
+                    'Proceed', () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ),
+                  );
+                });
+              } else if(res == null || res != 'Success'){
+                AuthViewModel.instance.setLoading(false);
+                ShowSnackBar.buildErrorSnackbar(context, res ?? 'Failed', Colors.red);
+              }
             },
           ),
         ],

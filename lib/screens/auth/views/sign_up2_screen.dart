@@ -24,8 +24,6 @@ class SignUpScreen2 extends ConsumerStatefulWidget {
   final String gender;
   final String address;
 
-
-
   const SignUpScreen2({
     Key? key,
     required this.fullName,
@@ -33,7 +31,6 @@ class SignUpScreen2 extends ConsumerStatefulWidget {
     required this.phoneNumber,
     required this.gender,
     required this.address,
-
   }) : super(key: key);
   @override
   ConsumerState<SignUpScreen2> createState() => _SignUpScreenState();
@@ -46,7 +43,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
   final _emailCont = TextEditingController();
   final _password1Cont = TextEditingController();
   bool? _isChecked = false;
-
 
   @override
   void initState() {
@@ -65,7 +61,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
         'Phone Number': widget.phoneNumber.trim(),
         "Gender": widget.gender.trim(),
         'Reviews': [],
-
       };
       return body;
     }
@@ -252,6 +247,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                           textSize: 14.sp,
                           text: 'Sign Up',
                           onPressed: () async {
+                            // authViewModel.signUpUser(
+                            //     body: getInputedData(),
+                            //     password: _password1Cont.text,
+                            //     email: _emailCont.text);
+                            // authViewModel.setLoading(false);
                             bool sentOtp =
                                 await authViewModel.sendOtp(_emailCont.text);
                             if (sentOtp) {

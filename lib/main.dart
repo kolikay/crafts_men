@@ -82,9 +82,9 @@ class MyApp extends StatelessWidget {
             LoginScreen.id: (context) => const LoginScreen(),
             EmailPasswordChangeScreen.id: (context) =>
                 const EmailPasswordChangeScreen(),
-            PasswordResetPinScreen.id: (context) =>
-                const PasswordResetPinScreen(),
-            NewPasswordScreen.id: (context) => const NewPasswordScreen(),
+            // PasswordResetPinScreen.id: (context) =>
+            //     PasswordResetPinScreen(),
+            // NewPasswordScreen.id: (context) => const NewPasswordScreen(),
             LocationScreen2.id: (context) => const LocationScreen2(),
             LocationScreen.id: (context) => const LocationScreen(),
           },

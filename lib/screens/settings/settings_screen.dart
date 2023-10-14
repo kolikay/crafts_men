@@ -25,10 +25,9 @@ class SettingsScreen extends ConsumerStatefulWidget {
 }
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
-
   @override
   Widget build(BuildContext context) {
-      final userInfoProvider = ref.watch(userProvider);
+    final userInfoProvider = ref.watch(userProvider);
     return SafeArea(
         child: Scaffold(
       appBar: PreferredSize(
@@ -53,19 +52,25 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ),
                   Row(
                     children: [
-                      Container(
-                        height: 90.h,
-                        width: 90.w,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage(
-                              'lib/assets/verifiedIcon.png',
+                      userInfoProvider.userApiData.profilePic != null
+                          ? CircleAvatar(
+                              radius: 34,
+                              backgroundImage: NetworkImage(
+                                  userInfoProvider.userApiData.profilePic!),
+                            )
+                          : Container(
+                              height: 90.h,
+                              width: 90.w,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: AssetImage(
+                                    'lib/assets/verifiedIcon.png',
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
                       SizedBox(width: 10.w),
                       SizedBox(
                         height: 60.h,
@@ -75,13 +80,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             NormalText(
-                              text:userInfoProvider.userApiData.fullName ?? '',
+                              text: userInfoProvider.userApiData.fullName ?? '',
                               size: 16.sp,
                               fontWeight: FontWeight.w400,
                               color: Colors.white,
                             ),
                             NormalText(
-                              text:userInfoProvider.userApiData.email ?? '',
+                              text: userInfoProvider.userApiData.email ?? '',
                               size: 12.sp,
                               fontWeight: FontWeight.w200,
                               color: Colors.white,

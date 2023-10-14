@@ -226,3 +226,10 @@ class BookingsCards extends StatelessWidget {
     );
   }
 }
+
+
+// FirebaseFirestore.instance.collection('users').doc(email).set((){
+//    "email":email,
+//    "pass":pass,
+//    "nick":nick,//You can add more fields or remove them
+// });

@@ -6,6 +6,8 @@ class PickImage {
     XFile? file = await imagePicker.pickImage(source: source);
     if (file != null) {
       return await file.readAsBytes();
+    } else {
+      return 'failed';
     }
   }
 }

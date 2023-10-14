@@ -9,7 +9,7 @@ class StorageMethods {
 
   Future<String> uploadImageTostorage(
       String childName, Uint8List file, bool isPost) async {
-    print('got here');
+
     Reference ref =
         _storage.ref().child(childName).child(_auth.currentUser!.uid);
 

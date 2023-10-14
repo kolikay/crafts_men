@@ -10,6 +10,7 @@ import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/constants/utils/snack_bar.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
+import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
 import 'package:craftsmen/screens/on_boarding/craftsMen/details/craftsmen_fill_details_screen.dart';
 import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
@@ -183,24 +184,29 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                 onPressed: () async {
                   bool verified = await authViewModel.verify(otpValue.text);
                   if (verified == true) {
-                    await authViewModel.signUpUser(
+                    var res = await authViewModel.signUpUser(
                         body: widget.body,
                         password: widget.password,
                         email: widget.email);
-                    ShowSnackBar.buildErrorSnackbar(
-                        context, 'OTP verified', Colors.greenAccent);
-                    dialogBuilder(
-                        context,
-                        'lib/assets/emailverifiedicon.png',
-                        'Account Created',
-                        'Your account has been Created and verified successfully,',
-                        'Proceed', () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const OnBoardingScreen(),
-                        ),
-                      );
-                    });
+
+                    if (res == null || res != 'Success') {
+                      Navigator.pushNamed(context, SignUpScreen.id);
+                      ShowSnackBar.buildErrorSnackbar(
+                          context, res!, Colors.red);
+                    } else {
+                      dialogBuilder(
+                          context,
+                          'lib/assets/emailverifiedicon.png',
+                          'Account Created',
+                          'Your account has been Created and verified successfully,',
+                          'Proceed', () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const OnBoardingScreen(),
+                          ),
+                        );
+                      });
+                    }
                   } else {
                     ShowSnackBar.buildErrorSnackbar(
                         context, 'Incorrect OTP', Colors.red);
