@@ -9,11 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
-
-
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
+  static const id = 'landingPage1';
 
   @override
   State<LandingPage> createState() => _LandingPageState();

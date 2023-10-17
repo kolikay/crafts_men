@@ -1,7 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
 
-import 'package:craftsmen/models/models.dart';
+import 'package:craftsmen/models/user_models.dart';
+import 'package:craftsmen/providers/skill_provider.dart';
 import 'package:craftsmen/providers/user_provider.dart';
 import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
 import 'package:craftsmen/screens/on_boarding/user/profile_screens/profile_view_model/profile_view_model.dart';
@@ -23,6 +24,11 @@ final authViewModelProvider = ChangeNotifierProvider<AuthViewModel>((ref) {
 //provider for logged in user api data
 final userProvider = ChangeNotifierProvider<UserProvider>((ref) {
   return UserProvider.instance;
+});
+
+//provider for logged in user api data
+final skillProvider = ChangeNotifierProvider<SkillProvider>((ref) {
+  return SkillProvider.instance;
 });
 
 

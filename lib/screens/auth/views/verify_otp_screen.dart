@@ -11,6 +11,8 @@ import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/constants/utils/snack_bar.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
 import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
+import 'package:craftsmen/screens/landing_page/landing_page_screen.dart';
+import 'package:craftsmen/screens/landing_page/landing_page_screen2.dart';
 import 'package:craftsmen/screens/on_boarding/craftsMen/details/craftsmen_fill_details_screen.dart';
 import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
@@ -21,12 +23,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class VerifyOtpScreen extends ConsumerStatefulWidget {
   final String email;
   final String password;
+  String? userType;
   final Map<String, dynamic> body;
-  const VerifyOtpScreen(
+  VerifyOtpScreen(
       {Key? key,
       required this.email,
       required this.body,
-      required this.password})
+      required this.password,
+      this.userType})
       : super(key: key);
   @override
   ConsumerState<VerifyOtpScreen> createState() => _VerifyOtpScreenState();
@@ -182,30 +186,57 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                 text: 'Verify',
                 textSize: 14.sp,
                 onPressed: () async {
+                  //verify OTP
                   bool verified = await authViewModel.verify(otpValue.text);
                   if (verified == true) {
                     var res = await authViewModel.signUpUser(
                         body: widget.body,
                         password: widget.password,
-                        email: widget.email);
+                        email: widget.email,
+                        userType: widget.userType!);
+                    print(res);
+                    print(widget.userType);
 
-                    if (res == null || res != 'Success') {
-                      Navigator.pushNamed(context, SignUpScreen.id);
-                      ShowSnackBar.buildErrorSnackbar(
-                          context, res!, Colors.red);
+                    // check what type of user registered
+                    if (widget.userType == 'Skill Provider') {
+                      if (res == null || res != 'Success') {
+                        Navigator.pushNamed(context, LandingPage.id);
+                        ShowSnackBar.buildErrorSnackbar(
+                            context, res!, Colors.red);
+                      } else {
+                        dialogBuilder(
+                            context,
+                            'lib/assets/emailverifiedicon.png',
+                            'Account Created',
+                            'Your account has been Created and verified successfully,',
+                            'Proceed', () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const OnBoardingScreen(),
+                            ),
+                          );
+                        });
+                      }
                     } else {
-                      dialogBuilder(
-                          context,
-                          'lib/assets/emailverifiedicon.png',
-                          'Account Created',
-                          'Your account has been Created and verified successfully,',
-                          'Proceed', () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const OnBoardingScreen(),
-                          ),
-                        );
-                      });
+                      if (res == null || res != 'Success') {
+                        Navigator.pushNamed(context, LandingPage.id);
+                        ShowSnackBar.buildErrorSnackbar(
+                            context, res!, Colors.red);
+                      } else {
+                        dialogBuilder(
+                            context,
+                            'lib/assets/emailverifiedicon.png',
+                            'Account Created',
+                            'Your account has been Created and verified successfully, Please Tell Us a bit more about your skills,',
+                            'Proceed', () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const CraftmenFillDetailsScreen(),
+                            ),
+                          );
+                        });
+                      }
                     }
                   } else {
                     ShowSnackBar.buildErrorSnackbar(

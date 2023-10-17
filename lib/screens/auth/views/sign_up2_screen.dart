@@ -23,14 +23,16 @@ class SignUpScreen2 extends ConsumerStatefulWidget {
   final String phoneNumber;
   final String gender;
   final String address;
+  String? userType;
 
-  const SignUpScreen2({
+   SignUpScreen2({
     Key? key,
     required this.fullName,
     required this.userName,
     required this.phoneNumber,
     required this.gender,
     required this.address,
+    this.userType
   }) : super(key: key);
   @override
   ConsumerState<SignUpScreen2> createState() => _SignUpScreenState();
@@ -51,6 +53,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
 
   @override
   Widget build(BuildContext context) {
+
     final authViewModel = ref.watch(authViewModelProvider);
 
     getInputedData() {
@@ -61,6 +64,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
         'Phone Number': widget.phoneNumber.trim(),
         "Gender": widget.gender.trim(),
         'Reviews': [],
+        'User Type':widget.userType
       };
       return body;
     }
@@ -261,6 +265,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                                     email: _emailCont.text,
                                     password: _password1Cont.text,
                                     body: getInputedData(),
+                                    userType: widget.userType,
                                   ),
                                 ),
                               );

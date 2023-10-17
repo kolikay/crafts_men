@@ -74,11 +74,14 @@ class LandingPage2 extends StatelessWidget {
                 ReuseableButton(
                   backGroundColor: kMainColor,
                   textColor: kWhite,
-                  text: 'Skill provider',
+                  text: 'Skill Provider',
                   onPressed: () {
-                    // auth.setUserState(true);
-
-                    Navigator.pushNamed(context, SignUpScreen.id);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SignUpScreen(userType: "Skill Provider"),
+                      ),
+                    );
                   },
                   width: 137.w,
                 ),
@@ -87,9 +90,12 @@ class LandingPage2 extends StatelessWidget {
                   textColor: kMainColor,
                   text: 'User',
                   onPressed: () {
-                  //  auth.setUserState(false);
-
-                    Navigator.pushNamed(context, SignUpScreen.id);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SignUpScreen(userType: "User"),
+                      ),
+                    );
                   },
                   width: 137.w,
                 ),

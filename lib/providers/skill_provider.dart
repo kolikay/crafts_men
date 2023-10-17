@@ -8,12 +8,12 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class UserProvider extends ChangeNotifier {
-  static final UserProvider _instance = UserProvider._();
+class SkillProvider extends ChangeNotifier {
+  static final SkillProvider _instance = SkillProvider._();
 
-  UserProvider._();
+  SkillProvider._();
 
-  static UserProvider get instance {
+  static SkillProvider get instance {
     return _instance;
   }
 
@@ -27,8 +27,10 @@ class UserProvider extends ChangeNotifier {
   //Get Loggen In User Details
   Future getLoggedinUserDetails() async {
     User currentUser = _auth.currentUser!;
-    DocumentSnapshot snap =
-        await _firestore.collection('Users').doc(currentUser.uid).get();
+    DocumentSnapshot snap = await _firestore
+        .collection('Skill Provider')
+        .doc(currentUser.uid)
+        .get();
 
     UserModel user = UserModel.fromSnapshot(snap);
     userApiData.fullName = user.fullName;
@@ -39,15 +41,15 @@ class UserProvider extends ChangeNotifier {
     userApiData.phoneNumber = user.phoneNumber;
     userApiData.reviews = user.reviews;
     userApiData.profilePic = user.profilePic;
+    userApiData.userType = user.userType;
   }
 
   // Update Login User Details
   Future updateLoggedinUserDetails(Map<String, dynamic> body) async {
     User currentUser = _auth.currentUser!;
-    await _firestore.collection('Users').doc(currentUser.uid).update(body);
+    await _firestore.collection('Skill Provider').doc(currentUser.uid).update(body);
     await getLoggedinUserDetails();
   }
-
 
   Future<String?> updateUserPassword(String email) async {
     try {

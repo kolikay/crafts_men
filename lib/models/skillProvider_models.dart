@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
-class UserModel extends ChangeNotifier {
-  UserModel({
+class SkillProviderModel extends ChangeNotifier {
+  SkillProviderModel({
     this.id,
     this.email,
     this.fullName,
@@ -12,6 +12,7 @@ class UserModel extends ChangeNotifier {
     this.address,
     this.reviews,
     this.profilePic,
+    this.userType,
   });
 
   String? id;
@@ -23,11 +24,12 @@ class UserModel extends ChangeNotifier {
   String? address;
   String? profilePic;
   List? reviews;
+  String? userType;
 
-  static UserModel fromSnapshot(DocumentSnapshot snap) {
+  static SkillProviderModel fromSnapshot(DocumentSnapshot snap) {
     var snapShot = snap.data() as Map<String, dynamic>;
 
-    return UserModel(
+    return SkillProviderModel(
       id: snapShot["ID"],
       email: snapShot["email"],
       fullName: snapShot["Full Name"],
@@ -37,6 +39,7 @@ class UserModel extends ChangeNotifier {
       address: snapShot["Address"],
       reviews: ["Reviews"],
       profilePic: snapShot["Profile Pic"],
+       userType: snapShot["User Type"],
     );
   }
 }

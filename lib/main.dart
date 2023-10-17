@@ -73,12 +73,13 @@ class MyApp extends StatelessWidget {
                   child: CircularProgressIndicator(color: kMainColor),
                 );
               }
-              return const LoginScreen();
+              return const LandingPage();
             }),
           ),
           routes: {
+             LandingPage.id: (context) =>const  LandingPage(),
             LandingPage2.id: (context) => LandingPage2(),
-            SignUpScreen.id: (context) => const SignUpScreen(),
+            SignUpScreen.id: (context) => SignUpScreen(),
             LoginScreen.id: (context) => const LoginScreen(),
             EmailPasswordChangeScreen.id: (context) =>
                 const EmailPasswordChangeScreen(),

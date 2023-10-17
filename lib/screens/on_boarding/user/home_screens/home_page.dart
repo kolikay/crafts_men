@@ -4,7 +4,7 @@ import 'package:craftsmen/constants/const/app_state_constants.dart';
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
-import 'package:craftsmen/models/models.dart';
+import 'package:craftsmen/models/user_models.dart';
 import 'package:craftsmen/providers/user_provider.dart';
 import 'package:craftsmen/screens/search/displayAllsearchScreen.dart';
 import 'package:flutter/material.dart';
