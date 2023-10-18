@@ -120,7 +120,7 @@ class AuthViewModel extends ChangeNotifier {
         return 'Success';
       }
     }).catchError((e) {
-      response = e.code;
+      response = e;
       setLoading(false);
     });
 
@@ -163,7 +163,7 @@ class AuthViewModel extends ChangeNotifier {
         }
       }).catchError((e) async {
        await _auth.signOut();
-        response = e.code;
+        response = 'Login Failed';
         setLoginError(true);
         setLoading(false);
       });

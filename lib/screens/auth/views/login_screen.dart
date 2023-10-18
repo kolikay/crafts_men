@@ -9,6 +9,7 @@ import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/constants/utils/snack_bar.dart';
 import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
 import 'package:craftsmen/screens/change_password/email_password_change_screen.dart';
+import 'package:craftsmen/screens/landing_page/landing_page_screen2.dart';
 import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -153,35 +154,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             )),
                         Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 8.0,
-                              ),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    height: 25,
-                                    width: 25,
-                                    child: Checkbox(
-                                        value: value,
-                                        onChanged: (val) {
-                                          setState(() {
-                                            value = val;
-                                          });
-                                        }),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left:8.0),
-                                    child: NormalText(    size: 14.sp,
-                                        text: 'Skill Provider?',
-                                        color: kMainColor,
-                                        fontWeight: FontWeight.w500,),
-                                  )
-                                ],
-                              ),
-                            ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 TextButton(
                                   onPressed: () {
@@ -193,7 +167,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                     padding: EdgeInsets.zero,
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
+                                    padding: const EdgeInsets.only(right: 8.0),
                                     child: NormalText(
                                       size: 14.sp,
                                       text: 'Forgot Password?',
@@ -220,12 +194,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   String responce = await authViewModel.signIn(
-                                      password: passwordController.text,
-                                      email: emailController.text, );
+                                    password: passwordController.text,
+                                    email: emailController.text,
+                                  );
 
                                   if (responce == "User" ||
                                       responce == "Skill Provider") {
-   
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (builder) {
                                       return OnBoardingScreen(
@@ -292,7 +266,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       children: [
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, SignUpScreen.id);
+                            Navigator.pushNamed(context, LandingPage2.id);
                           },
                           child: RichText(
                             text: TextSpan(

@@ -116,6 +116,7 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
               Padding(
                 padding: EdgeInsets.only(left: 50.w, right: 50.w),
                 child: PinCodeTextField(
+                  
                   controller: otpValue,
                   keyboardType: TextInputType.number,
                   length: 4,

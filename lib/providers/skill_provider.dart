@@ -35,6 +35,8 @@ class SkillProvider extends ChangeNotifier {
 
     SkillProviderModel user = SkillProviderModel.fromSnapshot(snap);
 
+    print(user.fullName);
+
     userApiData.fullName = user.fullName;
     userApiData.email = user.email;
     userApiData.userName = user.userName;
@@ -46,6 +48,10 @@ class SkillProvider extends ChangeNotifier {
     userApiData.userType = user.userType;
     return user;
   }
+
+
+
+
 
   // Update Login User Details
   Future updateLoggedinUserDetails(Map<String, dynamic> body) async {

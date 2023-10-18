@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 class UserModel extends ChangeNotifier {
@@ -26,6 +27,13 @@ class UserModel extends ChangeNotifier {
   List? reviews;
   String? userType;
 
+
+    UserModel.fromFirebaseUser({User? user}) {
+    id = user!.uid;
+    email = user.email;
+    userName = user.displayName;
+  }
+
   static UserModel fromSnapshot(DocumentSnapshot snap) {
     var snapShot = snap.data() as Map<String, dynamic>;
 
@@ -45,48 +53,20 @@ class UserModel extends ChangeNotifier {
 }
 
 
-  // body: loading
-  //         ? Container(
-  //             child: const Center(child: CircularProgressIndicator()),
-  //           )
-  //         : file != null?Container(child: Center(child: Image.memory(image),)) : Container(
-  //           child: const Center(child: Text('Pick an Image')),
-  //         ),
-  //         floatingActionButton: FloatingActionButton(
-  //           child: const Icon(
-  //             Icons.image,
-  //           ),
-  //           onPressed: (){
-  //             pickImage();
-  //           }),
-  //   );
-  // factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-  //       id: json["_id"],
-  //       email: json["email"],
-  //       fullName: json["Full Name"],
-  //       userName: json["User Name"],
-  //       phoneNumber: json["Phone Number"],
-  //       gender: json["Gender"],
-  //       address: json["Address"],
-        // active: json["active"],
-        // about: json["about"],
-        // gender: json["gender"],
-        // interest: json["interest"],
-        // location: json["location"],
-        // name: json["name"],
-        // occupation: json["occupation"],
-        // surname: json["surname"],
-        // photo: json["photo"],
-        // dob: json["dob"],
-      // );
+// class AuthUser {
+//   String? uid;
+//   String? email;
+//   String? userName;
 
-  // Map<String, dynamic> toJson() => {
-  //       "_id": id,
-  //       "email": email,
-  //       "Full Name": fullName,
-  //       "User Name": userName,
-  //       "Phone Number": phoneNumber,
-  //       "Gender": gender,
-  //       "Address": address,
-  //     };
+//   AuthUser({
+//     required this.uid,
+//     required this.email,
+//     required this.userName,
+//   });
 
+//   AuthUser.fromFirebaseUser({User? user}) {
+//     uid = user!.uid;
+//     email = user.email;
+//     userName = user.displayName;
+//   }
+// }

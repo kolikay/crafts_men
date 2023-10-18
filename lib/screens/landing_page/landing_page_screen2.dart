@@ -3,6 +3,7 @@ import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
+import 'package:craftsmen/screens/auth/views/login_screen.dart';
 import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -92,15 +93,47 @@ class LandingPage2 extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) =>
-                            SignUpScreen(userType: "User"),
+                        builder: (context) => SignUpScreen(userType: "User"),
                       ),
                     );
                   },
                   width: 137.w,
                 ),
               ],
-            )
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, LoginScreen.id);
+                  },
+                  child: RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        color: Colors.black87,
+                        fontSize: 16.sp,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: 'You have an account? ',
+                            style: TextStyle(fontSize: 14.sp)),
+                        TextSpan(
+                          text: 'Sign In',
+                          style: TextStyle(
+                              fontSize: 16.sp,
+                              color: kMainColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

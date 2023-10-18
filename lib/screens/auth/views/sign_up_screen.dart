@@ -12,7 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
   String? userType;
-   SignUpScreen({Key? key, this.userType}) : super(key: key);
+  SignUpScreen({Key? key, this.userType}) : super(key: key);
   static const String id = 'sign_up_screen';
 
   @override
@@ -187,9 +187,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             textSize: 16.sp,
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-
-                                await authViewModel.request();
-
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) => SignUpScreen2(

@@ -28,7 +28,7 @@ class CraftsMenSettingsScreen extends ConsumerStatefulWidget {
 class _CraftsMenSettingsScreenState extends ConsumerState<CraftsMenSettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    final userInfoProvider = ref.watch(userProvider);
+    final userInfoProvider = ref.watch(skillProvider);
     return SafeArea(
         child: Scaffold(
       appBar: PreferredSize(

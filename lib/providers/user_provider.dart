@@ -43,6 +43,13 @@ class UserProvider extends ChangeNotifier {
     return user;
   }
 
+  Stream<UserModel?> get currentUser =>
+      FirebaseAuth.instance.authStateChanges().map(
+            (User? firebaseUser) => (firebaseUser != null)
+                ? UserModel.fromFirebaseUser(user: firebaseUser)
+                : null,
+          );
+
   // Update Login User Details
   Future updateLoggedinUserDetails(Map<String, dynamic> body) async {
     User currentUser = _auth.currentUser!;
