@@ -27,6 +27,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  bool? value = false;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +68,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           text: 'Glad to meet you again',
                         ),
                         SizedBox(
-                          height: 15.h,
+                          height: 10.h,
                         ),
                         Visibility(
                           visible: authViewModel.loginError,
@@ -150,28 +151,58 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                         })),
                               ],
                             )),
-                        SizedBox(
-                          height: 16.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                        Column(
                           children: [
-                            TextButton(
-                              key: const Key('testKeyloginButton'),
-                              onPressed: () {
-                                // pushEmailPasswordChangeScreen(context);
-                                Navigator.pushNamed(
-                                    context, EmailPasswordChangeScreen.id);
-                              },
-                              style: TextButton.styleFrom(
-                                padding: EdgeInsets.zero,
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 8.0,
                               ),
-                              child: NormalText(
-                                size: 14.sp,
-                                text: 'Forgot Password?',
-                                color: kMainColor,
-                                fontWeight: FontWeight.w500,
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    height: 25,
+                                    width: 25,
+                                    child: Checkbox(
+                                        value: value,
+                                        onChanged: (val) {
+                                          setState(() {
+                                            value = val;
+                                          });
+                                        }),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left:8.0),
+                                    child: NormalText(    size: 14.sp,
+                                        text: 'Skill Provider?',
+                                        color: kMainColor,
+                                        fontWeight: FontWeight.w500,),
+                                  )
+                                ],
                               ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    // pushEmailPasswordChangeScreen(context);
+                                    Navigator.pushNamed(
+                                        context, EmailPasswordChangeScreen.id);
+                                  },
+                                  style: TextButton.styleFrom(
+                                    padding: EdgeInsets.zero,
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: NormalText(
+                                      size: 14.sp,
+                                      text: 'Forgot Password?',
+                                      color: kMainColor,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -188,18 +219,22 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               textSize: 14.sp,
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  String res = await authViewModel.signIn(
+                                  String responce = await authViewModel.signIn(
                                       password: passwordController.text,
-                                      email: emailController.text);
+                                      email: emailController.text, );
 
-                                  if (res == "Success") {
+                                  if (responce == "User" ||
+                                      responce == "Skill Provider") {
+   
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (builder) {
-                                      return const OnBoardingScreen();
+                                      return OnBoardingScreen(
+                                        user: responce,
+                                      );
                                     }));
                                   } else {
                                     ShowSnackBar.buildErrorSnackbar(
-                                        context, res, Colors.red);
+                                        context, responce, Colors.red);
                                   }
                                 }
                               },

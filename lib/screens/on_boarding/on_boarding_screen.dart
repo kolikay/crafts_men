@@ -1,7 +1,8 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/screens/on_boarding/user/notifications/views/notification_screen1.dart';
+import 'package:craftsmen/screens/settings/craftsmen_settings_screen.dart';
 
-import 'package:craftsmen/screens/settings/settings_screen.dart';
+import 'package:craftsmen/screens/settings/user_settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -9,11 +10,11 @@ import 'user/bookings/bookings.dart';
 import 'user/home_screens/home_page.dart';
 
 class OnBoardingScreen extends StatefulWidget {
-  // final String? user;
+  final String? user;
   static String id = 'onBordingScreen';
 
   const OnBoardingScreen({Key? key,
-  // required this.user
+  required this.user
   
   }) : super(key: key);
 
@@ -28,7 +29,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     const HomePageScreen(),
     const Bookings(),
     const NotificationScreen1(),
-    const SettingsScreen()
+    const UserSettingsScreen()
   ];
 
   final userOnboardingIcons = const [
@@ -54,7 +55,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     Bookings(),
     HomePageScreen(),
     HomePageScreen(),
-    SettingsScreen()
+    CraftsMenSettingsScreen()
   ];
 
   final skillIcons = const [
@@ -112,29 +113,29 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     List<StatefulWidget> showScreen = [];
     List<BottomNavigationBarItem> onboardingIcons = [];
 
-    // switch (widget.user) {
-    //   case 'kola':
-    //     setState(() {
-    //       showScreen = skillScreens;
-    //       onboardingIcons = skillIcons;
-    //     });
-    //     break;
-    //   case 'ayo':
-    //     setState(() {
-    //       showScreen = userScreens;
-    //       onboardingIcons = userOnboardingIcons;
-    //     });
-    //     break;
+    switch (widget.user) {
+      case 'Skill Provider':
+        setState(() {
+          showScreen = skillScreens;
+          onboardingIcons = skillIcons;
+        });
+        break;
+      case 'User':
+        setState(() {
+          showScreen = userScreens;
+          onboardingIcons = userOnboardingIcons;
+        });
+        break;
 
-    //   default:
-    //     setState(() {
-    //       showScreen = bothScreens;
-    //       onboardingIcons = bothIcons;
-    //     });
-    // }
+      default:
+        setState(() {
+          showScreen = bothScreens;
+          onboardingIcons = bothIcons;
+        });
+    }
     return Scaffold(
-      // body: showScreen[currentIndex],
-      body: userScreens[currentIndex],
+      body: showScreen[currentIndex],
+      // body: userScreens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           iconSize: 25.0.w,
           backgroundColor: Colors.white70,
@@ -142,8 +143,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           type: BottomNavigationBarType.fixed,
           onTap: (index) => setState(() => currentIndex = index),
           currentIndex: currentIndex,
-          // items: onboardingIcons
-          items: userOnboardingIcons,
+          items: onboardingIcons
+          // items: userOnboardingIcons,
           
           ),
     );

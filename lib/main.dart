@@ -1,10 +1,10 @@
 import 'package:craftsmen/constants/const/color.dart';
+import 'package:craftsmen/constants/const/shared_preferences.dart';
+import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
 
 import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
 import 'package:craftsmen/screens/change_password/email_password_change_screen.dart';
-import 'package:craftsmen/screens/change_password/enter_newpassword_screen.dart';
-import 'package:craftsmen/screens/change_password/passord_resetpin_screen.dart';
 import 'package:craftsmen/screens/landing_page/landing_page_screen.dart';
 import 'package:craftsmen/screens/landing_page/landing_page_screen2.dart';
 import 'package:craftsmen/screens/location/location_screen.dart';
@@ -18,11 +18,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'constants/reusesable_widgets/normal_text.dart';
-import 'screens/on_boarding/craftsMen/details/craftsmen_fill_details_screen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+   await UserPreferences.init();
+
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await Firebase.initializeApp(
@@ -55,12 +57,17 @@ class MyApp extends StatelessWidget {
                   primary: kMainColor,
                 ),
           ),
-          home: StreamBuilder(
+          home: 
+        //  LandingPage(),
+          StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: ((context, snapshot) {
               if (snapshot.connectionState == ConnectionState.active) {
                 if (snapshot.hasData) {
-                  return const OnBoardingScreen();
+                  String? userType = UserPreferences.getUserType();
+                  return OnBoardingScreen(
+                    user: userType,
+                  );
                 } else if (snapshot.hasError) {
                   return Center(
                       child: NormalText(
@@ -77,7 +84,7 @@ class MyApp extends StatelessWidget {
             }),
           ),
           routes: {
-             LandingPage.id: (context) =>const  LandingPage(),
+            LandingPage.id: (context) => const LandingPage(),
             LandingPage2.id: (context) => LandingPage2(),
             SignUpScreen.id: (context) => SignUpScreen(),
             LoginScreen.id: (context) => const LoginScreen(),

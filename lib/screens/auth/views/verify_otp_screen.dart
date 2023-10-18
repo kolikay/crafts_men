@@ -194,8 +194,7 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                         password: widget.password,
                         email: widget.email,
                         userType: widget.userType!);
-                    print(res);
-                    print(widget.userType);
+              
 
                     // check what type of user registered
                     if (widget.userType == 'Skill Provider') {
@@ -212,7 +211,7 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                             'Proceed', () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => const OnBoardingScreen(),
+                              builder: (context) => OnBoardingScreen(user: widget.userType,),
                             ),
                           );
                         });
@@ -232,7 +231,7 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) =>
-                                  const CraftmenFillDetailsScreen(),
+                                  CraftmenFillDetailsScreen(user: widget.userType,),
                             ),
                           );
                         });

@@ -8,14 +8,22 @@ static SharedPreferences? _preferences;
   static const keyInitialized = 'init'; //initialize bool for shared pref
 
 
-//init shared pref package
+//initialize shared pref package
   static Future init() async => _preferences = await SharedPreferences.getInstance();
+
 
 //set bool key from funtion to true or false (shows if shared pref has initialize explorescreen)
   static Future setInitialized(bool initialized) async => await _preferences!.setBool(keyInitialized, initialized);
 
 // get key function
   static bool? getInitialized() => _preferences!.getBool(keyInitialized);
+
+
+  //set userType
+   Future setUserType(String userType) async => await _preferences!.setString('User Type', userType);
+  // get userType
+  static String? getUserType() => _preferences!.getString('User Type');
+
 
 
   //set usertoken

@@ -9,7 +9,7 @@ import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/screens/auth/views/verify_otp_screen.dart';
 import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
-import 'package:craftsmen/screens/settings/settings_screen.dart';
+import 'package:craftsmen/screens/settings/user_settings_screen.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,9 +17,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetailsPage3 extends ConsumerStatefulWidget {
   final PageController control;
+    final String? user;
   const DetailsPage3({
     Key? key,
     required this.control,
+    required this.user
   }) : super(key: key);
 
   @override
@@ -104,12 +106,12 @@ class _DetailsPage3State extends ConsumerState<DetailsPage3> {
                     'Thank You',
                     'Thanks for taking your time to fill the details. Once your service is needed, you will be notify  ',
                     'View Details', () {
-                  Navigator.pushNamed(context, OnBoardingScreen.id);
-                  // Navigator.of(context).push(
-                  //   MaterialPageRoute(
-                  //     builder: (context) => OnBoardingScreen.id,
-                  //   ),
-                  // );
+                  // Navigator.pushNamed(context, OnBoardingScreen.id);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => OnBoardingScreen(user: widget.user),
+                    ),
+                  );
                 });
               }),
         ]),

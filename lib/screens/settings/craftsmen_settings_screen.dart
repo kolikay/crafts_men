@@ -1,6 +1,7 @@
 import 'package:craftsmen/constants/const/app_state_constants.dart';
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
+import 'package:craftsmen/screens/on_boarding/craftsMen/crafts_men_profile_screens/profile_view/crafts_profile_screen.dart';
 import 'package:craftsmen/screens/on_boarding/user/home_screens/homepage_constant_widgets.dart';
 import 'package:craftsmen/screens/on_boarding/user/notifications/views/notification_screen1.dart';
 import 'package:craftsmen/screens/on_boarding/user/profile_screens/profile_view/profile_screen.dart';
@@ -16,15 +17,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SettingsScreen extends ConsumerStatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+class CraftsMenSettingsScreen extends ConsumerStatefulWidget {
+  const CraftsMenSettingsScreen({Key? key}) : super(key: key);
   static const String id = 'settings_screen';
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SettingsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _CraftsMenSettingsScreenState();
 }
 
-class _SettingsScreenState extends ConsumerState<SettingsScreen> {
+class _CraftsMenSettingsScreenState extends ConsumerState<CraftsMenSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final userInfoProvider = ref.watch(userProvider);
@@ -116,7 +117,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: ((context) => const ProfileScreen()),
+                      builder: ((context) => const CraftMenProfileScreen()),
                     ),
                   );
                 },

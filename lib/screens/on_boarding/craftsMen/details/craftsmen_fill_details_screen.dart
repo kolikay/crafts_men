@@ -8,7 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CraftmenFillDetailsScreen extends ConsumerStatefulWidget {
-  const CraftmenFillDetailsScreen({Key? key}) : super(key: key);
+  final String? user;
+  const CraftmenFillDetailsScreen({Key? key,required this.user}) : super(key: key);
   // static const String id = 'sign_up_screen';
 
   @override
@@ -94,7 +95,7 @@ class _CraftmenFillDetailsScreenState
                               compAddCont: _compAdd,
                             ),
                              DetailsPage2(control: pageController,),
-                             DetailsPage3(control: pageController,),
+                             DetailsPage3(control: pageController, user: widget.user,),
                           ],
                         ),
                       ),

@@ -25,7 +25,7 @@ class UserProvider extends ChangeNotifier {
   UserModel userApiData = UserModel();
 
   //Get Loggen In User Details
-  Future getLoggedinUserDetails() async {
+  Future<UserModel> getLoggedinUserDetails() async {
     User currentUser = _auth.currentUser!;
     DocumentSnapshot snap =
         await _firestore.collection('Users').doc(currentUser.uid).get();
@@ -39,6 +39,8 @@ class UserProvider extends ChangeNotifier {
     userApiData.phoneNumber = user.phoneNumber;
     userApiData.reviews = user.reviews;
     userApiData.profilePic = user.profilePic;
+
+    return user;
   }
 
   // Update Login User Details
@@ -47,7 +49,6 @@ class UserProvider extends ChangeNotifier {
     await _firestore.collection('Users').doc(currentUser.uid).update(body);
     await getLoggedinUserDetails();
   }
-
 
   Future<String?> updateUserPassword(String email) async {
     try {

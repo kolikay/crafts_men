@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:craftsmen/models/skillProvider_models.dart';
 import 'package:craftsmen/models/user_models.dart';
 import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,7 +23,7 @@ class SkillProvider extends ChangeNotifier {
   final _firestore = FirebaseFirestore.instance;
 
   //instance of usermodel
-  UserModel userApiData = UserModel();
+  SkillProviderModel userApiData = SkillProviderModel();
 
   //Get Loggen In User Details
   Future getLoggedinUserDetails() async {
@@ -32,7 +33,8 @@ class SkillProvider extends ChangeNotifier {
         .doc(currentUser.uid)
         .get();
 
-    UserModel user = UserModel.fromSnapshot(snap);
+    SkillProviderModel user = SkillProviderModel.fromSnapshot(snap);
+
     userApiData.fullName = user.fullName;
     userApiData.email = user.email;
     userApiData.userName = user.userName;
@@ -42,12 +44,16 @@ class SkillProvider extends ChangeNotifier {
     userApiData.reviews = user.reviews;
     userApiData.profilePic = user.profilePic;
     userApiData.userType = user.userType;
+    return user;
   }
 
   // Update Login User Details
   Future updateLoggedinUserDetails(Map<String, dynamic> body) async {
     User currentUser = _auth.currentUser!;
-    await _firestore.collection('Skill Provider').doc(currentUser.uid).update(body);
+    await _firestore
+        .collection('Skill Provider')
+        .doc(currentUser.uid)
+        .update(body);
     await getLoggedinUserDetails();
   }
 

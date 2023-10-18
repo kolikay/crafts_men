@@ -1,6 +1,7 @@
 // import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:craftsmen/models/skillProvider_models.dart';
 import 'package:craftsmen/models/user_models.dart';
 import 'package:craftsmen/providers/skill_provider.dart';
 import 'package:craftsmen/providers/user_provider.dart';
@@ -98,55 +99,76 @@ class AuthViewModel extends ChangeNotifier {
     String? response;
     setLoading(true);
 
-    if (body.isNotEmpty) {
-      await _auth
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then((res) async {
-        // do whatever you want to do with new user object
-        _firestore.collection(userType).doc(res.user!.uid).set(body);
-        //get login user details upon sign up
-      
-        if (userType == 'User') {
-          await UserProvider.instance.getLoggedinUserDetails();
-          response = 'Success';
-          setLoading(false);
-          return 'Success';
-        } else if (userType == 'Skill Provider') {
-          await SkillProvider.instance.getLoggedinUserDetails();
-          response = 'Success';
-          setLoading(false);
-          return 'Success';
-        }
-      }).catchError((e) {
-        response = e.code;
+    await _auth
+        .createUserWithEmailAndPassword(email: email, password: password)
+        .then((res) async {
+      // do whatever you want to do with new user object
+      _firestore.collection(userType).doc(res.user!.uid).set(body);
+      //get login user details upon sign up
+
+      if (userType == 'User') {
+        await UserProvider.instance.getLoggedinUserDetails();
+        response = 'Success';
+        userPref.setUserType('User');
         setLoading(false);
-        return e.code; // code, message, details
-      });
-    }
+        return 'Success';
+      } else if (userType == 'Skill Provider') {
+        await SkillProvider.instance.getLoggedinUserDetails();
+        response = 'Success';
+        userPref.setUserType('Skill Provider');
+        setLoading(false);
+        return 'Success';
+      }
+    }).catchError((e) {
+      response = e.code;
+      setLoading(false);
+    });
+
     return response;
   }
 
 // User Login
   Future<String> signIn(
       {required String password, required String email}) async {
+    String? response;
     setLoading(true);
-    try {
-      if (password.isNotEmpty || email.isNotEmpty) {
-        await _auth.signInWithEmailAndPassword(
-            email: email, password: password);
 
-        //get login user details upon sign up
-        await UserProvider.instance.getLoggedinUserDetails();
-      }
+    if (password.isNotEmpty || email.isNotEmpty) {
+      await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) async {
+        final userDoc = await _firestore
+            .collection('Users')
+            .doc(_auth.currentUser!.uid)
+            .get();
 
-      setLoading(false);
-      return 'Success';
-    } on FirebaseAuthException catch (e) {
-      setLoginError(true);
+        if (userDoc.exists) {
+          //get login user details upon sign up
+          UserModel data = await UserProvider.instance.getLoggedinUserDetails();
 
-      setLoading(false);
-      return 'failed';
+          response = data.userType;
+
+          userPref.setUserType('User');
+          setLoading(false);
+        } else {
+          //get login user details upon sign up
+          SkillProviderModel data =
+              await SkillProvider.instance.getLoggedinUserDetails();
+
+          response = data.userType;
+
+          userPref.setUserType('Skill Provider');
+
+          setLoading(false);
+        }
+      }).catchError((e) async {
+       await _auth.signOut();
+        response = e.code;
+        setLoginError(true);
+        setLoading(false);
+      });
     }
+    return response!;
   }
 
   Future logOut() async {
