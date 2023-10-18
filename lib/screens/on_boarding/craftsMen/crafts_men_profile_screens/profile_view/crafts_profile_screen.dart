@@ -28,15 +28,15 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
   bool readOnly = true;
   bool onEdit = false;
   final _formKey = GlobalKey<FormState>();
-  String? email;
-  String? fullName;
-  String? userName;
-  String? phoneNumber;
-  String? gender;
-  String? address;
-  String? photo;
-  String? photoUrl;
-  bool loading = false;
+  String? _email;
+  String? _fullName;
+  String? _userName;
+  String? _phoneNumber;
+  String? _gender;
+  String? _address;
+  String? _photo;
+  String? _photoUrl;
+  bool _loading = false;
 
   bottomSheet(
     BuildContext context,
@@ -67,7 +67,7 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                         iconSize: 50.w,
                         onPressed: () async {
                           setState(() {
-                            loading = true;
+                            _loading = true;
                           });
                           var im =
                               await PickImage.pickImage(ImageSource.camera);
@@ -78,12 +78,12 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                                     'UserProfilePicx', im, false);
 
                             setState(() {
-                              photo = image;
-                              loading = false;
+                              _photo = image;
+                              _loading = false;
                             });
                           }
                           setState(() {
-                            loading = false;
+                            _loading = false;
                           });
                         },
                         icon: const Icon(Icons.add_a_photo_rounded),
@@ -98,7 +98,7 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                         iconSize: 50.w,
                         onPressed: () async {
                           setState(() {
-                            loading = true;
+                            _loading = true;
                           });
                           var im =
                               await PickImage.pickImage(ImageSource.gallery);
@@ -109,12 +109,12 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                                     'UserProfilePicx', im, false);
 
                             setState(() {
-                              photo = image;
-                              loading = false;
+                              _photo = image ;
+                              _loading = false;
                             });
                           }
                           setState(() {
-                            loading = false;
+                            _loading = false;
                           });
                         },
                         icon: const Icon(Icons.image),
@@ -142,14 +142,13 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
   }
 
   getApiData(SkillProviderModel user) async {
-    email = user.email ?? '';
-    fullName = user.fullName ?? '';
-    userName = user.userName ?? '';
-    phoneNumber = user.phoneNumber ?? '';
-    gender = user.gender ?? '';
-    photoUrl = user.profilePic ?? '';
-
-    address = user.address ?? ' (Test Address)';
+    _email = user.email ?? '';
+    _fullName = user.fullName ?? '';
+    _userName = user.userName ?? '';
+    _phoneNumber = user.phoneNumber ?? '';
+    _gender = user.gender ?? '';
+    _photoUrl = user.profilePic ?? '';
+    _address = user.address ?? ' (Test Address)';
   }
 
   @override
@@ -159,37 +158,38 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
 
     getInputedData() {
       final body = {
-        "email": email,
-        "Full Name": fullName,
-        "User Name": userName,
-        'Phone Number': phoneNumber,
-        "Gender": gender,
-        "address": address,
+        "email": _email,
+        "Full Name": _fullName,
+        "User Name": _userName,
+        'Phone Number': _phoneNumber,
+        "Gender": _gender,
+        "address": _address,
         'Reviews': [],
+   
       };
       return body;
     }
 
     Widget getProfileImage() {
-      if (photo != null && photoUrl != null) {
-        return CircleAvatar(radius: 64, backgroundImage: NetworkImage(photo!));
+      if (_photo != null && _photoUrl != null) {
+        return CircleAvatar(radius: 64, backgroundImage: NetworkImage(_photo!));
       }
-      if (photo == null && photoUrl != null) {
+      if (_photo == null && _photoUrl != null) {
         return CircleAvatar(
           radius: 64,
-          backgroundImage: NetworkImage(photoUrl!),
+          backgroundImage: NetworkImage(_photoUrl!),
         );
       }
-      if (photo == null && photoUrl == null) {
+      if (_photo == null && _photoUrl == null) {
         return const CircleAvatar(
           radius: 64,
           backgroundImage: AssetImage('lib/assets/profileImage.jpeg'),
         );
       }
-      if (photoUrl != null) {
+      if (_photoUrl != null) {
         return CircleAvatar(
           radius: 64,
-          backgroundImage: NetworkImage(photoUrl!),
+          backgroundImage: NetworkImage(_photoUrl!),
         );
       }
 
@@ -268,29 +268,29 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                   SizedBox(
                     height: 24.h,
                   ),
-                  // Stack(
-                  //   children: [
-                  //     !loading
-                  //         ? getProfileImage()
-                  //         : const CircularProgressIndicator(
-                  //             color: Colors.blueAccent,
-                  //           ),
-                  //     Positioned(
-                  //       bottom: -10.h,
-                  //       left: 85.w,
-                  //       child: IconButton(
-                  //         color: kMainColor,
-                  //         iconSize: 30.w,
-                  //         icon: const Icon(
-                  //           Icons.camera_alt,
-                  //         ),
-                  //         onPressed: () {
-                  //           bottomSheet(context);
-                  //         },
-                  //       ),
-                  //     )
-                  //   ],
-                  // ),
+                  Stack(
+                    children: [
+                      !_loading
+                          ? getProfileImage()
+                          : const CircularProgressIndicator(
+                              color: Colors.blueAccent,
+                            ),
+                      Positioned(
+                        bottom: -10.h,
+                        left: 85.w,
+                        child: IconButton(
+                          color: kMainColor,
+                          iconSize: 30.w,
+                          icon: const Icon(
+                            Icons.camera_alt,
+                          ),
+                          onPressed: () {
+                            bottomSheet(context);
+                          },
+                        ),
+                      )
+                    ],
+                  ),
                   SizedBox(
                     height: 24.h,
                   ),
@@ -299,10 +299,10 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                     child: Column(
                       children: [
                         ProfileFormField(
-                          initialValue: fullName,
+                          initialValue: _fullName,
                           onChanged: (val) {
                             setState(() {
-                              fullName = val;
+                              _fullName = val;
                             });
                           },
                           enable: onEdit,
@@ -316,10 +316,10 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                           height: 24.h,
                         ),
                         ProfileFormField(
-                          initialValue: userName,
+                          initialValue: _userName,
                           onChanged: (val) {
                             setState(() {
-                              userName = val;
+                              _userName = val;
                             });
                           },
                           enable: onEdit,
@@ -333,10 +333,10 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                           height: 24.h,
                         ),
                         ProfileFormField(
-                          initialValue: email,
+                          initialValue: _email,
                           onChanged: (val) {
                             setState(() {
-                              email = val;
+                              _email = val;
                             });
                           },
                           enable: onEdit,
@@ -350,10 +350,10 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                           height: 24.h,
                         ),
                         ProfileFormField(
-                          initialValue: gender,
+                          initialValue: _gender,
                           onChanged: (val) {
                             setState(() {
-                              gender = val;
+                              _gender = val;
                             });
                           },
                           enable: onEdit,
@@ -367,10 +367,10 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                           height: 24.h,
                         ),
                         ProfileFormField(
-                          initialValue: address,
+                          initialValue: _address,
                           onChanged: (val) {
                             setState(() {
-                              address = val;
+                              _address = val;
                             });
                           },
                           enable: onEdit,
@@ -384,10 +384,10 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                           height: 24.h,
                         ),
                         ProfileFormField(
-                          initialValue: phoneNumber,
+                          initialValue: _phoneNumber,
                           onChanged: (val) {
                             setState(() {
-                              phoneNumber = val;
+                              _phoneNumber = val;
                             });
                           },
                           enable: onEdit,
