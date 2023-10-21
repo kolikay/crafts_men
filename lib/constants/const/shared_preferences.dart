@@ -38,10 +38,6 @@ static SharedPreferences? _preferences;
 
 
 
-
-
-
-
   //set userpic
   static Future setUserProfilePix(String token) async => await _preferences!.setString('profilePic', token);
 

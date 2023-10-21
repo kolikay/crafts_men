@@ -10,6 +10,7 @@ import 'package:craftsmen/constants/utils/pick_image.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/models/user_models.dart';
 import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
+import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,8 +34,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   String? _phoneNumber;
   String? _gender;
   String? _address;
-  String? _photo;
-  String? _photoUrl;
+  String? _selectedPhoto;
+  String? _downloadedPhoto;
+
   bool _loading = false;
 
   bottomSheet(
@@ -43,6 +45,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     return showModalBottomSheet(
       context: context,
       builder: (builder) {
+        final userInfoProvider = ref.watch(userProvider);
         return SizedBox(
           height: 160.h,
           child: Column(
@@ -77,7 +80,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                     'UserProfilePicx', im, false);
 
                             setState(() {
-                              _photo = image;
+                              _selectedPhoto = image;
                               _loading = false;
                             });
                           }
@@ -97,7 +100,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         iconSize: 50.w,
                         onPressed: () async {
                           setState(() {
-                          _loading = true;
+                            _loading = true;
                           });
                           var im =
                               await PickImage.pickImage(ImageSource.gallery);
@@ -106,9 +109,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             String? image = await StorageMethods()
                                 .uploadImageTostorage(
                                     'UserProfilePicx', im, false);
+                            await userInfoProvider.updateLoggedinUserDetails(
+                                {'Profile Pic': image});
 
                             setState(() {
-                              _photo = image;
+                              _selectedPhoto = image;
                               _loading = false;
                             });
                           }
@@ -135,8 +140,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   @override
   void didChangeDependencies() {
     final userInfoProvider = ref.watch(userProvider);
+
     final user = userInfoProvider.userApiData;
+
     getApiData(user);
+
     super.didChangeDependencies();
   }
 
@@ -146,8 +154,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     _userName = user.userName ?? '';
     _phoneNumber = user.phoneNumber ?? '';
     _gender = user.gender ?? '';
-    _photoUrl = user.profilePic ?? '';
-
+    _downloadedPhoto = user.profilePic ?? '';
     _address = user.address ??
         'No 27, Kenneth Street, Ikoyi,Lagos state (Test Address)';
   }
@@ -171,25 +178,21 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     }
 
     Widget getProfileImage() {
-      if (_photo != null && _photoUrl != null) {
-        return CircleAvatar(radius: 64, backgroundImage: NetworkImage(_photo!));
+      if (_selectedPhoto != null) {
+        return CircleAvatar(
+            radius: 64, backgroundImage: NetworkImage(_selectedPhoto!));
       }
-      if (_photo == null && _photoUrl != null) {
+      if (_selectedPhoto == null && _downloadedPhoto!.isNotEmpty) {
         return CircleAvatar(
           radius: 64,
-          backgroundImage: NetworkImage(_photoUrl!),
+          backgroundImage: NetworkImage(_downloadedPhoto!),
         );
       }
-      if (_photo == null && _photoUrl == null) {
+
+      if (_selectedPhoto == null && _downloadedPhoto!.isEmpty) {
         return const CircleAvatar(
           radius: 64,
           backgroundImage: AssetImage('lib/assets/profileImage.jpeg'),
-        );
-      }
-      if (_photoUrl != null) {
-        return CircleAvatar(
-          radius: 64,
-          backgroundImage: NetworkImage(_photoUrl!),
         );
       }
 

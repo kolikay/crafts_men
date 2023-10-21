@@ -98,7 +98,6 @@ class _DetailsPage3State extends ConsumerState<DetailsPage3> {
           ReuseableButton(
               text: 'Submit',
               onPressed: () async {
-                await authViewModel.request();
                 // print(getInputedData());
                 dialogBuilder(
                     context,

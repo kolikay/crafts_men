@@ -116,7 +116,6 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
               Padding(
                 padding: EdgeInsets.only(left: 50.w, right: 50.w),
                 child: PinCodeTextField(
-                  
                   controller: otpValue,
                   keyboardType: TextInputType.number,
                   length: 4,
@@ -189,17 +188,17 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                 onPressed: () async {
                   //verify OTP
                   bool verified = await authViewModel.verify(otpValue.text);
+
                   if (verified == true) {
                     var res = await authViewModel.signUpUser(
                         body: widget.body,
                         password: widget.password,
                         email: widget.email,
                         userType: widget.userType!);
-              
 
                     // check what type of user registered
-                    if (widget.userType == 'Skill Provider') {
-                      if (res == null || res != 'Success') {
+                    if (widget.userType == 'Users') {
+                      if (res != 'Success') {
                         Navigator.pushNamed(context, LandingPage.id);
                         ShowSnackBar.buildErrorSnackbar(
                             context, res!, Colors.red);
@@ -212,13 +211,15 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                             'Proceed', () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => OnBoardingScreen(user: widget.userType,),
+                              builder: (context) => OnBoardingScreen(
+                                user: widget.userType,
+                              ),
                             ),
                           );
                         });
                       }
-                    } else {
-                      if (res == null || res != 'Success') {
+                    } else if(widget.userType == 'Skill Providers'){
+                      if (res != 'Success') {
                         Navigator.pushNamed(context, LandingPage.id);
                         ShowSnackBar.buildErrorSnackbar(
                             context, res!, Colors.red);
@@ -231,8 +232,9 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                             'Proceed', () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  CraftmenFillDetailsScreen(user: widget.userType,),
+                              builder: (context) => CraftmenFillDetailsScreen(
+                                user: widget.userType,
+                              ),
                             ),
                           );
                         });

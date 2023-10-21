@@ -34,8 +34,8 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
   String? _phoneNumber;
   String? _gender;
   String? _address;
-  String? _photo;
-  String? _photoUrl;
+  String? _selectedPhoto;
+  String? _downloadedPhoto;
   bool _loading = false;
 
   bottomSheet(
@@ -44,6 +44,7 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
     return showModalBottomSheet(
       context: context,
       builder: (builder) {
+        final skillUserInfoProvider = ref.watch(skillProvider);
         return SizedBox(
           height: 160.h,
           child: Column(
@@ -78,7 +79,7 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                                     'UserProfilePicx', im, false);
 
                             setState(() {
-                              _photo = image;
+                              _selectedPhoto = image;
                               _loading = false;
                             });
                           }
@@ -107,9 +108,12 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                             String? image = await StorageMethods()
                                 .uploadImageTostorage(
                                     'UserProfilePicx', im, false);
+                            await skillUserInfoProvider
+                                .updateLoggedinUserDetails(
+                                    {'Profile Pic': image});
 
                             setState(() {
-                              _photo = image ;
+                              _selectedPhoto = image;
                               _loading = false;
                             });
                           }
@@ -135,8 +139,8 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
 
   @override
   void didChangeDependencies() {
-    final userInfoProvider = ref.watch(skillProvider);
-    final user = userInfoProvider.userApiData;
+    final skillUserInfoProvider = ref.watch(skillProvider);
+    final user = skillUserInfoProvider.skillUserApiData;
     getApiData(user);
     super.didChangeDependencies();
   }
@@ -147,7 +151,7 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
     _userName = user.userName ?? '';
     _phoneNumber = user.phoneNumber ?? '';
     _gender = user.gender ?? '';
-    _photoUrl = user.profilePic ?? '';
+    _downloadedPhoto = user.profilePic ?? '';
     _address = user.address ?? ' (Test Address)';
   }
 
@@ -165,31 +169,26 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
         "Gender": _gender,
         "address": _address,
         'Reviews': [],
-   
       };
       return body;
     }
 
     Widget getProfileImage() {
-      if (_photo != null && _photoUrl != null) {
-        return CircleAvatar(radius: 64, backgroundImage: NetworkImage(_photo!));
+      if (_selectedPhoto != null) {
+        return CircleAvatar(
+            radius: 64, backgroundImage: NetworkImage(_selectedPhoto!));
       }
-      if (_photo == null && _photoUrl != null) {
+      if (_selectedPhoto == null && _downloadedPhoto!.isNotEmpty) {
         return CircleAvatar(
           radius: 64,
-          backgroundImage: NetworkImage(_photoUrl!),
+          backgroundImage: NetworkImage(_downloadedPhoto!),
         );
       }
-      if (_photo == null && _photoUrl == null) {
+
+      if (_selectedPhoto == null && _downloadedPhoto!.isEmpty) {
         return const CircleAvatar(
           radius: 64,
           backgroundImage: AssetImage('lib/assets/profileImage.jpeg'),
-        );
-      }
-      if (_photoUrl != null) {
-        return CircleAvatar(
-          radius: 64,
-          backgroundImage: NetworkImage(_photoUrl!),
         );
       }
 

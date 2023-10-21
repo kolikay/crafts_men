@@ -11,6 +11,7 @@ import 'package:craftsmen/screens/location/location_screen.dart';
 import 'package:craftsmen/screens/location/location_screen2.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
 import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,12 +19,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-   await UserPreferences.init();
+  await UserPreferences.init();
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
@@ -44,6 +43,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    String? userType = UserPreferences.getUserType();
+
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
@@ -58,13 +59,12 @@ class MyApp extends StatelessWidget {
                 ),
           ),
           home: 
-        //  LandingPage(),
-          StreamBuilder(
+          // LandingPage(),
+              StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: ((context, snapshot) {
               if (snapshot.connectionState == ConnectionState.active) {
                 if (snapshot.hasData) {
-                  String? userType = UserPreferences.getUserType();
                   return OnBoardingScreen(
                     user: userType,
                   );
@@ -92,9 +92,12 @@ class MyApp extends StatelessWidget {
                 const EmailPasswordChangeScreen(),
             // PasswordResetPinScreen.id: (context) =>
             //     PasswordResetPinScreen(),
-            // NewPasswordScreen.id: (context) => const NewPasswordScreen(),
+
             LocationScreen2.id: (context) => const LocationScreen2(),
             LocationScreen.id: (context) => const LocationScreen(),
+            OnBoardingScreen.id: (context) => OnBoardingScreen(
+                  user: userType,
+                ),
           },
         );
       },

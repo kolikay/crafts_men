@@ -80,7 +80,7 @@ class LandingPage2 extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) =>
-                            SignUpScreen(userType: "Skill Provider"),
+                            SignUpScreen(userType: "Skill Providers"),
                       ),
                     );
                   },
@@ -93,7 +93,7 @@ class LandingPage2 extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => SignUpScreen(userType: "User"),
+                        builder: (context) => SignUpScreen(userType: "Users"),
                       ),
                     );
                   },

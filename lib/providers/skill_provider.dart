@@ -23,41 +23,37 @@ class SkillProvider extends ChangeNotifier {
   final _firestore = FirebaseFirestore.instance;
 
   //instance of usermodel
-  SkillProviderModel userApiData = SkillProviderModel();
+  SkillProviderModel skillUserApiData = SkillProviderModel();
 
   //Get Loggen In User Details
   Future getLoggedinUserDetails() async {
     User currentUser = _auth.currentUser!;
     DocumentSnapshot snap = await _firestore
-        .collection('Skill Provider')
+        .collection('Skill Providers')
         .doc(currentUser.uid)
         .get();
+    print(snap.data());
 
-    SkillProviderModel user = SkillProviderModel.fromSnapshot(snap);
+    SkillProviderModel skillUser = SkillProviderModel.fromSnapshot(snap);
 
-    print(user.fullName);
-
-    userApiData.fullName = user.fullName;
-    userApiData.email = user.email;
-    userApiData.userName = user.userName;
-    userApiData.gender = user.gender;
-    userApiData.address = user.address;
-    userApiData.phoneNumber = user.phoneNumber;
-    userApiData.reviews = user.reviews;
-    userApiData.profilePic = user.profilePic;
-    userApiData.userType = user.userType;
-    return user;
+    skillUserApiData.fullName = skillUser.fullName;
+    skillUserApiData.email = skillUser.email;
+    skillUserApiData.userName = skillUser.userName;
+    skillUserApiData.gender = skillUser.gender;
+    skillUserApiData.address = skillUser.address;
+    skillUserApiData.phoneNumber = skillUser.phoneNumber;
+    skillUserApiData.reviews = skillUser.reviews;
+    skillUserApiData.profilePic = skillUser.profilePic;
+    skillUserApiData.userType = skillUser.userType;
+    notifyListeners();
+    return skillUser;
   }
-
-
-
-
 
   // Update Login User Details
   Future updateLoggedinUserDetails(Map<String, dynamic> body) async {
     User currentUser = _auth.currentUser!;
     await _firestore
-        .collection('Skill Provider')
+        .collection('Skill Providers')
         .doc(currentUser.uid)
         .update(body);
     await getLoggedinUserDetails();

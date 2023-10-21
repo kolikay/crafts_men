@@ -64,7 +64,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
         'Phone Number': widget.phoneNumber.trim(),
         "Gender": widget.gender.trim(),
         'Reviews': [],
-        'User Type':widget.userType
+        'User Type':widget.userType,
+        'Profile Pic': '',
       };
       return body;
     }

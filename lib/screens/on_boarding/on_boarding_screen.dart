@@ -114,24 +114,24 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     List<BottomNavigationBarItem> onboardingIcons = [];
 
     switch (widget.user) {
-      case 'Skill Provider':
+      case 'Skill Providers':
         setState(() {
           showScreen = skillScreens;
           onboardingIcons = skillIcons;
         });
         break;
-      case 'User':
+      case 'Users':
         setState(() {
           showScreen = userScreens;
           onboardingIcons = userOnboardingIcons;
         });
         break;
 
-      default:
-        setState(() {
-          showScreen = bothScreens;
-          onboardingIcons = bothIcons;
-        });
+      // default:
+      //   setState(() {
+      //     showScreen = bothScreens;
+      //     onboardingIcons = bothIcons;
+      //   });
     }
     return Scaffold(
       body: showScreen[currentIndex],

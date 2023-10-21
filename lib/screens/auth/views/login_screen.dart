@@ -198,8 +198,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                     email: emailController.text,
                                   );
 
-                                  if (responce == "User" ||
-                                      responce == "Skill Provider") {
+                                  if (responce == "Users" ||
+                                      responce == "Skill Providers") {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (builder) {
                                       return OnBoardingScreen(

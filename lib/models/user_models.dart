@@ -27,14 +27,7 @@ class UserModel extends ChangeNotifier {
   List? reviews;
   String? userType;
 
-
-    UserModel.fromFirebaseUser({User? user}) {
-    id = user!.uid;
-    email = user.email;
-    userName = user.displayName;
-  }
-
-  static UserModel fromSnapshot(DocumentSnapshot snap) {
+  static UserModel fromSnapshot( DocumentSnapshot snap) {
     var snapShot = snap.data() as Map<String, dynamic>;
 
     return UserModel(
@@ -47,11 +40,25 @@ class UserModel extends ChangeNotifier {
       address: snapShot["Address"],
       reviews: ["Reviews"],
       profilePic: snapShot["Profile Pic"],
-       userType: snapShot["User Type"],
+      userType: snapShot["User Type"],
     );
   }
 }
 
+
+  // Stream<UserModel?> get currentUser =>
+  //     FirebaseAuth.instance.authStateChanges().map(
+  //           (UserModel? firebaseUser) => (firebaseUser != null)
+  //               ? UserModel.fromSnapshot()
+  //               : null,
+  //         );
+
+
+  // UserModel.fromFirebaseUser({User? user}) {
+  //   id = user!.uid;
+  //   email = user.email;
+  //   userName = user.displayName;
+  // }
 
 // class AuthUser {
 //   String? uid;

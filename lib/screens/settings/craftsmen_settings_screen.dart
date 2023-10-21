@@ -28,7 +28,7 @@ class CraftsMenSettingsScreen extends ConsumerStatefulWidget {
 class _CraftsMenSettingsScreenState extends ConsumerState<CraftsMenSettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    final userInfoProvider = ref.watch(skillProvider);
+    final skillInfoProvider = ref.watch(skillProvider);
     return SafeArea(
         child: Scaffold(
       appBar: PreferredSize(
@@ -53,11 +53,11 @@ class _CraftsMenSettingsScreenState extends ConsumerState<CraftsMenSettingsScree
                   ),
                   Row(
                     children: [
-                      userInfoProvider.userApiData.profilePic != null
+                      skillInfoProvider.skillUserApiData.profilePic != null 
                           ? CircleAvatar(
                               radius: 34,
                               backgroundImage: NetworkImage(
-                                  userInfoProvider.userApiData.profilePic!),
+                                  skillInfoProvider.skillUserApiData.profilePic!),
                             )
                           : Container(
                               height: 90.h,
@@ -81,13 +81,13 @@ class _CraftsMenSettingsScreenState extends ConsumerState<CraftsMenSettingsScree
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             NormalText(
-                              text: userInfoProvider.userApiData.fullName ?? '',
+                              text: skillInfoProvider.skillUserApiData.fullName ?? '',
                               size: 16.sp,
                               fontWeight: FontWeight.w400,
                               color: Colors.white,
                             ),
                             NormalText(
-                              text: userInfoProvider.userApiData.email ?? '',
+                              text: skillInfoProvider.skillUserApiData.email ?? '',
                               size: 12.sp,
                               fontWeight: FontWeight.w200,
                               color: Colors.white,

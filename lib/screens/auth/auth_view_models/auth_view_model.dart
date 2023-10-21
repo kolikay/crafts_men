@@ -89,42 +89,24 @@ class AuthViewModel extends ChangeNotifier {
   }
 
 // User Registration
-
   Future<String?> signUpUser({
     required Map<String, dynamic> body,
     required String password,
     required String email,
     required String userType,
   }) async {
-    String? response;
     setLoading(true);
-
-    await _auth
-        .createUserWithEmailAndPassword(email: email, password: password)
-        .then((res) async {
+    try {
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
       // do whatever you want to do with new user object
-      _firestore.collection(userType).doc(res.user!.uid).set(body);
-      //get login user details upon sign up
-
-      if (userType == 'User') {
-        await UserProvider.instance.getLoggedinUserDetails();
-        response = 'Success';
-        userPref.setUserType('User');
-        setLoading(false);
-        return 'Success';
-      } else if (userType == 'Skill Provider') {
-        await SkillProvider.instance.getLoggedinUserDetails();
-        response = 'Success';
-        userPref.setUserType('Skill Provider');
-        setLoading(false);
-        return 'Success';
-      }
-    }).catchError((e) {
-      response = e;
+      _firestore.collection(userType).doc(_auth.currentUser!.uid).set(body);
       setLoading(false);
-    });
-
-    return response;
+      return 'Success';
+    } on FirebaseAuthException catch (e) {
+      setLoading(false);
+      return e.toString();
+    }
   }
 
 // User Login
@@ -143,26 +125,29 @@ class AuthViewModel extends ChangeNotifier {
             .get();
 
         if (userDoc.exists) {
+          print('one');
           //get login user details upon sign up
           UserModel data = await UserProvider.instance.getLoggedinUserDetails();
 
           response = data.userType;
 
-          userPref.setUserType('User');
+          userPref.setUserType('Users');
           setLoading(false);
         } else {
+           print('two');
           //get login user details upon sign up
           SkillProviderModel data =
               await SkillProvider.instance.getLoggedinUserDetails();
 
           response = data.userType;
 
-          userPref.setUserType('Skill Provider');
+          userPref.setUserType('Skill Providers');
 
           setLoading(false);
         }
       }).catchError((e) async {
-       await _auth.signOut();
+        print(e.toString());
+        await _auth.signOut();
         response = 'Login Failed';
         setLoginError(true);
         setLoading(false);
@@ -173,7 +158,9 @@ class AuthViewModel extends ChangeNotifier {
 
   Future logOut() async {
     setLoading(true);
+    await UserPreferences.resetSharedPref();
     await _auth.signOut();
+
     setLoading(false);
   }
 }

@@ -1,12 +1,11 @@
-import 'dart:io';
-import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:craftsmen/models/user_models.dart';
-import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+
+
 
 class UserProvider extends ChangeNotifier {
   static final UserProvider _instance = UserProvider._();
@@ -30,7 +29,9 @@ class UserProvider extends ChangeNotifier {
     DocumentSnapshot snap =
         await _firestore.collection('Users').doc(currentUser.uid).get();
 
-    UserModel user = UserModel.fromSnapshot(snap);
+    UserModel user = UserModel.fromSnapshot(
+      snap,
+    );
     userApiData.fullName = user.fullName;
     userApiData.email = user.email;
     userApiData.userName = user.userName;
@@ -39,16 +40,9 @@ class UserProvider extends ChangeNotifier {
     userApiData.phoneNumber = user.phoneNumber;
     userApiData.reviews = user.reviews;
     userApiData.profilePic = user.profilePic;
-
+    notifyListeners();
     return user;
   }
-
-  Stream<UserModel?> get currentUser =>
-      FirebaseAuth.instance.authStateChanges().map(
-            (User? firebaseUser) => (firebaseUser != null)
-                ? UserModel.fromFirebaseUser(user: firebaseUser)
-                : null,
-          );
 
   // Update Login User Details
   Future updateLoggedinUserDetails(Map<String, dynamic> body) async {
@@ -66,3 +60,49 @@ class UserProvider extends ChangeNotifier {
     }
   }
 }
+//   List<UserModel> _userDataFromSnapshop(QuerySnapshot snapShot) {
+//     return snapShot.docs.map((doc) {
+//       return UserModel(
+//         id: doc.get("ID") ?? '',
+//         email: doc.get("email") ?? '',
+//         fullName: doc.get("Full Name") ?? '',
+//         userName: doc.get("User Name") ?? '',
+//         phoneNumber: doc.get("Phone Number") ?? '',
+//         gender: doc.get("Gendere") ?? '',
+//         address: doc.get("Address") ?? '',
+//         reviews: doc.get("Reviews") ?? '',
+//         profilePic: doc.get("Profile Pic") ?? '',
+//         userType: doc.get("User Type") ?? '',
+//       );
+//     }).toList();
+//   }
+
+//   static UserModel fromSnapshot(DocumentSnapshot snap) {
+//     var snapShot = snap.data() as Map<String, dynamic>;
+
+//     return UserModel(
+//       id: snapShot["ID"],
+//       email: snapShot["email"],
+//       fullName: snapShot["Full Name"],
+//       userName: snapShot["User Name"],
+//       phoneNumber: snapShot["Phone Number"],
+//       gender: snapShot["Gender"],
+//       address: snapShot["Address"],
+//       reviews: ["Reviews"],
+//       profilePic: snapShot["Profile Pic"],
+//       userType: snapShot["User Type"],
+//     );
+//   }
+
+//   Stream<List<UserModel>> get userDataStream {
+//     return _firestore.collection('User').snapshots().map(_userDataFromSnapshop);
+//   }
+
+//   Stream<UserModel> get userDataStream1 {
+//     return _firestore
+//         .collection('User')
+//         .doc(_auth.currentUser!.uid)
+//         .snapshots()
+//         .map(fromSnapshot);
+//   }
+// }
