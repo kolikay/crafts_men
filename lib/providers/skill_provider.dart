@@ -32,7 +32,6 @@ class SkillProvider extends ChangeNotifier {
         .collection('Skill Providers')
         .doc(currentUser.uid)
         .get();
-    print(snap.data());
 
     SkillProviderModel skillUser = SkillProviderModel.fromSnapshot(snap);
 
@@ -47,6 +46,19 @@ class SkillProvider extends ChangeNotifier {
     skillUserApiData.userType = skillUser.userType;
     notifyListeners();
     return skillUser;
+  }
+
+  //update user
+  Future clearUserDetailsLocally() async {
+    skillUserApiData.fullName = '';
+    skillUserApiData.email = '';
+    skillUserApiData.userName = '';
+    skillUserApiData.gender = '';
+    skillUserApiData.address = '';
+    skillUserApiData.phoneNumber = '';
+    skillUserApiData.reviews = [];
+    skillUserApiData.profilePic = '';
+    notifyListeners();
   }
 
   // Update Login User Details

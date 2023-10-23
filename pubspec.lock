@@ -285,7 +285,7 @@ packages:
       name: flutter_riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.4"
+    version: "2.3.7"
   flutter_screenutil:
     dependency: "direct main"
     description:
@@ -540,7 +540,7 @@ packages:
       name: riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3"
+    version: "2.3.7"
   rxdart:
     dependency: transitive
     description:

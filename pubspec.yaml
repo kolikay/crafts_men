@@ -54,7 +54,7 @@ dependencies:
   #check connection package
   simple_connection_checker: ^0.2.1
   #state management
-  flutter_riverpod: ^1.0.1
+  flutter_riverpod: ^2.0.0
   #App Responsivness
   flutter_screenutil: 5.5.3+2 
   #image picker

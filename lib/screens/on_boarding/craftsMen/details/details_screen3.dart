@@ -16,13 +16,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetailsPage3 extends ConsumerStatefulWidget {
-  final PageController control;
-    final String? user;
-  const DetailsPage3({
-    Key? key,
-    required this.control,
-    required this.user
-  }) : super(key: key);
+  final String? user;
+  const DetailsPage3({Key? key, required this.user}) : super(key: key);
 
   @override
   ConsumerState<DetailsPage3> createState() => _DetailsPage3State();

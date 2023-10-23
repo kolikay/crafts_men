@@ -5,28 +5,24 @@ import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DetailsPage1 extends StatelessWidget {
-  const DetailsPage1(
+class DetailsPage1 extends StatefulWidget {
+  final Function saveCraftPhoneDetails;
+  final Function saveCraftEmailDetails;
+  final Function saveCraftAddDetails;
+  final Function saveCraftNameDetails;
+ const DetailsPage1(
       {Key? key,
-      required this.control,
-      required GlobalKey<FormState> formKey,
-      required TextEditingController compNameCont,
-      required TextEditingController compEmailCont,
-      required TextEditingController compPhoneCont,
-      required TextEditingController compAddCont})
-      : _formKey = formKey,
-        _compNameCont = compNameCont,
-        _compEmailCont = compEmailCont,
-        _compPhoneCont = compPhoneCont,
-        _compAddCont = compAddCont,
-        super(key: key);
-  final GlobalKey<FormState> _formKey;
-  final TextEditingController _compNameCont;
-  final TextEditingController _compEmailCont;
-  final TextEditingController _compPhoneCont;
-  final TextEditingController _compAddCont;
-  final PageController control;
+      required this.saveCraftAddDetails,
+      required this.saveCraftEmailDetails,
+      required this.saveCraftNameDetails,
+      required this.saveCraftPhoneDetails})
+      : super(key: key);
 
+  @override
+  State<DetailsPage1> createState() => _DetailsPage1State();
+}
+
+class _DetailsPage1State extends State<DetailsPage1> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -56,11 +52,12 @@ class DetailsPage1 extends StatelessWidget {
         height: 25.h,
       ),
       Form(
-        key: _formKey,
         child: Column(
           children: [
             MyTextField(
-              controller: _compNameCont,
+              onChanged: (val) {
+                widget.saveCraftNameDetails(val);
+              },
               obcureText: false,
               keyBoardType: TextInputType.text,
               isPassword: false,
@@ -71,7 +68,9 @@ class DetailsPage1 extends StatelessWidget {
               height: 35.h,
             ),
             MyTextField(
-              controller: _compEmailCont,
+              onChanged: (val) {
+                widget.saveCraftEmailDetails(val);
+              },
               obcureText: false,
               keyBoardType: TextInputType.text,
               isPassword: false,
@@ -82,7 +81,9 @@ class DetailsPage1 extends StatelessWidget {
               height: 35.h,
             ),
             MyTextField(
-              controller: _compPhoneCont,
+              onChanged: (val) {
+                widget.saveCraftPhoneDetails(val);
+              },
               obcureText: false,
               keyBoardType: TextInputType.number,
               isPassword: false,
@@ -95,7 +96,9 @@ class DetailsPage1 extends StatelessWidget {
             SizedBox(
               height: 120.h,
               child: TextField(
-                controller: _compAddCont,
+                onChanged: (val) {
+                  widget.saveCraftAddDetails(val);
+                },
                 textAlignVertical: TextAlignVertical.top,
                 expands: true,
                 maxLength: 100,
@@ -124,7 +127,6 @@ class DetailsPage1 extends StatelessWidget {
       SizedBox(
         height: 25.h,
       ),
-
     ]);
   }
 }

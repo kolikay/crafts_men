@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:craftsmen/constants/const/shared_preferences.dart';
 import 'package:dio/dio.dart';
 import 'package:auth_handler/auth_handler.dart';
+import 'package:craftsmen/constants/const/app_state_constants.dart';
 
 class AuthViewModel extends ChangeNotifier {
   Dio dio = Dio();
@@ -101,6 +102,30 @@ class AuthViewModel extends ChangeNotifier {
           email: email, password: password);
       // do whatever you want to do with new user object
       _firestore.collection(userType).doc(_auth.currentUser!.uid).set(body);
+
+      if (userType == "Users") {
+        await UserProvider.instance.getLoggedinUserDetails();
+      }
+      if (userType == "Skill Providers") {
+        await SkillProvider.instance.getLoggedinUserDetails();
+      }
+
+      setLoading(false);
+      return 'Success';
+    } on FirebaseAuthException catch (e) {
+      setLoading(false);
+      return e.toString();
+    }
+  }
+
+// User Registration
+  Future<String?> signUpCraftMen({required Map<String, dynamic> body}) async {
+    setLoading(true);
+    try {
+      _firestore
+          .collection('Skill Providers')
+          .doc(_auth.currentUser!.uid)
+          .update(body);
       setLoading(false);
       return 'Success';
     } on FirebaseAuthException catch (e) {
@@ -125,8 +150,6 @@ class AuthViewModel extends ChangeNotifier {
             .get();
 
         if (userDoc.exists) {
-          print('one');
-          //get login user details upon sign up
           UserModel data = await UserProvider.instance.getLoggedinUserDetails();
 
           response = data.userType;
@@ -134,8 +157,6 @@ class AuthViewModel extends ChangeNotifier {
           userPref.setUserType('Users');
           setLoading(false);
         } else {
-           print('two');
-          //get login user details upon sign up
           SkillProviderModel data =
               await SkillProvider.instance.getLoggedinUserDetails();
 
@@ -156,9 +177,15 @@ class AuthViewModel extends ChangeNotifier {
     return response!;
   }
 
-  Future logOut() async {
+  Future logOut(ref) async {
     setLoading(true);
+
+    await UserProvider.instance.clearUserDetailsLocally();
+
+    await SkillProvider.instance.clearUserDetailsLocally();
+
     await UserPreferences.resetSharedPref();
+
     await _auth.signOut();
 
     setLoading(false);

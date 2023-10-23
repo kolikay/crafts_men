@@ -1,25 +1,30 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:craftsmen/constants/const/app_state_constants.dart';
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LogOutScreen extends StatefulWidget {
+class LogOutScreen extends ConsumerStatefulWidget {
   const LogOutScreen({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<LogOutScreen> createState() => _LogOutScreenState();
+  ConsumerState<LogOutScreen> createState() => _LogOutScreenState();
 }
 
-class _LogOutScreenState extends State<LogOutScreen> {
+class _LogOutScreenState extends ConsumerState<LogOutScreen> {
   @override
   Widget build(BuildContext context) {
+    final authViewModel = ref.watch(authViewModelProvider);
+    final userInfoProvider = ref.watch(userProvider);
+
     return Center(
       child: Dialog(
         child: SizedBox(
@@ -63,7 +68,7 @@ class _LogOutScreenState extends State<LogOutScreen> {
                     height: 50.h,
                     text: 'Yes',
                     onPressed: () async {
-                      await AuthViewModel.instance.logOut();
+                      await AuthViewModel.instance.logOut(context);
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           LoginScreen.id, (Route<dynamic> route) => false);
                     }),

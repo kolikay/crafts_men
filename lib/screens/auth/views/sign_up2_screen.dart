@@ -25,15 +25,15 @@ class SignUpScreen2 extends ConsumerStatefulWidget {
   final String address;
   String? userType;
 
-   SignUpScreen2({
-    Key? key,
-    required this.fullName,
-    required this.userName,
-    required this.phoneNumber,
-    required this.gender,
-    required this.address,
-    this.userType
-  }) : super(key: key);
+  SignUpScreen2(
+      {Key? key,
+      required this.fullName,
+      required this.userName,
+      required this.phoneNumber,
+      required this.gender,
+      required this.address,
+      this.userType})
+      : super(key: key);
   @override
   ConsumerState<SignUpScreen2> createState() => _SignUpScreenState();
 }
@@ -53,7 +53,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
 
   @override
   Widget build(BuildContext context) {
-
     final authViewModel = ref.watch(authViewModelProvider);
 
     getInputedData() {
@@ -64,7 +63,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
         'Phone Number': widget.phoneNumber.trim(),
         "Gender": widget.gender.trim(),
         'Reviews': [],
-        'User Type':widget.userType,
+        'User Type': widget.userType,
         'Profile Pic': '',
       };
       return body;
@@ -111,6 +110,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                                 validator: (val) {
                                   if (val!.isEmpty) {
                                     return 'Field Cannot be empty';
+                                  } else if (!val.contains('@')) {
+                                    return 'Enter a valid email';
+                                  } else if (!val.contains('.')) {
+                                    return 'Enter a valid email';
                                   }
                                   return null;
                                 },
@@ -125,9 +128,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                                 height: 24.h,
                               ),
                               MyTextField(
-                                validator: (val) {
-                                  if (val!.isEmpty) {
+                                validator: (pass) {
+                                  if (pass!.isEmpty) {
                                     return 'Field Cannot be empty';
+                                  } else if (pass.length < 6) {
+                                    return 'Password to short';
                                   }
                                   return null;
                                 },
@@ -164,17 +169,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                                 isPassword: true,
                                 isReadOnly: false,
                                 labelText: 'Confirm Password',
-                                sufixIcon: IconButton(
-                                  color: Colors.black54,
-                                  icon: Icon(_isObscure1
-                                      ? Icons.visibility
-                                      : Icons.visibility_off),
-                                  onPressed: () {
-                                    setState(() {
-                                      _isObscure1 = !_isObscure1;
-                                    });
-                                  },
-                                ),
                               ),
                             ],
                           ),
@@ -252,29 +246,26 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                           textSize: 14.sp,
                           text: 'Sign Up',
                           onPressed: () async {
-                            // authViewModel.signUpUser(
-                            //     body: getInputedData(),
-                            //     password: _password1Cont.text,
-                            //     email: _emailCont.text);
-                            // authViewModel.setLoading(false);
-                            bool sentOtp =
-                                await authViewModel.sendOtp(_emailCont.text);
-                            if (sentOtp) {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => VerifyOtpScreen(
-                                    email: _emailCont.text,
-                                    password: _password1Cont.text,
-                                    body: getInputedData(),
-                                    userType: widget.userType,
+                            if (_formKey.currentState!.validate()) {
+                              bool sentOtp =
+                                  await authViewModel.sendOtp(_emailCont.text);
+                              if (sentOtp) {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => VerifyOtpScreen(
+                                      email: _emailCont.text,
+                                      password: _password1Cont.text,
+                                      body: getInputedData(),
+                                      userType: widget.userType,
+                                    ),
                                   ),
-                                ),
-                              );
-                              ShowSnackBar.buildErrorSnackbar(
-                                  context, 'OTP Sent  ', Colors.greenAccent);
-                            } else {
-                              ShowSnackBar.buildErrorSnackbar(
-                                  context, 'Could not send OTP', Colors.red);
+                                );
+                                ShowSnackBar.buildErrorSnackbar(
+                                    context, 'OTP Sent  ', Colors.greenAccent);
+                              } else {
+                                ShowSnackBar.buildErrorSnackbar(
+                                    context, 'Could not send OTP', Colors.red);
+                              }
                             }
                           },
                         ),

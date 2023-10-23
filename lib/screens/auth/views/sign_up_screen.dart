@@ -127,12 +127,17 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                                 validator: (val) {
                                   if (val!.isEmpty) {
                                     return 'Field Cannot be empty';
+                                  }else if( val.length < 11){
+                                    return 'Phone Number must be 11 digits';
+                                  }else if( val.length > 11){
+                                    return 'Phone Number must be 11 digits';
                                   }
                                   return null;
+                                
                                 },
                                 controller: _phoneNumber,
                                 obcureText: false,
-                                keyBoardType: TextInputType.number,
+                                keyBoardType: TextInputType.phone,
                                 isPassword: false,
                                 isReadOnly: false,
                                 labelText: 'Phone Number',

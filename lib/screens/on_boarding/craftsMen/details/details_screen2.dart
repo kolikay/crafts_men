@@ -7,12 +7,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetailsPage2 extends StatefulWidget {
-   final PageController control;
-  
-   DetailsPage2({
-    Key? key,
-        required this.control,
-  }) : super(key: key);
+  final Function webSiteCont;
+  final Function startYear;
+  final Function skill;
+  final Function employee;
+  final Function experience;
+  const DetailsPage2(
+      {Key? key,
+      required this.webSiteCont,
+      required this.startYear,
+      required this.skill,
+      required this.employee,
+      required this.experience})
+      : super(key: key);
 
   @override
   State<DetailsPage2> createState() => _DetailsPage2State();
@@ -21,7 +28,6 @@ class DetailsPage2 extends StatefulWidget {
 class _DetailsPage2State extends State<DetailsPage2> {
   int employee = 0;
   int experince = 0;
-
   String? proffession;
 
   final othersCont = TextEditingController();
@@ -87,7 +93,10 @@ class _DetailsPage2State extends State<DetailsPage2> {
             SizedBox(
               height: 5.h,
             ),
-            const MyTextField(
+            MyTextField(
+                onChanged: (val) {
+                  widget.webSiteCont(val);
+                },
                 borderColor: Colors.grey,
                 isPassword: false,
                 obcureText: false,
@@ -113,12 +122,14 @@ class _DetailsPage2State extends State<DetailsPage2> {
                     if (employee > 0) {
                       setState(() {
                         employee--;
+                         widget.employee(employee);
                       });
                     } else {
                       setState(() {
                         employee = 0;
                       });
                     }
+                   
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -157,6 +168,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                   onTap: () {
                     setState(() {
                       employee++;
+                       widget.employee(employee);
                     });
                   },
                   child: Container(
@@ -194,12 +206,14 @@ class _DetailsPage2State extends State<DetailsPage2> {
                     if (experince > 0) {
                       setState(() {
                         experince--;
+                        widget.experience(experince);
                       });
                     } else {
                       setState(() {
                         experince = 0;
                       });
                     }
+                  
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -238,6 +252,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                   onTap: () {
                     setState(() {
                       experince++;
+                       widget.experience(experince);
                     });
                   },
                   child: Container(
@@ -268,7 +283,10 @@ class _DetailsPage2State extends State<DetailsPage2> {
             SizedBox(
               height: 5.h,
             ),
-            const MyTextField(
+            MyTextField(
+                onChanged: (val) {
+                  widget.startYear(val);
+                },
                 borderColor: Colors.grey,
                 isPassword: false,
                 obcureText: false,
@@ -289,7 +307,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
             ),
             InkWell(
               onTap: () {
-                bottomSheet(context);
+                bottomSheet(context, widget.skill);
               },
               child: Container(
                 width: 335.w,
@@ -322,14 +340,13 @@ class _DetailsPage2State extends State<DetailsPage2> {
             SizedBox(
               height: 25.h,
             ),
-
           ],
         ),
       ],
     );
   }
 
-  bottomSheet(BuildContext context) {
+  bottomSheet(BuildContext context, Function skill) {
     return showModalBottomSheet(
         enableDrag: true,
         backgroundColor: Colors.transparent,
@@ -388,6 +405,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                           });
                           setState(() {
                             proffession = 'Barbing';
+                            skill('Barbing');
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -416,6 +434,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                           });
                           setState(() {
                             proffession = 'Teaching';
+                            skill('Teaching');
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -444,6 +463,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                           });
                           setState(() {
                             proffession = 'Electricity';
+                            skill('Electricity');
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -472,6 +492,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                           });
                           setState(() {
                             proffession = 'Baking';
+                            skill('Baking');
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -500,6 +521,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                           });
                           setState(() {
                             proffession = 'Plumbing';
+                            skill('Plumbing');
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -528,6 +550,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                           });
                           setState(() {
                             proffession = 'Catering & Food Service';
+                            skill('Catering & Food Service');
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -556,6 +579,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                           });
                           setState(() {
                             proffession = 'Engineering';
+                            skill('Engineering');
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -584,6 +608,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                           });
                           setState(() {
                             proffession = 'Medicine';
+                            skill('Medicine');
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -613,6 +638,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                           });
                           setState(() {
                             proffession = 'Others';
+                            skill('Others');
                           });
                         },
                         shape: RoundedRectangleBorder(

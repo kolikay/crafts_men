@@ -19,6 +19,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'screens/on_boarding/craftsMen/details/craftsmen_fill_details_screen.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -59,30 +61,30 @@ class MyApp extends StatelessWidget {
                 ),
           ),
           home: 
-          // LandingPage(),
-              StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: ((context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.active) {
-                if (snapshot.hasData) {
-                  return OnBoardingScreen(
-                    user: userType,
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(
-                      child: NormalText(
-                    text: 'Error Occured',
-                  ));
-                }
-              }
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(color: kMainColor),
-                );
-              }
-              return const LandingPage();
-            }),
-          ),
+          CraftmenFillDetailsScreen(user:  'Skill Providers',),
+          //     StreamBuilder(
+          //   stream: FirebaseAuth.instance.authStateChanges(),
+          //   builder: ((context, snapshot) {
+          //     if (snapshot.connectionState == ConnectionState.active) {
+          //       if (snapshot.hasData) {
+          //         return OnBoardingScreen(
+          //           user: userType,
+          //         );
+          //       } else if (snapshot.hasError) {
+          //         return Center(
+          //             child: NormalText(
+          //           text: 'Error Occured',
+          //         ));
+          //       }
+          //     }
+          //     if (snapshot.connectionState == ConnectionState.waiting) {
+          //       return const Center(
+          //         child: CircularProgressIndicator(color: kMainColor),
+          //       );
+          //     }
+          //     return const LandingPage();
+          //   }),
+          // ),
           routes: {
             LandingPage.id: (context) => const LandingPage(),
             LandingPage2.id: (context) => LandingPage2(),

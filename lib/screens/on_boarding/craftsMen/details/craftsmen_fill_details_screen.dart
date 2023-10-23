@@ -1,4 +1,5 @@
 import 'package:craftsmen/constants/const/color.dart';
+import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/screens/on_boarding/craftsMen/details/detail_screen1.dart';
 import 'package:craftsmen/screens/on_boarding/craftsMen/details/details_screen2.dart';
 import 'package:craftsmen/screens/on_boarding/craftsMen/details/details_screen3.dart';
@@ -9,7 +10,11 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CraftmenFillDetailsScreen extends ConsumerStatefulWidget {
   final String? user;
-  const CraftmenFillDetailsScreen({Key? key,required this.user}) : super(key: key);
+
+  CraftmenFillDetailsScreen({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
   // static const String id = 'sign_up_screen';
 
   @override
@@ -19,15 +24,18 @@ class CraftmenFillDetailsScreen extends ConsumerStatefulWidget {
 
 class _CraftmenFillDetailsScreenState
     extends ConsumerState<CraftmenFillDetailsScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _compNameCont = TextEditingController();
-  final _compEmailCont = TextEditingController();
-  final _compPhoneCont = TextEditingController();
-  final _compAdd = TextEditingController();
-
   late PageController pageController;
   int currentPage = 0;
   bool isLastPage = false;
+  String compName = '';
+  String phone = '';
+  String compEmail = '';
+  String compAdd = '';
+  String webSiteCont = '';
+  String startYear = '';
+  String skill = '';
+  int employee = 0;
+  int experience = 0;
 
   @override
   void initState() {
@@ -44,8 +52,66 @@ class _CraftmenFillDetailsScreenState
     pageController.dispose();
   }
 
+  void _saveCraftPhoneDetails(String phone) {
+    setState(() {
+      phone = phone;
+    });
+  }
+
+  void _saveCraftEmailDetails(String email) {
+    setState(() {
+      compEmail = email;
+    });
+  }
+
+  void _saveCraftNameDetails(String name) {
+    setState(() {
+      compName = name;
+    });
+  }
+
+  void _saveCraftAddDetails(String add) {
+    setState(() {
+      compAdd = add;
+    });
+  }
+
+  void _saveCraftWebsite(String val) {
+    setState(() {
+      webSiteCont = val;
+    });
+  }
+
+  void _saveCraftstartYear(String add) {
+    setState(() {
+      startYear = add;
+    });
+  }
+
+  void _saveCraftskill(String val) {
+    setState(() {
+      skill = val;
+    });
+  }
+
+  void _saveCraftExperience(int val) {
+    setState(() {
+      experience = val;
+    });
+  }
+
+  void _saveCraftEmployeee(int val) {
+    setState(() {
+      employee = val;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(employee);
+        print(skill);
+          print(experience);
+            print(compEmail);
     return SafeArea(
       child: Stack(
         children: [
@@ -80,22 +146,28 @@ class _CraftmenFillDetailsScreenState
                         height: 800,
                         child: PageView(
                           controller: pageController,
-                          onPageChanged: (index) {
-                            setState(() {
-                              isLastPage = index == 2;
-                            });
-                          },
+                          // onPageChanged: (index) {
+                          //   setState(() {
+                          //     isLastPage = index == 2;
+                          //   });
+                          // },
                           children: [
                             DetailsPage1(
-                              control: pageController,
-                              formKey: _formKey,
-                              compNameCont: _compNameCont,
-                              compEmailCont: _compEmailCont,
-                              compPhoneCont: _compPhoneCont,
-                              compAddCont: _compAdd,
+                              saveCraftPhoneDetails: _saveCraftPhoneDetails,
+                              saveCraftAddDetails: _saveCraftAddDetails,
+                              saveCraftEmailDetails: _saveCraftEmailDetails,
+                              saveCraftNameDetails: _saveCraftNameDetails,
                             ),
-                             DetailsPage2(control: pageController,),
-                             DetailsPage3(control: pageController, user: widget.user,),
+                            DetailsPage2(
+                              startYear: _saveCraftstartYear,
+                              skill: _saveCraftskill,
+                              employee: _saveCraftEmployeee,
+                              experience: _saveCraftExperience,
+                              webSiteCont: _saveCraftWebsite,
+                            ),
+                            DetailsPage3(
+                              user: widget.user,
+                            ),
                           ],
                         ),
                       ),
