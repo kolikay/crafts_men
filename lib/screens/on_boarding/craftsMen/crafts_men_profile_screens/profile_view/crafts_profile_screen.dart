@@ -34,6 +34,16 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
   String? _phoneNumber;
   String? _gender;
   String? _address;
+  String? _skill;
+  String? _startYear;
+  int? _employee;
+  int? _experience;
+  String? _companyName;
+  String? _companyAdd;
+  String? _companyPhoneNumber;
+  String? _companyWebsite;
+  String? _compEmail;
+  final TextEditingController _more = TextEditingController();
   String? _selectedPhoto;
   String? _downloadedPhoto;
   bool _loading = false;
@@ -153,6 +163,16 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
     _gender = user.gender ?? '';
     _downloadedPhoto = user.profilePic ?? '';
     _address = user.address ?? ' (Test Address)';
+    _skill = user.skill ?? '';
+    _companyName = user.companyName ?? '';
+    _companyAdd = user.companyAdd ?? '';
+    _experience = user.experience ?? 0;
+    _compEmail = user.compEmail ?? '';
+    _companyPhoneNumber = user.companyPhoneNumber ?? '';
+    _companyWebsite = user.companyWebsite ?? '';
+    _employee = user.employee ?? 0;
+    _startYear = user.startYear ?? '';
+    _more.text = user.moreAboutMe ?? '';
   }
 
   @override
@@ -260,7 +280,7 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
           ),
           body: SingleChildScrollView(
             child: SizedBox(
-              height: 821.h,
+              height: 1500.h,
               width: double.infinity,
               child: Column(
                 children: [
@@ -312,7 +332,7 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                           labelText: 'Full Name',
                         ),
                         SizedBox(
-                          height: 24.h,
+                          height: 15.h,
                         ),
                         ProfileFormField(
                           initialValue: _userName,
@@ -329,7 +349,7 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                           labelText: 'Username',
                         ),
                         SizedBox(
-                          height: 24.h,
+                          height: 15.h,
                         ),
                         ProfileFormField(
                           initialValue: _email,
@@ -346,7 +366,7 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                           labelText: 'Email',
                         ),
                         SizedBox(
-                          height: 24.h,
+                          height: 15.h,
                         ),
                         ProfileFormField(
                           initialValue: _gender,
@@ -363,7 +383,7 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                           labelText: 'Gender',
                         ),
                         SizedBox(
-                          height: 24.h,
+                          height: 15.h,
                         ),
                         ProfileFormField(
                           initialValue: _address,
@@ -377,10 +397,10 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                           keyBoardType: TextInputType.text,
                           isPassword: false,
                           isReadOnly: !onEdit,
-                          labelText: 'Address',
+                          labelText: 'Home Address',
                         ),
                         SizedBox(
-                          height: 24.h,
+                          height: 15.h,
                         ),
                         ProfileFormField(
                           initialValue: _phoneNumber,
@@ -394,10 +414,204 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                           keyBoardType: TextInputType.number,
                           isPassword: false,
                           isReadOnly: !onEdit,
-                          labelText: 'Phone Number',
+                          labelText: 'Personal Phone Number',
                         ),
                         SizedBox(
-                          height: 24.h,
+                          height: 15.h,
+                        ),
+                        ProfileFormField(
+                          initialValue: _companyName,
+                          onChanged: (val) {
+                            setState(() {
+                              _companyName = val;
+                            });
+                          },
+                          enable: onEdit,
+                          obcureText: false,
+                          keyBoardType: TextInputType.number,
+                          isPassword: false,
+                          isReadOnly: !onEdit,
+                          labelText: 'Company Name',
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        ProfileFormField(
+                          initialValue: _companyWebsite,
+                          onChanged: (val) {
+                            setState(() {
+                              _companyWebsite = val;
+                            });
+                          },
+                          enable: onEdit,
+                          obcureText: false,
+                          keyBoardType: TextInputType.number,
+                          isPassword: false,
+                          isReadOnly: !onEdit,
+                          labelText: 'Company Website',
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        ProfileFormField(
+                          initialValue: _compEmail,
+                          onChanged: (val) {
+                            setState(() {
+                              _compEmail = val;
+                            });
+                          },
+                          enable: onEdit,
+                          obcureText: false,
+                          keyBoardType: TextInputType.number,
+                          isPassword: false,
+                          isReadOnly: !onEdit,
+                          labelText: 'Company Email',
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        ProfileFormField(
+                          initialValue: _companyPhoneNumber,
+                          onChanged: (val) {
+                            setState(() {
+                              _companyPhoneNumber = val;
+                            });
+                          },
+                          enable: onEdit,
+                          obcureText: false,
+                          keyBoardType: TextInputType.number,
+                          isPassword: false,
+                          isReadOnly: !onEdit,
+                          labelText: 'Company Phone Number',
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        ProfileFormField(
+                          initialValue: _skill,
+                          onChanged: (val) {
+                            setState(() {
+                              _skill = val;
+                            });
+                          },
+                          enable: onEdit,
+                          obcureText: false,
+                          keyBoardType: TextInputType.number,
+                          isPassword: false,
+                          isReadOnly: !onEdit,
+                          labelText: 'Skill',
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        ProfileFormField(
+                          initialValue: _companyAdd,
+                          onChanged: (val) {
+                            setState(() {
+                              _companyAdd = val;
+                            });
+                          },
+                          enable: onEdit,
+                          obcureText: false,
+                          keyBoardType: TextInputType.number,
+                          isPassword: false,
+                          isReadOnly: !onEdit,
+                          labelText: 'Company Address',
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        ProfileFormField(
+                          initialValue: _employee.toString(),
+                          onChanged: (val) {
+                            setState(() {
+                              _employee = val as int;
+                            });
+                          },
+                          enable: onEdit,
+                          obcureText: false,
+                          keyBoardType: TextInputType.number,
+                          isPassword: false,
+                          isReadOnly: !onEdit,
+                          labelText: 'Number of Employee',
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              ProfileFormField(
+                                width: 140.w,
+                                initialValue: _experience.toString(),
+                                onChanged: (val) {
+                                  setState(() {
+                                    _experience = val as int;
+                                  });
+                                },
+                                enable: onEdit,
+                                obcureText: false,
+                                keyBoardType: TextInputType.number,
+                                isPassword: false,
+                                isReadOnly: !onEdit,
+                                labelText: 'Year of Experience',
+                              ),
+                              ProfileFormField(
+                                width: 140.w,
+                                initialValue: _startYear,
+                                onChanged: (val) {
+                                  setState(() {
+                                    _startYear = val;
+                                  });
+                                },
+                                enable: onEdit,
+                                obcureText: false,
+                                keyBoardType: TextInputType.number,
+                                isPassword: false,
+                                isReadOnly: !onEdit,
+                                labelText: 'Number of Employee',
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: SizedBox(
+                            height: 150.h,
+                            child: TextField(
+                              controller: _more,
+                              textAlignVertical: TextAlignVertical.top,
+                              expands: true,
+                              maxLength: 200,
+                              maxLines: null,
+                              decoration: InputDecoration(
+                                hintText: 'More About My Business',
+                                hintStyle: TextStyle(
+                                    color: kBlackDull, fontSize: 16.sp),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 10.h, horizontal: 10.w),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: kMainColor, width: 1.0.w),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: kMainColor, width: 1.0.w),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.grey, width: 1.0.w),
+                                ),
+                                labelStyle: TextStyle(
+                                    color: Colors.black54, fontSize: 16.sp),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),

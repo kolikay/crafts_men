@@ -55,7 +55,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
   Widget build(BuildContext context) {
     final authViewModel = ref.watch(authViewModelProvider);
 
-    getInputedData() {
+    _getInputedData() {
       final body = {
         "email": _emailCont.text.trim(),
         "Full Name": widget.fullName.trim(),
@@ -255,7 +255,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                                     builder: (context) => VerifyOtpScreen(
                                       email: _emailCont.text,
                                       password: _password1Cont.text,
-                                      body: getInputedData(),
+                                      body: _getInputedData(),
                                       userType: widget.userType,
                                     ),
                                   ),

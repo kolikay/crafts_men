@@ -118,7 +118,7 @@ class AuthViewModel extends ChangeNotifier {
     }
   }
 
-// User Registration
+// Craftmen details Registration update
   Future<String?> signUpCraftMen({required Map<String, dynamic> body}) async {
     setLoading(true);
     try {
@@ -167,7 +167,6 @@ class AuthViewModel extends ChangeNotifier {
           setLoading(false);
         }
       }).catchError((e) async {
-        print(e.toString());
         await _auth.signOut();
         response = 'Login Failed';
         setLoginError(true);

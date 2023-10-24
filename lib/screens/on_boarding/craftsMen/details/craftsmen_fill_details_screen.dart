@@ -108,10 +108,6 @@ class _CraftmenFillDetailsScreenState
 
   @override
   Widget build(BuildContext context) {
-    print(employee);
-        print(skill);
-          print(experience);
-            print(compEmail);
     return SafeArea(
       child: Stack(
         children: [
@@ -167,6 +163,14 @@ class _CraftmenFillDetailsScreenState
                             ),
                             DetailsPage3(
                               user: widget.user,
+                              skill: skill,
+                              startYear: startYear,
+                              compAdd: compAdd,
+                              compEmail: compEmail,
+                              compName: compName,
+                              employee: employee,
+                              experience: experience,
+                              webSiteCont: webSiteCont,
                             ),
                           ],
                         ),

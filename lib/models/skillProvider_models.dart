@@ -13,6 +13,16 @@ class SkillProviderModel extends ChangeNotifier {
     this.reviews,
     this.profilePic,
     this.userType,
+    this.skill,
+    this.startYear,
+    this.employee,
+    this.experience,
+    this.companyAdd,
+    this.companyName,
+    this.compEmail,
+    this.companyPhoneNumber,
+    this.companyWebsite,
+    this.moreAboutMe,
   });
 
   String? id;
@@ -25,6 +35,16 @@ class SkillProviderModel extends ChangeNotifier {
   String? profilePic;
   List? reviews;
   String? userType;
+  String? skill;
+  String? startYear;
+   int? employee;
+  int? experience;
+  String? companyName;
+  String? companyAdd;
+  String? companyPhoneNumber;
+  String? companyWebsite;
+  String? compEmail;
+   String? moreAboutMe;
 
   static SkillProviderModel fromSnapshot(DocumentSnapshot snap) {
     var snapShot = snap.data() as Map<String, dynamic>;
@@ -39,54 +59,18 @@ class SkillProviderModel extends ChangeNotifier {
       address: snapShot["Address"],
       reviews: ["Reviews"],
       profilePic: snapShot["Profile Pic"],
-       userType: snapShot["User Type"],
+      userType: snapShot["User Type"],
+      companyAdd: snapShot["Company Address"],
+      companyName: snapShot["Company Name"],
+      compEmail: snapShot["Company Email"],
+      companyWebsite: snapShot["Company Website"],
+      companyPhoneNumber: snapShot["Company Phone Number"],
+      skill: snapShot["Skill"],
+      experience: snapShot["Experince"],
+      employee: snapShot["Employees"],
+      startYear: snapShot["Company Start Year"],
+      moreAboutMe: snapShot["More About the Company"],
     );
   }
 }
-
-
-  // body: loading
-  //         ? Container(
-  //             child: const Center(child: CircularProgressIndicator()),
-  //           )
-  //         : file != null?Container(child: Center(child: Image.memory(image),)) : Container(
-  //           child: const Center(child: Text('Pick an Image')),
-  //         ),
-  //         floatingActionButton: FloatingActionButton(
-  //           child: const Icon(
-  //             Icons.image,
-  //           ),
-  //           onPressed: (){
-  //             pickImage();
-  //           }),
-  //   );
-  // factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-  //       id: json["_id"],
-  //       email: json["email"],
-  //       fullName: json["Full Name"],
-  //       userName: json["User Name"],
-  //       phoneNumber: json["Phone Number"],
-  //       gender: json["Gender"],
-  //       address: json["Address"],
-        // active: json["active"],
-        // about: json["about"],
-        // gender: json["gender"],
-        // interest: json["interest"],
-        // location: json["location"],
-        // name: json["name"],
-        // occupation: json["occupation"],
-        // surname: json["surname"],
-        // photo: json["photo"],
-        // dob: json["dob"],
-      // );
-
-  // Map<String, dynamic> toJson() => {
-  //       "_id": id,
-  //       "email": email,
-  //       "Full Name": fullName,
-  //       "User Name": userName,
-  //       "Phone Number": phoneNumber,
-  //       "Gender": gender,
-  //       "Address": address,
-  //     };
 

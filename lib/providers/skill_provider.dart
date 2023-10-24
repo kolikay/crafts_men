@@ -44,6 +44,18 @@ class SkillProvider extends ChangeNotifier {
     skillUserApiData.reviews = skillUser.reviews;
     skillUserApiData.profilePic = skillUser.profilePic;
     skillUserApiData.userType = skillUser.userType;
+    skillUserApiData.compEmail = skillUser.compEmail;
+    skillUserApiData.companyAdd = skillUser.companyAdd;
+    skillUserApiData.companyName = skillUser.companyName;
+    skillUserApiData.companyPhoneNumber = skillUser.companyPhoneNumber;
+    skillUserApiData.companyWebsite = skillUser.companyWebsite;
+    skillUserApiData.skill = skillUser.skill;
+    skillUserApiData.startYear = skillUser.startYear;
+    skillUserApiData.companyWebsite = skillUser.companyWebsite;
+    skillUserApiData.employee = skillUser.employee;
+    skillUserApiData.experience = skillUser.experience;
+    skillUserApiData.moreAboutMe = skillUser.moreAboutMe;
+
     notifyListeners();
     return skillUser;
   }
@@ -58,6 +70,17 @@ class SkillProvider extends ChangeNotifier {
     skillUserApiData.phoneNumber = '';
     skillUserApiData.reviews = [];
     skillUserApiData.profilePic = '';
+    skillUserApiData.compEmail = '';
+    skillUserApiData.companyAdd = '';
+    skillUserApiData.companyName = '';
+    skillUserApiData.companyPhoneNumber = '';
+    skillUserApiData.companyWebsite = '';
+    skillUserApiData.skill = '';
+    skillUserApiData.startYear = '';
+    skillUserApiData.companyWebsite = '';
+    skillUserApiData.employee = 0;
+    skillUserApiData.experience = 0;
+    skillUserApiData.moreAboutMe = '';
     notifyListeners();
   }
 

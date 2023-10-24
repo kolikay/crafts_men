@@ -7,6 +7,7 @@ import 'package:craftsmen/constants/reusesable_widgets/reusaable_textformfield.d
 import 'package:craftsmen/constants/reusesable_widgets/reusable_info_widget.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
+import 'package:craftsmen/constants/utils/snack_bar.dart';
 import 'package:craftsmen/screens/auth/views/verify_otp_screen.dart';
 import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
 import 'package:craftsmen/screens/settings/user_settings_screen.dart';
@@ -17,13 +18,54 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetailsPage3 extends ConsumerStatefulWidget {
   final String? user;
-  const DetailsPage3({Key? key, required this.user}) : super(key: key);
+  final String? compName;
+  final String? phone;
+  final String? compEmail;
+  final String? compAdd;
+  final String? webSiteCont;
+  final String? startYear;
+  final String? skill;
+  final int? employee;
+  final int? experience;
+
+  const DetailsPage3(
+      {Key? key,
+      required this.user,
+      this.compAdd,
+      this.compEmail,
+      this.webSiteCont,
+      this.compName,
+      this.employee,
+      this.skill,
+      this.experience,
+      this.phone,
+      this.startYear})
+      : super(key: key);
 
   @override
   ConsumerState<DetailsPage3> createState() => _DetailsPage3State();
 }
 
 class _DetailsPage3State extends ConsumerState<DetailsPage3> {
+ final  _more = TextEditingController();
+
+
+  _getInputedData() {
+    final body = {
+      "Company Address": widget.compAdd,
+      "Company Name": widget.compName,
+      "Company Email": widget.compEmail,
+      "Company Website": widget.webSiteCont,
+      "Company Phone Number": widget.phone,
+      "Skill": widget.skill,
+      "Experince": widget.experience,
+      "Employees": widget.employee,
+      "Company Start Year": widget.startYear,
+      "More About the Company": _more.text,
+    };
+    return body;
+  }
+
   @override
   Widget build(BuildContext context) {
     final authViewModel = ref.watch(authViewModelProvider);
@@ -93,20 +135,33 @@ class _DetailsPage3State extends ConsumerState<DetailsPage3> {
           ReuseableButton(
               text: 'Submit',
               onPressed: () async {
-                // print(getInputedData());
-                dialogBuilder(
-                    context,
-                    'lib/assets/verifiedIcon.png',
-                    'Thank You',
-                    'Thanks for taking your time to fill the details. Once your service is needed, you will be notify  ',
-                    'View Details', () {
-                  // Navigator.pushNamed(context, OnBoardingScreen.id);
+                String? response =
+                    await authViewModel.signUpCraftMen(body: _getInputedData());
+                if (response == 'Success') {
+                  dialogBuilder(
+                      context,
+                      'lib/assets/verifiedIcon.png',
+                      'Thank You',
+                      'Thanks for taking your time to fill the details. Once your service is needed, you will be notify  ',
+                      'View Details', () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            OnBoardingScreen(user: widget.user),
+                      ),
+                    );
+                  });
+                } else {
+                  ShowSnackBar.buildErrorSnackbar(
+                      context,
+                      'Something went wrong, please try again later',
+                      Colors.red);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => OnBoardingScreen(user: widget.user),
                     ),
                   );
-                });
+                }
               }),
         ]),
         Positioned(
