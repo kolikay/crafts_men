@@ -68,6 +68,51 @@ class HomeConstants {
       ),
     );
   }
+    static InkWell categoryCard(BuildContext context, String label, String imgUrl,
+      GestureTapCallback onTap) {
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 24.h,
+          ),
+          Card(
+            color: Colors.white,
+            elevation: 10,
+            child: SizedBox(
+              width: 100.w,
+              height: 90.h,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 40.h,
+                    width: 40.w,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: ResizeImage(AssetImage(imgUrl),
+                            height: 30, width: 30),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15.h,
+                  ),
+                  NormalText(
+                    text: label,
+                    size: 10.sp,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class DrawerIcons extends StatefulWidget {

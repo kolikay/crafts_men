@@ -638,7 +638,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                           });
                           setState(() {
                             proffession = 'Others';
-                            skill('Others');
+                            skill(othersCont.text);
                           });
                         },
                         shape: RoundedRectangleBorder(

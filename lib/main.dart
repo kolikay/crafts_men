@@ -1,6 +1,8 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/const/shared_preferences.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
+import 'package:craftsmen/providers/skill_provider.dart';
+import 'package:craftsmen/providers/user_provider.dart';
 import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
 
 import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
@@ -60,32 +62,38 @@ class MyApp extends StatelessWidget {
                   primary: kMainColor,
                 ),
           ),
-          home:
+          home:LandingPage(),
 
               // CraftmenFillDetailsScreen(user:  'Skill Providers',),
-              StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: ((context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.active) {
-                if (snapshot.hasData) {
-                  return OnBoardingScreen(
-                    user: userType,
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(
-                      child: NormalText(
-                    text: 'Error Occured',
-                  ));
-                }
-              }
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(color: kMainColor),
-                );
-              }
-              return const LandingPage();
-            }),
-          ),
+          //     StreamBuilder(
+          //   stream: FirebaseAuth.instance.authStateChanges(),
+          //   builder: ((context, snapshot) {
+          //     if (userType == 'Skill Providers') {
+          //       SkillProvider.instance.getLoggedinUserDetails();
+          //     } else if (userType == 'Users') {
+          //       UserProvider.instance.getLoggedinUserDetails();
+          //     }
+
+          //     if (snapshot.connectionState == ConnectionState.active) {
+          //       if (snapshot.hasData) {
+          //         return OnBoardingScreen(
+          //           user: userType,
+          //         );
+          //       } else if (snapshot.hasError) {
+          //         return Center(
+          //             child: NormalText(
+          //           text: 'Error Occured',
+          //         ));
+          //       }
+          //     }
+          //     if (snapshot.connectionState == ConnectionState.waiting) {
+          //       return const Center(
+          //         child: CircularProgressIndicator(color: kMainColor),
+          //       );
+          //     }
+          //     return const LandingPage();
+          //   }),
+          // ),
           routes: {
             LandingPage.id: (context) => const LandingPage(),
             LandingPage2.id: (context) => LandingPage2(),

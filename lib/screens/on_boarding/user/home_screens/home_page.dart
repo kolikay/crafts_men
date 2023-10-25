@@ -6,6 +6,7 @@ import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/models/user_models.dart';
 import 'package:craftsmen/providers/user_provider.dart';
+import 'package:craftsmen/screens/on_boarding/user/home_screens/categories_page.dart';
 import 'package:craftsmen/screens/search/displayAllsearchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -37,6 +38,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
   Widget build(BuildContext context) {
     final authViewModel = ref.watch(authViewModelProvider);
     final loginUser = ref.watch(userProvider);
+    final search = ref.watch(searchProvider);
 
     return SafeArea(
       child: Stack(children: [
@@ -53,15 +55,14 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         NormalText(
-                          text: "Hello ${loginUser.userApiData.userName ?? ''} !!! " ,
+                          text:
+                              "Hello ${loginUser.userApiData.userName ?? ''} !!! ",
                           size: 20.sp,
                           fontWeight: FontWeight.w600,
                           color: kMainColor,
                         ),
                         IconButton(
-                          onPressed: ()  {
-                
-                          },
+                          onPressed: () {},
                           icon: Icon(
                             Icons.add_alert_sharp,
                             color: kMainColor,
@@ -147,7 +148,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                               children: <Widget>[
                                 HomeConstants.newInkwell(context, 'Plumbers',
                                     'lib/assets/plumber.png', () async {
-                                  await authViewModel.request();
+                                  await search.searchSkills('Deve');
 
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
@@ -186,16 +187,61 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                     ),
                                   );
                                 }),
-                                HomeConstants.newInkwell(context, 'Barber',
-                                    'lib/assets/barber.png', () {}),
+                                HomeConstants.newInkwell(
+                                    context, 'Barber', 'lib/assets/barber.png',
+                                    () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: ((context) =>
+                                          const DisplayAllSearchScreen(
+                                            service: 'Electricians',
+                                          )),
+                                    ),
+                                  );
+                                }),
                                 HomeConstants.newInkwell(context, 'Engineer',
-                                    'lib/assets/engineer.png', () {}),
-                                HomeConstants.newInkwell(context, 'Health',
-                                    'lib/assets/health.png', () {}),
+                                    'lib/assets/engineer.png', () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: ((context) =>
+                                          const DisplayAllSearchScreen(
+                                            service: 'Electricians',
+                                          )),
+                                    ),
+                                  );
+                                }),
+                                HomeConstants.newInkwell(
+                                    context, 'Health', 'lib/assets/health.png',
+                                    () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: ((context) =>
+                                          const DisplayAllSearchScreen(
+                                            service: 'Electricians',
+                                          )),
+                                    ),
+                                  );
+                                }),
                                 HomeConstants.newInkwell(context, 'Carpenter',
-                                    'lib/assets/carpenter.png', () {}),
-                                HomeConstants.newInkwell(context, 'More',
-                                    'lib/assets/more.png', () {}),
+                                    'lib/assets/carpenter.png', () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: ((context) =>
+                                          const DisplayAllSearchScreen(
+                                            service: 'Electricians',
+                                          )),
+                                    ),
+                                  );
+                                }),
+                                HomeConstants.newInkwell(
+                                    context, 'More', 'lib/assets/more.png', () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: ((context) =>
+                                          const CategoriesPage()),
+                                    ),
+                                  );
+                                }),
                               ],
                             ),
                           ),

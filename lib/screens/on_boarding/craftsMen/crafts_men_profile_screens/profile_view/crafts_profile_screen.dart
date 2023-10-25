@@ -162,7 +162,7 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
     _phoneNumber = user.phoneNumber ?? '';
     _gender = user.gender ?? '';
     _downloadedPhoto = user.profilePic ?? '';
-    _address = user.address ?? ' (Test Address)';
+    _address = user.address ?? '';
     _skill = user.skill ?? '';
     _companyName = user.companyName ?? '';
     _companyAdd = user.companyAdd ?? '';
@@ -187,8 +187,18 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
         "User Name": _userName,
         'Phone Number': _phoneNumber,
         "Gender": _gender,
-        "address": _address,
+        "Address": _address,
         'Reviews': [],
+        "Company Address": _companyAdd,
+        "Company Name": _companyName,
+        "Company Email": _compEmail,
+        "Company Website": _companyWebsite,
+        "Company Phone Number": _companyPhoneNumber,
+        "Skill": _skill,
+        "Experince": _experience,
+        "Employees": _employee,
+        "Company Start Year": _startYear,
+        "More About the Company": _more.text,
       };
       return body;
     }

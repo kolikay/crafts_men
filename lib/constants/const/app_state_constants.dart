@@ -3,6 +3,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:craftsmen/models/user_models.dart';
+import 'package:craftsmen/providers/search_skills_provider.dart';
 import 'package:craftsmen/providers/skill_provider.dart';
 import 'package:craftsmen/providers/user_provider.dart';
 import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
@@ -32,6 +33,14 @@ final userProvider = ChangeNotifierProvider<UserProvider>((ref) {
 final skillProvider = ChangeNotifierProvider<SkillProvider>((ref) {
   return SkillProvider.instance;
 });
+
+
+
+//provider for logged in user api data
+final searchProvider = ChangeNotifierProvider((ref) {
+  return SearchSkillProvider.instance;
+});
+
 
 
 //stream of user data

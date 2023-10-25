@@ -19,7 +19,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class DetailsPage3 extends ConsumerStatefulWidget {
   final String? user;
   final String? compName;
-  final String? phone;
+  final String? compPhone;
   final String? compEmail;
   final String? compAdd;
   final String? webSiteCont;
@@ -38,7 +38,7 @@ class DetailsPage3 extends ConsumerStatefulWidget {
       this.employee,
       this.skill,
       this.experience,
-      this.phone,
+      this.compPhone,
       this.startYear})
       : super(key: key);
 
@@ -47,8 +47,7 @@ class DetailsPage3 extends ConsumerStatefulWidget {
 }
 
 class _DetailsPage3State extends ConsumerState<DetailsPage3> {
- final  _more = TextEditingController();
-
+  final _more = TextEditingController();
 
   _getInputedData() {
     final body = {
@@ -56,7 +55,7 @@ class _DetailsPage3State extends ConsumerState<DetailsPage3> {
       "Company Name": widget.compName,
       "Company Email": widget.compEmail,
       "Company Website": widget.webSiteCont,
-      "Company Phone Number": widget.phone,
+      "Company Phone Number": widget.compPhone,
       "Skill": widget.skill,
       "Experince": widget.experience,
       "Employees": widget.employee,
@@ -135,9 +134,11 @@ class _DetailsPage3State extends ConsumerState<DetailsPage3> {
           ReuseableButton(
               text: 'Submit',
               onPressed: () async {
+                authViewModel.setLoading(true);
                 String? response =
                     await authViewModel.signUpCraftMen(body: _getInputedData());
                 if (response == 'Success') {
+                  authViewModel.setLoading(false);
                   dialogBuilder(
                       context,
                       'lib/assets/verifiedIcon.png',
@@ -152,6 +153,7 @@ class _DetailsPage3State extends ConsumerState<DetailsPage3> {
                     );
                   });
                 } else {
+                  authViewModel.setLoading(false);
                   ShowSnackBar.buildErrorSnackbar(
                       context,
                       'Something went wrong, please try again later',

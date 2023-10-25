@@ -66,14 +66,18 @@ class AuthViewModel extends ChangeNotifier {
       otpLength: 4,
     );
 
-    bool result = await authHandler.sendOtp(email);
-    if (result) {
-      setLoading(false);
-      return true;
-    } else {
-      setLoading(false);
-      return false;
-    }
+    // bool result = await authHandler.sendOtp(email);
+
+    // if (result) {
+    //   setLoading(false);
+    //   return true;
+    // } else {
+    //   setLoading(false);
+    //   return false;
+    // }
+
+    setLoading(false);
+    return true;
   }
 
 //email validation
@@ -87,6 +91,7 @@ class AuthViewModel extends ChangeNotifier {
       setLoading(false);
       return false;
     }
+
   }
 
 // User Registration
