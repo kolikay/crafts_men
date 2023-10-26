@@ -148,7 +148,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                               children: <Widget>[
                                 HomeConstants.newInkwell(context, 'Plumbers',
                                     'lib/assets/plumber.png', () async {
-                                  await search.searchSkills('Deve');
+                                  await search.getUser('developer');
 
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
