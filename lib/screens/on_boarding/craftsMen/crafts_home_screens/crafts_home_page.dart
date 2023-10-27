@@ -15,16 +15,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'crafts_homepage_constant_widgets.dart';
 
-class HomePageScreen extends ConsumerStatefulWidget {
-  const HomePageScreen({Key? key}) : super(key: key);
+class CraftsHomePageScreen extends ConsumerStatefulWidget {
+  const CraftsHomePageScreen({Key? key}) : super(key: key);
 
   static const String id = 'homepage_screen';
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _HomePageScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _CraftsHomePageScreenState();
 }
 
-class _HomePageScreenState extends ConsumerState<HomePageScreen> {
+class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
   final searchCont = TextEditingController();
   @override
   void initState() {
@@ -33,7 +33,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
   }
 
   addData() async {
-    await SkillProvider.instance.getLoggedinUserDetails();
+    await SkillProvider.instance.getSKillLoggedinUserDetails();
   }
 
   @override
@@ -160,7 +160,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                               mainAxisSpacing: 1,
                               crossAxisCount: 4,
                               children: <Widget>[
-                                HomeConstants.newInkwell(context, 'Plumbers',
+                                CraftsHomeConstants.newInkwell(context, 'Plumbers',
                                     'lib/assets/plumber.png', () async {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
@@ -171,7 +171,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                     ),
                                   );
                                 }),
-                                HomeConstants.newInkwell(context, 'Painters ',
+                                CraftsHomeConstants.newInkwell(context, 'Painters ',
                                     'lib/assets/painter.png', () async {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
@@ -182,7 +182,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                     ),
                                   );
                                 }),
-                                HomeConstants.newInkwell(
+                                CraftsHomeConstants.newInkwell(
                                     context,
                                     'Electricians',
                                     'lib/assets/electrician.png', () async {
@@ -195,7 +195,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                     ),
                                   );
                                 }),
-                                HomeConstants.newInkwell(
+                                CraftsHomeConstants.newInkwell(
                                     context, 'Barber', 'lib/assets/barber.png',
                                     () {
                                   Navigator.of(context).push(
@@ -207,7 +207,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                     ),
                                   );
                                 }),
-                                HomeConstants.newInkwell(context, 'Engineer',
+                                CraftsHomeConstants.newInkwell(context, 'Engineer',
                                     'lib/assets/engineer.png', () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
@@ -218,7 +218,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                     ),
                                   );
                                 }),
-                                HomeConstants.newInkwell(
+                                CraftsHomeConstants.newInkwell(
                                     context, 'Health', 'lib/assets/health.png',
                                     () {
                                   Navigator.of(context).push(
@@ -230,7 +230,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                     ),
                                   );
                                 }),
-                                HomeConstants.newInkwell(context, 'Carpenter',
+                                CraftsHomeConstants.newInkwell(context, 'Carpenter',
                                     'lib/assets/carpenter.png', () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
@@ -241,7 +241,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                     ),
                                   );
                                 }),
-                                HomeConstants.newInkwell(
+                                CraftsHomeConstants.newInkwell(
                                     context, 'More', 'lib/assets/more.png', () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
@@ -271,19 +271,19 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                             viewportFraction: 0.9.w,
                             autoPlay: true,
                             onPageChanged: (index, reason) => setState(
-                                () => HomeConstants.activeImageIndex = index),
+                                () => CraftsHomeConstants.activeImageIndex = index),
                             autoPlayInterval: const Duration(seconds: 2),
                           ),
-                          itemCount: HomeConstants.images.length,
+                          itemCount: CraftsHomeConstants.images.length,
                           itemBuilder: (context, index, realIndex) {
-                            final image = HomeConstants.images[index];
-                            return HomeConstants.buildImage(image, index);
+                            final image = CraftsHomeConstants.images[index];
+                            return CraftsHomeConstants.buildImage(image, index);
                           },
                         ),
                         SizedBox(
                           height: 10.h,
                         ),
-                        HomeConstants.buildIndicator(),
+                        CraftsHomeConstants.buildIndicator(),
                       ],
                     ),
                   ],

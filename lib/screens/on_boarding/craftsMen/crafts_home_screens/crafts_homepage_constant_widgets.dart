@@ -4,7 +4,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HomeConstants {
+class CraftsHomeConstants {
   static int activeImageIndex = 0;
 
   static List<String> images = [

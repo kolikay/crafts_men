@@ -1,4 +1,5 @@
 import 'package:craftsmen/constants/const/color.dart';
+import 'package:craftsmen/screens/on_boarding/craftsMen/crafts_home_screens/crafts_home_page.dart';
 import 'package:craftsmen/screens/on_boarding/user/notifications/views/notification_screen1.dart';
 import 'package:craftsmen/screens/settings/craftsmen_settings_screen.dart';
 
@@ -53,8 +54,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   final skillScreens = const [
     Bookings(),
-    HomePageScreen(),
-    HomePageScreen(),
+    CraftsHomePageScreen(),
+    CraftsHomePageScreen(),
     CraftsMenSettingsScreen()
   ];
 

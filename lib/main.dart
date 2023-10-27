@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: ((context, snapshot) {
               if (userType == 'Skill Providers') {
-                SkillProvider.instance.getLoggedinUserDetails();
+                SkillProvider.instance.getSKillLoggedinUserDetails();
               } else if (userType == 'Users') {
                 UserProvider.instance.getLoggedinUserDetails();
               }

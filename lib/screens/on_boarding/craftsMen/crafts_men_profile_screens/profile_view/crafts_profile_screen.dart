@@ -36,8 +36,8 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
   String? _address;
   String? _skill;
   String? _startYear;
-  int? _employee;
-  int? _experience;
+ String? _employee;
+String? _experience;
   String? _companyName;
   String? _companyAdd;
   String? _companyPhoneNumber;
@@ -166,11 +166,11 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
     _skill = user.skill ?? '';
     _companyName = user.companyName ?? '';
     _companyAdd = user.companyAdd ?? '';
-    _experience = user.experience ?? 0;
+    _experience = user.experience ?? '';
     _compEmail = user.compEmail ?? '';
     _companyPhoneNumber = user.companyPhoneNumber ?? '';
     _companyWebsite = user.companyWebsite ?? '';
-    _employee = user.employee ?? 0;
+    _employee = user.employee ?? '';
     _startYear = user.startYear ?? '';
     _more.text = user.moreAboutMe ?? '';
   }
@@ -532,10 +532,10 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                           height: 15.h,
                         ),
                         ProfileFormField(
-                          initialValue: _employee.toString(),
+                          initialValue: _employee,
                           onChanged: (val) {
                             setState(() {
-                              _employee = val as int;
+                              _employee = val;
                             });
                           },
                           enable: onEdit,
@@ -558,7 +558,7 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
                                 initialValue: _experience.toString(),
                                 onChanged: (val) {
                                   setState(() {
-                                    _experience = val as int;
+                                    _experience = val;
                                   });
                                 },
                                 enable: onEdit,

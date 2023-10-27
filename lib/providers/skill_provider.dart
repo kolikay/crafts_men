@@ -26,7 +26,7 @@ class SkillProvider extends ChangeNotifier {
   SkillProviderModel skillUserApiData = SkillProviderModel();
 
   //Get Loggen In User Details
-  Future<SkillProviderModel> getLoggedinUserDetails() async {
+  Future<SkillProviderModel> getSKillLoggedinUserDetails() async {
     User currentUser = _auth.currentUser!;
     final snap = await _firestore
         .collection('Skill Providers')
@@ -81,8 +81,8 @@ class SkillProvider extends ChangeNotifier {
     skillUserApiData.skill = '';
     skillUserApiData.startYear = '';
     skillUserApiData.companyWebsite = '';
-    skillUserApiData.employee = 0;
-    skillUserApiData.experience = 0;
+    skillUserApiData.employee = '';
+    skillUserApiData.experience = '';
     skillUserApiData.moreAboutMe = '';
     notifyListeners();
   }
@@ -94,7 +94,7 @@ class SkillProvider extends ChangeNotifier {
         .collection('Skill Providers')
         .doc(currentUser.uid)
         .update(body);
-    await getLoggedinUserDetails();
+    await getSKillLoggedinUserDetails();
   }
 
   Future<String?> updateUserPassword(String email) async {

@@ -91,7 +91,6 @@ class AuthViewModel extends ChangeNotifier {
       setLoading(false);
       return false;
     }
-
   }
 
 // User Registration
@@ -112,7 +111,7 @@ class AuthViewModel extends ChangeNotifier {
         await UserProvider.instance.getLoggedinUserDetails();
       }
       if (userType == "Skill Providers") {
-        await SkillProvider.instance.getLoggedinUserDetails();
+        await SkillProvider.instance.getSKillLoggedinUserDetails();
       }
 
       setLoading(false);
@@ -127,7 +126,7 @@ class AuthViewModel extends ChangeNotifier {
   Future<String?> signUpCraftMen({required Map<String, dynamic> body}) async {
     setLoading(true);
     try {
-      _firestore
+      await _firestore
           .collection('Skill Providers')
           .doc(_auth.currentUser!.uid)
           .update(body);
@@ -163,7 +162,7 @@ class AuthViewModel extends ChangeNotifier {
           setLoading(false);
         } else {
           SkillProviderModel data =
-              await SkillProvider.instance.getLoggedinUserDetails();
+              await SkillProvider.instance.getSKillLoggedinUserDetails();
 
           response = data.userType;
 

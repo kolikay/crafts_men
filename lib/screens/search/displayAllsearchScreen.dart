@@ -57,9 +57,8 @@ class _DisplayAllSearchScreenState
               future: searchResultProvider.searchSkills(widget.service),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.done) {
-                  if (snap.data!.isEmpty) {
-               
-                  }
+                  print(snap.data);
+
                   return ListView.builder(
                       itemCount: searchResultProvider.allCraftmen.length,
                       itemBuilder: (context, index) {
@@ -87,8 +86,7 @@ class _DisplayAllSearchScreenState
                         );
                       });
                 } else if (snap.hasError) {
-                  return ShowSnackBar.buildErrorSnackbar(
-                      context, 'message', Colors.red);
+                  return SizedBox();
                 } else {
                   return const Center(child: CircularProgressIndicator());
                 }

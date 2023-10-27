@@ -7,17 +7,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'crafts_homepage_constant_widgets.dart';
 
-class CategoriesPage extends ConsumerStatefulWidget {
+class CraftsMenCategoriesPage extends ConsumerStatefulWidget {
   static const id = 'catsearchscreen';
-  const CategoriesPage({
+  const CraftsMenCategoriesPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _CategoriesPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _CraftsMenCategoriesPageState();
 }
 
-class _CategoriesPageState extends ConsumerState<CategoriesPage> {
+class _CraftsMenCategoriesPageState extends ConsumerState<CraftsMenCategoriesPage> {
   @override
   Widget build(BuildContext context) {
     // final notes = ref.watch(noteViewModelProvider);
@@ -49,7 +49,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage> {
                     mainAxisSpacing: 1,
                     crossAxisCount: 3,
                     children: <Widget>[
-                      HomeConstants.categoryCard(
+                      CraftsHomeConstants.categoryCard(
                           context, 'Plumbers', 'lib/assets/plumber.png', () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -59,7 +59,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage> {
                           ),
                         );
                       }),
-                      HomeConstants.categoryCard(context, 'Painters',
+                      CraftsHomeConstants.categoryCard(context, 'Painters',
                           'lib/assets/painter.png', () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -69,7 +69,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage> {
                           ),
                         );
                       }),
-                      HomeConstants.categoryCard(
+                      CraftsHomeConstants.categoryCard(
                           context, 'Electricians', 'lib/assets/electrician.png', () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -79,7 +79,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage> {
                           ),
                         );
                       }),
-                      HomeConstants.categoryCard(
+                      CraftsHomeConstants.categoryCard(
                           context, 'Barbers', 'lib/assets/Barber.png', () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -89,7 +89,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage> {
                           ),
                         );
                       }),
-                      HomeConstants.categoryCard(
+                      CraftsHomeConstants.categoryCard(
                           context, 'Engineer', 'lib/assets/engineer.png',
                           () {
                         Navigator.of(context).push(
@@ -100,7 +100,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage> {
                           ),
                         );
                       }),
-                      HomeConstants.categoryCard(context, 'Health Workers',
+                      CraftsHomeConstants.categoryCard(context, 'Health Workers',
                           'lib/assets/health.png', () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -110,7 +110,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage> {
                           ),
                         );
                       }),
-                      HomeConstants.categoryCard(
+                      CraftsHomeConstants.categoryCard(
                           context, 'Carpenters', 'lib/assets/carpenter.png', () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -120,7 +120,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage> {
                           ),
                         );
                       }),
-                      HomeConstants.categoryCard(context, 'Hair Stylist',
+                      CraftsHomeConstants.categoryCard(context, 'Hair Stylist',
                           'lib/assets/carpenter.png', () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -130,7 +130,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage> {
                           ),
                         );
                       }),
-                      HomeConstants.categoryCard(
+                      CraftsHomeConstants.categoryCard(
                           context, 'Developers', 'lib/assets/carpenter.png',
                           () {
                         Navigator.of(context).push(
