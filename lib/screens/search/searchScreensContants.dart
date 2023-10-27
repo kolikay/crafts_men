@@ -5,12 +5,9 @@ import 'package:craftsmen/models/skillProvider_models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
-
-
 class AboutTabView extends StatefulWidget {
-    SkillProviderModel craftManDetails;
-   AboutTabView({Key? key, required this.craftManDetails}) : super(key: key);
+  SkillProviderModel craftManDetails;
+  AboutTabView({Key? key, required this.craftManDetails}) : super(key: key);
 
   @override
   State<AboutTabView> createState() => _AboutTabViewState();
@@ -26,6 +23,7 @@ class _AboutTabViewState extends State<AboutTabView> {
   final _started = TextEditingController();
   final _ratings = TextEditingController();
   final _jobCompleted = TextEditingController();
+  final _skill = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +32,7 @@ class _AboutTabViewState extends State<AboutTabView> {
     _awayFromYouCont.text = 'kolikay';
     _phone.text = widget.craftManDetails.phoneNumber ?? '';
     _address.text = widget.craftManDetails.address ?? '';
+    _skill.text = widget.craftManDetails.skill ?? '';
     _yOE.text = widget.craftManDetails.experience.toString();
     _started.text = widget.craftManDetails.startYear.toString();
     _ratings.text = '4.5';
@@ -41,8 +40,8 @@ class _AboutTabViewState extends State<AboutTabView> {
 
     return SingleChildScrollView(
       child: SizedBox(
-         width: 375.w,
-          height: 700.h,
+        width: 375.w,
+        height: 700.h,
         child: Column(
           children: [
             SizedBox(
@@ -59,6 +58,14 @@ class _AboutTabViewState extends State<AboutTabView> {
             ProfileFormField(
               labelText: 'Email',
               controller: _email,
+              isReadOnly: true,
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            ProfileFormField(
+              labelText: 'Skill',
+              controller: _skill,
               isReadOnly: true,
             ),
             SizedBox(
@@ -134,7 +141,8 @@ class ReviwTabView extends StatefulWidget {
   final List<Widget> tab;
   SkillProviderModel craftManDetails;
 
-   ReviwTabView({Key? key, required this.tab, required this.craftManDetails}) : super(key: key);
+  ReviwTabView({Key? key, required this.tab, required this.craftManDetails})
+      : super(key: key);
 
   @override
   State<ReviwTabView> createState() => _ReviwTabViewState();
@@ -264,7 +272,7 @@ class ReviewCards extends StatelessWidget {
               ),
             ],
           ),
-        const  Divider(
+          const Divider(
             color: kBlackDull,
             thickness: 1,
           ),
@@ -276,7 +284,7 @@ class ReviewCards extends StatelessWidget {
 
 class WorkPhotoTabView extends StatelessWidget {
   SkillProviderModel craftManDetails;
-   WorkPhotoTabView({Key? key, required this.craftManDetails}) : super(key: key);
+  WorkPhotoTabView({Key? key, required this.craftManDetails}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -296,47 +304,74 @@ class WorkPhotoTabView extends StatelessWidget {
               SizedBox(
                 height: 100.h,
                 width: 100.w,
-                child: Image.asset('lib/assets/worker1.png', fit: BoxFit.fill,),
+                child: Image.asset(
+                  'lib/assets/worker1.png',
+                  fit: BoxFit.fill,
+                ),
               ),
-               SizedBox(
+              SizedBox(
                 height: 100.h,
                 width: 100.w,
-                child: Image.asset('lib/assets/worker2.png', fit: BoxFit.fill,),
+                child: Image.asset(
+                  'lib/assets/worker2.png',
+                  fit: BoxFit.fill,
+                ),
               ),
-                 SizedBox(
+              SizedBox(
                 height: 100.h,
                 width: 100.w,
-                child: Image.asset('lib/assets/worker3.png', fit: BoxFit.fill,),
+                child: Image.asset(
+                  'lib/assets/worker3.png',
+                  fit: BoxFit.fill,
+                ),
               ),
-               SizedBox(
+              SizedBox(
                 height: 100.h,
                 width: 100.w,
-                child: Image.asset('lib/assets/worker4.png', fit: BoxFit.fill,),
+                child: Image.asset(
+                  'lib/assets/worker4.png',
+                  fit: BoxFit.fill,
+                ),
               ),
-                SizedBox(
+              SizedBox(
                 height: 100.h,
                 width: 100.w,
-                child: Image.asset('lib/assets/worker5.png', fit: BoxFit.fill,),
+                child: Image.asset(
+                  'lib/assets/worker5.png',
+                  fit: BoxFit.fill,
+                ),
               ),
-             SizedBox(
+              SizedBox(
                 height: 100.h,
                 width: 100.w,
-                child: Image.asset('lib/assets/worker6.png', fit: BoxFit.fill,),
+                child: Image.asset(
+                  'lib/assets/worker6.png',
+                  fit: BoxFit.fill,
+                ),
               ),
-                  SizedBox(
+              SizedBox(
                 height: 100.h,
                 width: 100.w,
-                child: Image.asset('lib/assets/worker7.png', fit: BoxFit.fill,),
+                child: Image.asset(
+                  'lib/assets/worker7.png',
+                  fit: BoxFit.fill,
+                ),
               ),
-                  SizedBox(
+              SizedBox(
                 height: 100.h,
                 width: 100.w,
-                child: Image.asset('lib/assets/worker8.png', fit: BoxFit.fill,),
+                child: Image.asset(
+                  'lib/assets/worker8.png',
+                  fit: BoxFit.fill,
+                ),
               ),
-                  SizedBox(
+              SizedBox(
                 height: 100.h,
                 width: 100.w,
-                child: Image.asset('lib/assets/worker9.png', fit: BoxFit.fill,),
+                child: Image.asset(
+                  'lib/assets/worker9.png',
+                  fit: BoxFit.fill,
+                ),
               ),
             ],
           ),

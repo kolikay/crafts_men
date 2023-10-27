@@ -24,6 +24,11 @@ class DisplayAllSearchScreen extends ConsumerStatefulWidget {
       _DisplayAllSearchScreenState();
 }
 
+@override
+void initState() {
+  WidgetsBinding.instance.addPostFrameCallback((_) {});
+}
+
 class _DisplayAllSearchScreenState
     extends ConsumerState<DisplayAllSearchScreen> {
   @override
@@ -52,6 +57,9 @@ class _DisplayAllSearchScreenState
               future: searchResultProvider.searchSkills(widget.service),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.done) {
+                  if (snap.data!.isEmpty) {
+               
+                  }
                   return ListView.builder(
                       itemCount: searchResultProvider.allCraftmen.length,
                       itemBuilder: (context, index) {
