@@ -58,7 +58,12 @@ class _DisplayAllSearchScreenState
                         return SearchDisplayCard(
                           name:
                               searchResultProvider.allCraftmen[index].fullName!,
-                          imageUrl: 'lib/assets/logoTrans.png',
+                          imageUrl: searchResultProvider
+                                      .allCraftmen[index].profilePic ==
+                                  ''
+                              ? 'https://st2.depositphotos.com/4520249/7558/v/450/depositphotos_75585915-stock-illustration-construction-worker-icon.jpg'
+                              : searchResultProvider
+                                  .allCraftmen[index].profilePic!,
                           rating: '4.5',
                           distance: snap.data![index].email!,
                           tapped: () async {

@@ -9,8 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SingleSearchScreen extends StatefulWidget {
-final  SkillProviderModel craftManDetails;
- const  SingleSearchScreen({Key? key, required this.craftManDetails}) : super(key: key);
+  final SkillProviderModel craftManDetails;
+  const SingleSearchScreen({Key? key, required this.craftManDetails})
+      : super(key: key);
 
   @override
   State<SingleSearchScreen> createState() => _SingleSearchScreenState();
@@ -56,14 +57,23 @@ class _SingleSearchScreenState extends State<SingleSearchScreen> {
               const SizedBox(
                 height: 20,
               ),
-              SizedBox(
-                height: 150.h,
-                width: double.infinity,
-                child: Image.asset(
-                  'lib/assets/workerImage.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
+              widget.craftManDetails.profilePic == ''
+                  ? SizedBox(
+                      height: 150.h,
+                      width: double.infinity,
+                      child: Image.asset(
+                        'lib/assets/workerImage.png',
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  : SizedBox(
+                      height: 150.h,
+                      width: double.infinity,
+                      child: Image.network(
+                        widget.craftManDetails.profilePic!,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
               SizedBox(
                 height: 20.h,
               ),
@@ -91,14 +101,10 @@ class _SingleSearchScreenState extends State<SingleSearchScreen> {
               SizedBox(
                 height: 450.h,
                 child: TabBarView(children: [
-                   AboutTabView(craftManDetails: widget.craftManDetails),
+                  AboutTabView(craftManDetails: widget.craftManDetails),
                   ReviwTabView(
-                    tab: tabs,
-                    craftManDetails: widget.craftManDetails
-                  ),
-                   WorkPhotoTabView(
-                    craftManDetails: widget.craftManDetails
-                  ),
+                      tab: tabs, craftManDetails: widget.craftManDetails),
+                  WorkPhotoTabView(craftManDetails: widget.craftManDetails),
                 ]),
               ),
             ],

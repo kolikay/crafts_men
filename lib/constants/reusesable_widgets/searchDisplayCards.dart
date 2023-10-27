@@ -42,7 +42,7 @@ class _SearchDisplayCardState extends State<SearchDisplayCard> {
                     height: 60.h,
                     width: 60.w,
                     decoration: const BoxDecoration(shape: BoxShape.circle),
-                    child: Image.asset(widget.imageUrl),
+                    child: Image.network(widget.imageUrl),
                   ),
                   const SizedBox(
                     width: 15,
