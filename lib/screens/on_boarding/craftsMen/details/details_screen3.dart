@@ -106,6 +106,7 @@ class _DetailsPage3State extends ConsumerState<DetailsPage3> {
           SizedBox(
             height: 300.h,
             child: TextField(
+              controller: _more,
               textAlignVertical: TextAlignVertical.top,
               expands: true,
               maxLength: 150,

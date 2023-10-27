@@ -28,7 +28,7 @@ class _CraftmenFillDetailsScreenState
   int currentPage = 0;
   bool isLastPage = false;
   String compName = '';
-  String phone = '';
+  String compPhone = '';
   String compEmail = '';
   String compAdd = '';
   String webSiteCont = '';
@@ -52,16 +52,17 @@ class _CraftmenFillDetailsScreenState
     pageController.dispose();
   }
 
-  void _saveCraftPhoneDetails(String phone) {
-    setState(() {
-      phone = phone;
-    });
-  }
-
   void _saveCraftEmailDetails(String email) {
     setState(() {
       compEmail = email;
     });
+  }
+
+  void _saveCraftPhoneDetails(String phone) {
+    setState(() {
+      compPhone = phone;
+    });
+  
   }
 
   void _saveCraftNameDetails(String name) {
@@ -171,6 +172,7 @@ class _CraftmenFillDetailsScreenState
                               employee: employee,
                               experience: experience,
                               webSiteCont: webSiteCont,
+                              compPhone: compPhone,
                             ),
                           ],
                         ),

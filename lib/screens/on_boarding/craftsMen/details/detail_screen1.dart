@@ -10,7 +10,7 @@ class DetailsPage1 extends StatefulWidget {
   final Function saveCraftEmailDetails;
   final Function saveCraftAddDetails;
   final Function saveCraftNameDetails;
- const DetailsPage1(
+  const DetailsPage1(
       {Key? key,
       required this.saveCraftAddDetails,
       required this.saveCraftEmailDetails,
@@ -82,6 +82,7 @@ class _DetailsPage1State extends State<DetailsPage1> {
             ),
             MyTextField(
               onChanged: (val) {
+                
                 widget.saveCraftPhoneDetails(val);
               },
               obcureText: false,
