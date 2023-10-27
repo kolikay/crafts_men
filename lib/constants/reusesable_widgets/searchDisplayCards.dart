@@ -30,7 +30,8 @@ class _SearchDisplayCardState extends State<SearchDisplayCard> {
       padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: InkWell(
         onTap: widget.tapped,
-        child: SizedBox(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           height: 95.h,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

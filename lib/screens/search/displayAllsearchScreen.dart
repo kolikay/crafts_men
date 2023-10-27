@@ -5,6 +5,9 @@ import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusesable_appBar2.dart';
 import 'package:craftsmen/constants/reusesable_widgets/searchDisplayCards.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
+import 'package:craftsmen/constants/utils/snack_bar.dart';
+import 'package:craftsmen/models/skillProvider_models.dart';
+import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
 import 'package:craftsmen/screens/search/singleSearchDisplayScreen.dart';
 
 import 'package:flutter/material.dart';
@@ -26,6 +29,7 @@ class _DisplayAllSearchScreenState
   @override
   Widget build(BuildContext context) {
     final authViewModel = ref.watch(authViewModelProvider);
+    final searchResultProvider = ref.watch(searchProvider);
     return SafeArea(
       child: Stack(children: [
         Scaffold(
@@ -44,62 +48,38 @@ class _DisplayAllSearchScreenState
               ),
             ),
           ),
-          body: SingleChildScrollView(
-              child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: SizedBox(
-              height: 850,
-              child: Column(
-                children: [
-                  SearchDisplayCard(
-                    name: 'Ali Muhammed',
-                    imageUrl: 'lib/assets/logoTrans.png',
-                    rating: '4.5',
-                    distance: '500m away',
-                    tapped: () async {
-                      // await authViewModel.request();
-
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: ((context) => const SingleSearchScreen()),
-                        ),
-                      );
-                    },
-                  ),
-                  SearchDisplayCard(
-                    name: 'Ali Muhammed',
-                    imageUrl: 'lib/assets/logoTrans.png',
-                    rating: '4.5',
-                    distance: '3 KM away',
-                    tapped: () async {
-                       await authViewModel.request();
-
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: ((context) => const SingleSearchScreen()),
-                        ),
-                      );
-                    },
-                  ),
-                  SearchDisplayCard(
-                    name: 'Ali Muhammed',
-                    imageUrl: 'lib/assets/logoTrans.png',
-                    rating: '4.5',
-                    distance: '1 KM away',
-                    tapped: () async {
-                       await authViewModel.request();
-
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: ((context) => const SingleSearchScreen()),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          )),
+          body: FutureBuilder<List<SkillProviderModel>>(
+              future: searchResultProvider.searchSkills(widget.service),
+              builder: (context, snap) {
+                if (snap.connectionState == ConnectionState.done) {
+                  return ListView.builder(
+                      itemCount: searchResultProvider.allCraftmen.length,
+                      itemBuilder: (context, index) {
+                        return SearchDisplayCard(
+                          name:
+                              searchResultProvider.allCraftmen[index].fullName!,
+                          imageUrl: 'lib/assets/logoTrans.png',
+                          rating: '4.5',
+                          distance: snap.data![index].email!,
+                          tapped: () async {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: ((context) => SingleSearchScreen(
+                                      craftManDetails: searchResultProvider
+                                          .allCraftmen[index],
+                                    )),
+                              ),
+                            );
+                          },
+                        );
+                      });
+                } else if (snap.hasError) {
+                  return ShowSnackBar.buildErrorSnackbar(
+                      context, 'message', Colors.red);
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              }),
         ),
         Positioned(
           child: authViewModel.loading

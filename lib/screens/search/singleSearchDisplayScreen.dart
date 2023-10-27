@@ -1,6 +1,7 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
+import 'package:craftsmen/models/skillProvider_models.dart';
 import 'package:craftsmen/screens/search/searchScreensContants.dart';
 
 import 'package:craftsmen/screens/search/serviceDetailsScreen.dart';
@@ -8,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SingleSearchScreen extends StatefulWidget {
-  const SingleSearchScreen({Key? key}) : super(key: key);
+final  SkillProviderModel craftManDetails;
+ const  SingleSearchScreen({Key? key, required this.craftManDetails}) : super(key: key);
 
   @override
   State<SingleSearchScreen> createState() => _SingleSearchScreenState();
@@ -89,11 +91,14 @@ class _SingleSearchScreenState extends State<SingleSearchScreen> {
               SizedBox(
                 height: 450.h,
                 child: TabBarView(children: [
-                  const AboutTabView(),
+                   AboutTabView(craftManDetails: widget.craftManDetails),
                   ReviwTabView(
                     tab: tabs,
+                    craftManDetails: widget.craftManDetails
                   ),
-                  const WorkPhotoTabView(),
+                   WorkPhotoTabView(
+                    craftManDetails: widget.craftManDetails
+                  ),
                 ]),
               ),
             ],
@@ -116,7 +121,6 @@ class _SingleSearchScreenState extends State<SingleSearchScreen> {
                   text: "Book",
                   width: double.infinity,
                 ),
-                
               ],
             ),
           ),

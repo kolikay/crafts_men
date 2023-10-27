@@ -1,6 +1,7 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/profleFormFields.dart';
+import 'package:craftsmen/models/skillProvider_models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -8,7 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class AboutTabView extends StatefulWidget {
-  const AboutTabView({Key? key}) : super(key: key);
+    SkillProviderModel craftManDetails;
+   AboutTabView({Key? key, required this.craftManDetails}) : super(key: key);
 
   @override
   State<AboutTabView> createState() => _AboutTabViewState();
@@ -27,13 +29,13 @@ class _AboutTabViewState extends State<AboutTabView> {
 
   @override
   Widget build(BuildContext context) {
-    _email.text = 'kolikay2gmail.com';
-    _fullnameCont.text = 'kolawole fabusuyi';
+    _email.text = widget.craftManDetails.email ?? '';
+    _fullnameCont.text = widget.craftManDetails.fullName ?? '';
     _awayFromYouCont.text = 'kolikay';
-    _phone.text = "08062842978";
-    _address.text = 'No 27, Kenneth Street, Ikoyi,Lagos state';
-    _yOE.text = "4 years";
-    _started.text = "2020";
+    _phone.text = widget.craftManDetails.phoneNumber ?? '';
+    _address.text = widget.craftManDetails.address ?? '';
+    _yOE.text = widget.craftManDetails.experience.toString();
+    _started.text = widget.craftManDetails.startYear.toString();
     _ratings.text = '4.5';
     _jobCompleted.text = "47";
 
@@ -130,8 +132,9 @@ List<Widget> tabs = const [
 
 class ReviwTabView extends StatefulWidget {
   final List<Widget> tab;
+  SkillProviderModel craftManDetails;
 
-  const ReviwTabView({Key? key, required this.tab}) : super(key: key);
+   ReviwTabView({Key? key, required this.tab, required this.craftManDetails}) : super(key: key);
 
   @override
   State<ReviwTabView> createState() => _ReviwTabViewState();
@@ -272,7 +275,8 @@ class ReviewCards extends StatelessWidget {
 }
 
 class WorkPhotoTabView extends StatelessWidget {
-  const WorkPhotoTabView({Key? key}) : super(key: key);
+  SkillProviderModel craftManDetails;
+   WorkPhotoTabView({Key? key, required this.craftManDetails}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -5,6 +5,7 @@ import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/models/user_models.dart';
+import 'package:craftsmen/providers/skill_provider.dart';
 import 'package:craftsmen/providers/user_provider.dart';
 import 'package:craftsmen/screens/on_boarding/user/home_screens/categories_page.dart';
 import 'package:craftsmen/screens/search/displayAllsearchScreen.dart';
@@ -12,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'homepage_constant_widgets.dart';
+import 'crafts_homepage_constant_widgets.dart';
 
 class HomePageScreen extends ConsumerStatefulWidget {
   const HomePageScreen({Key? key}) : super(key: key);
@@ -32,13 +33,13 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
   }
 
   addData() async {
-    await UserProvider.instance.getLoggedinUserDetails();
+    await SkillProvider.instance.getLoggedinUserDetails();
   }
 
   @override
   Widget build(BuildContext context) {
     final authViewModel = ref.watch(authViewModelProvider);
-    final loginUser = ref.watch(userProvider);
+    final loginUser = ref.watch(skillProvider);
 
     return SafeArea(
       child: Stack(children: [
@@ -56,7 +57,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                       children: [
                         NormalText(
                           text:
-                              "Hello ${loginUser.userApiData.userName ?? ''} !!! ",
+                              "Hello ${loginUser.skillUserApiData.userName ?? ''} !!! ",
                           size: 20.sp,
                           fontWeight: FontWeight.w600,
                           color: kMainColor,
@@ -72,7 +73,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                       ],
                     ),
                     NormalText(
-                      text: '27, Kenneth Street, Ikoyi, Lagos',
+                      text: loginUser.skillUserApiData.email ?? '',
                       size: 14.sp,
                       color: kBlackDull,
                     ),

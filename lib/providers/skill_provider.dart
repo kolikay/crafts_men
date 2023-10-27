@@ -26,12 +26,15 @@ class SkillProvider extends ChangeNotifier {
   SkillProviderModel skillUserApiData = SkillProviderModel();
 
   //Get Loggen In User Details
-  Future getLoggedinUserDetails() async {
+  Future<SkillProviderModel> getLoggedinUserDetails() async {
     User currentUser = _auth.currentUser!;
-    DocumentSnapshot snap = await _firestore
+    final snap = await _firestore
         .collection('Skill Providers')
         .doc(currentUser.uid)
         .get();
+
+    // final userData =
+    //     snap.docs.map((e) => SkillProviderModel.fromSnapshotNew(e)).single;
 
     SkillProviderModel skillUser = SkillProviderModel.fromSnapshot(snap);
 

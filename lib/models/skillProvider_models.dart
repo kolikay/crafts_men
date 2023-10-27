@@ -46,13 +46,8 @@ class SkillProviderModel extends ChangeNotifier {
   String? compEmail;
   String? moreAboutMe;
 
-
-
-
-
-    static SkillProviderModel fromSnapshotNew(DocumentSnapshot<Map<String, dynamic>> snap) {
+    static SkillProviderModel fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snap) {
     var snapShot = snap.data() ;
-
     return SkillProviderModel(
       id: snapShot!["ID"],
       email: snapShot["email"],
@@ -77,56 +72,60 @@ class SkillProviderModel extends ChangeNotifier {
     );
   }
 
-  static SkillProviderModel fromSnapshot(DocumentSnapshot snap) {
-    var snapShot = snap.data() as Map<String, dynamic>;
-
-    return SkillProviderModel(
-      id: snapShot["ID"],
-      email: snapShot["email"],
-      fullName: snapShot["Full Name"],
-      userName: snapShot["User Name"],
-      phoneNumber: snapShot["Phone Number"],
-      gender: snapShot["Gender"],
-      address: snapShot["Address"],
-      reviews: ["Reviews"],
-      profilePic: snapShot["Profile Pic"],
-      userType: snapShot["User Type"],
-      companyAdd: snapShot["Company Address"],
-      companyName: snapShot["Company Name"],
-      compEmail: snapShot["Company Email"],
-      companyWebsite: snapShot["Company Website"],
-      companyPhoneNumber: snapShot["Company Phone Number"],
-      skill: snapShot["Skill"],
-      experience: snapShot["Experince"],
-      employee: snapShot["Employees"],
-      startYear: snapShot["Company Start Year"],
-      moreAboutMe: snapShot["More About the Company"],
-    );
-  }
 
 
 
-  static SkillProviderModel fromMap(Map<String, dynamic> snapShot) {
-    return SkillProviderModel(
-      email: snapShot["email"],
-      fullName: snapShot["Full Name"],
-      userName: snapShot["User Name"],
-      phoneNumber: snapShot["Phone Number"],
-      gender: snapShot["Gender"],
-      address: snapShot["Address"],
-      reviews: ["Reviews"],
-      profilePic: snapShot["Profile Pic"],
-      userType: snapShot["User Type"],
-      companyAdd: snapShot["Company Address"],
-      companyName: snapShot["Company Name"],
-      compEmail: snapShot["Company Email"],
-      companyWebsite: snapShot["Company Website"],
-      companyPhoneNumber: snapShot["Company Phone Number"],
-      skill: snapShot["Skill"],
-      experience: snapShot["Experince"],
-      employee: snapShot["Employees"],
-      startYear: snapShot["Company Start Year"],
-      moreAboutMe: snapShot["More About the Company"],
-    );
-  }
+
+  // static SkillProviderModel fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snap) {
+  //   var snapShot = snap.data()  ;
+
+  //   return SkillProviderModel(
+  //     id: snapShot!["ID"],
+  //     email: snapShot["email"],
+  //     fullName: snapShot["Full Name"],
+  //     userName: snapShot["User Name"],
+  //     phoneNumber: snapShot["Phone Number"],
+  //     gender: snapShot["Gender"],
+  //     address: snapShot["Address"],
+  //     reviews: ["Reviews"],
+  //     profilePic: snapShot["Profile Pic"],
+  //     userType: snapShot["User Type"],
+  //     companyAdd: snapShot["Company Address"],
+  //     companyName: snapShot["Company Name"],
+  //     compEmail: snapShot["Company Email"],
+  //     companyWebsite: snapShot["Company Website"],
+  //     companyPhoneNumber: snapShot["Company Phone Number"],
+  //     skill: snapShot["Skill"],
+  //     experience: snapShot["Experince"],
+  //     employee: snapShot["Employees"],
+  //     startYear: snapShot["Company Start Year"],
+  //     moreAboutMe: snapShot["More About the Company"],
+  //   );
+  // }
+
+
+
+  // static SkillProviderModel fromMap(Map<String, dynamic> snapShot) {
+  //   return SkillProviderModel(
+  //     email: snapShot["email"],
+  //     fullName: snapShot["Full Name"],
+  //     userName: snapShot["User Name"],
+  //     phoneNumber: snapShot["Phone Number"],
+  //     gender: snapShot["Gender"],
+  //     address: snapShot["Address"],
+  //     reviews: ["Reviews"],
+  //     profilePic: snapShot["Profile Pic"],
+  //     userType: snapShot["User Type"],
+  //     companyAdd: snapShot["Company Address"],
+  //     companyName: snapShot["Company Name"],
+  //     compEmail: snapShot["Company Email"],
+  //     companyWebsite: snapShot["Company Website"],
+  //     companyPhoneNumber: snapShot["Company Phone Number"],
+  //     skill: snapShot["Skill"],
+  //     experience: snapShot["Experince"],
+  //     employee: snapShot["Employees"],
+  //     startYear: snapShot["Company Start Year"],
+  //     moreAboutMe: snapShot["More About the Company"],
+  //   );
+  // }
 }

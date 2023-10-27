@@ -23,20 +23,18 @@ final authViewModelProvider = ChangeNotifierProvider<AuthViewModel>((ref) {
 // });
 
 
-
-//provider for logged in user api data
+//provider for users in user api data
 final userProvider = ChangeNotifierProvider<UserProvider>((ref) {
   return UserProvider.instance;
 });
 
-//provider for logged in user api data
+//provider for skillprovider in user api data
 final skillProvider = ChangeNotifierProvider<SkillProvider>((ref) {
   return SkillProvider.instance;
 });
 
 
 
-//provider for logged in user api data
 final searchProvider = ChangeNotifierProvider((ref) {
   return SearchSkillProvider.instance;
 });
