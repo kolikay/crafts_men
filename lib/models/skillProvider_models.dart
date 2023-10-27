@@ -37,8 +37,8 @@ class SkillProviderModel extends ChangeNotifier {
   String? userType;
   String? skill;
   String? startYear;
-  String? employee;
-  String? experience;
+  int? employee;
+  int? experience;
   String? companyName;
   String? companyAdd;
   String? companyPhoneNumber;

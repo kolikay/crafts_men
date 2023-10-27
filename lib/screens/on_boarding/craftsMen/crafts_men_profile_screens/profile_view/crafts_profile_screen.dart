@@ -36,8 +36,8 @@ class _CraftMenProfileScreenState extends ConsumerState<CraftMenProfileScreen> {
   String? _address;
   String? _skill;
   String? _startYear;
- String? _employee;
-String? _experience;
+  int? _employee;
+  int? _experience;
   String? _companyName;
   String? _companyAdd;
   String? _companyPhoneNumber;
@@ -166,11 +166,11 @@ String? _experience;
     _skill = user.skill ?? '';
     _companyName = user.companyName ?? '';
     _companyAdd = user.companyAdd ?? '';
-    _experience = user.experience ?? '';
+    _experience = user.experience ?? 0;
     _compEmail = user.compEmail ?? '';
     _companyPhoneNumber = user.companyPhoneNumber ?? '';
     _companyWebsite = user.companyWebsite ?? '';
-    _employee = user.employee ?? '';
+    _employee = user.employee ?? 0;
     _startYear = user.startYear ?? '';
     _more.text = user.moreAboutMe ?? '';
   }
@@ -273,6 +273,7 @@ String? _experience;
                       if (onEdit) {
                         await userInfoProvider
                             .updateLoggedinUserDetails(getInputedData());
+                        // print(getInputedData());
                       }
 
                       setState(() {
@@ -532,12 +533,13 @@ String? _experience;
                           height: 15.h,
                         ),
                         ProfileFormField(
-                          initialValue: _employee,
-                          onChanged: (val) {
-                            setState(() {
-                              _employee = val;
-                            });
-                          },
+                          initialValue: _employee.toString(),
+                          // onChanged: (val) {
+                          //   print(val);
+                          //   setState(() {
+                          //     _employee = val as int;
+                          //   });
+                          // },
                           enable: onEdit,
                           obcureText: false,
                           keyBoardType: TextInputType.number,
@@ -556,16 +558,16 @@ String? _experience;
                               ProfileFormField(
                                 width: 140.w,
                                 initialValue: _experience.toString(),
-                                onChanged: (val) {
-                                  setState(() {
-                                    _experience = val;
-                                  });
-                                },
+                                // onChanged: (val) {
+                                //   setState(() {
+                                //     _experience = val as int?;
+                                //   });
+                                // },
                                 enable: onEdit,
                                 obcureText: false,
                                 keyBoardType: TextInputType.number,
                                 isPassword: false,
-                                isReadOnly: !onEdit,
+                                isReadOnly: true,
                                 labelText: 'Year of Experience',
                               ),
                               ProfileFormField(
@@ -581,7 +583,7 @@ String? _experience;
                                 keyBoardType: TextInputType.number,
                                 isPassword: false,
                                 isReadOnly: !onEdit,
-                                labelText: 'Number of Employee',
+                                labelText: 'Start Year',
                               ),
                             ],
                           ),

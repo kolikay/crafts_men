@@ -171,6 +171,7 @@ class AuthViewModel extends ChangeNotifier {
           setLoading(false);
         }
       }).catchError((e) async {
+        print(e.toString());
         await _auth.signOut();
         response = 'Login Failed';
         setLoginError(true);

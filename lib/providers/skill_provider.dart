@@ -81,8 +81,8 @@ class SkillProvider extends ChangeNotifier {
     skillUserApiData.skill = '';
     skillUserApiData.startYear = '';
     skillUserApiData.companyWebsite = '';
-    skillUserApiData.employee = '';
-    skillUserApiData.experience = '';
+    skillUserApiData.employee = 0;
+    skillUserApiData.experience = 0;
     skillUserApiData.moreAboutMe = '';
     notifyListeners();
   }

@@ -63,9 +63,9 @@ class MyApp extends StatelessWidget {
                 ),
           ),
           home:
-              // LandingPage(),
+            // OnBoardingScreen(user: 'Skill Providers',),
 
-              //     CraftmenFillDetailsScreen(user:  'Skill Providers',),
+                  // CraftmenFillDetailsScreen(user:  'Skill Providers',),
               StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: ((context, snapshot) {

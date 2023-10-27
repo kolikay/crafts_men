@@ -133,37 +133,39 @@ class _DetailsPage3State extends ConsumerState<DetailsPage3> {
           ),
           ReuseableButton(
               text: 'Submit',
-              onPressed: () async {
-                authViewModel.setLoading(true);
-                String? response =
-                    await authViewModel.signUpCraftMen(body: _getInputedData());
-                if (response == 'Success') {
-                  authViewModel.setLoading(false);
-                  dialogBuilder(
-                      context,
-                      'lib/assets/verifiedIcon.png',
-                      'Thank You',
-                      'Thanks for taking your time to fill the details. Once your service is needed, you will be notify  ',
-                      'View Details', () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            OnBoardingScreen(user: widget.user),
-                      ),
-                    );
-                  });
-                } else {
-                  authViewModel.setLoading(false);
-                  ShowSnackBar.buildErrorSnackbar(
-                      context,
-                      'Something went wrong, please try again later',
-                      Colors.red);
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => OnBoardingScreen(user: widget.user),
-                    ),
-                  );
-                }
+              onPressed: () {
+                print(_getInputedData());
+                ;
+                //   authViewModel.setLoading(true);
+                //   String? response =
+                //       await authViewModel.signUpCraftMen(body: _getInputedData());
+                //   if (response == 'Success') {
+                //     authViewModel.setLoading(false);
+                //     dialogBuilder(
+                //         context,
+                //         'lib/assets/verifiedIcon.png',
+                //         'Thank You',
+                //         'Thanks for taking your time to fill the details. Once your service is needed, you will be notify  ',
+                //         'View Details', () {
+                //       Navigator.of(context).push(
+                //         MaterialPageRoute(
+                //           builder: (context) =>
+                //               OnBoardingScreen(user: widget.user),
+                //         ),
+                //       );
+                //     });
+                //   } else {
+                //     authViewModel.setLoading(false);
+                //     ShowSnackBar.buildErrorSnackbar(
+                //         context,
+                //         'Something went wrong, please try again later',
+                //         Colors.red);
+                //     Navigator.of(context).push(
+                //       MaterialPageRoute(
+                //         builder: (context) => OnBoardingScreen(user: widget.user),
+                //       ),
+                //     );
+                //   }
               }),
         ]),
         Positioned(
