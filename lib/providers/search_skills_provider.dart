@@ -16,7 +16,7 @@ class SearchSkillProvider extends ChangeNotifier {
   List<SkillProviderModel> allCraftmen = [];
 
   Future<List<SkillProviderModel>> searchSkills(String search) async {
-       print('object');
+  
     final snapshop = await _firestore
         .collection("Skill Providers")
         .where("Skill",
@@ -27,15 +27,11 @@ class SearchSkillProvider extends ChangeNotifier {
                         .codeUnitAt(search.toLowerCase().length - 1) +
                     1))
         .get();
-        
 
     allCraftmen =
         snapshop.docs.map((e) => SkillProviderModel.fromSnapshot(e)).toList();
- 
 
-    for (var b in allCraftmen) {
-      print(b.email);
-    }
+
     return allCraftmen;
   }
 }

@@ -111,7 +111,7 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                         MaterialPageRoute(
                                           builder: ((context) =>
                                               DisplayAllSearchScreen(
-                                                service: searchCont.text,
+                                                service: searchCont.text.trim().toLowerCase(),
                                               )),
                                         ),
                                       );
@@ -166,7 +166,7 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'Developer',
+                                            service: 'plumber',
                                           )),
                                     ),
                                   );
@@ -177,7 +177,7 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'Painter',
+                                            service: 'painter',
                                           )),
                                     ),
                                   );
@@ -190,7 +190,7 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'Electrician',
+                                            service: 'electrician',
                                           )),
                                     ),
                                   );
@@ -202,7 +202,7 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'Electrician',
+                                            service: 'barber',
                                           )),
                                     ),
                                   );
@@ -213,7 +213,7 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'Electrician',
+                                            service: 'engineer',
                                           )),
                                     ),
                                   );
@@ -225,7 +225,7 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'Electrician',
+                                            service: 'health',
                                           )),
                                     ),
                                   );
@@ -236,7 +236,7 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'Electrician',
+                                            service: 'carpenter',
                                           )),
                                     ),
                                   );

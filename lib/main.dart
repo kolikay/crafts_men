@@ -9,6 +9,7 @@ import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
 import 'package:craftsmen/screens/change_password/email_password_change_screen.dart';
 import 'package:craftsmen/screens/landing_page/landing_page_screen.dart';
 import 'package:craftsmen/screens/landing_page/landing_page_screen2.dart';
+import 'package:craftsmen/screens/landing_page/no_internet.dart';
 import 'package:craftsmen/screens/location/location_screen.dart';
 import 'package:craftsmen/screens/location/location_screen2.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
@@ -20,6 +21,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:simple_connection_checker/simple_connection_checker.dart';
 
 import 'screens/on_boarding/craftsMen/details/craftsmen_fill_details_screen.dart';
 
@@ -30,6 +32,7 @@ void main() async {
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
   await Firebase.initializeApp(
       options: const FirebaseOptions(
           apiKey: "AIzaSyCduRrB3MyvBbVA-woOBgZGJvxGZZbDA9E",
@@ -41,10 +44,32 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isLoggedIn = false;
+
+  @override
+  void initState() {
+    getUser();
+    super.initState();
+  }
+
+  getUser() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        setState(() {
+          isLoggedIn = true;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     String? userType = UserPreferences.getUserType();
@@ -62,39 +87,39 @@ class MyApp extends StatelessWidget {
                   primary: kMainColor,
                 ),
           ),
-          home:
-            // OnBoardingScreen(user: 'Skill Providers',),
+          home: isLoggedIn ? OnBoardingScreen(user: userType) : LandingPage2(),
+          // OnBoardingScreen(user: 'Skill Providers',),
 
-                  // CraftmenFillDetailsScreen(user:  'Skill Providers',),
-              StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: ((context, snapshot) {
-              if (userType == 'Skill Providers') {
-                SkillProvider.instance.getSKillLoggedinUserDetails();
-              } else if (userType == 'Users') {
-                UserProvider.instance.getLoggedinUserDetails();
-              }
+          // CraftmenFillDetailsScreen(user:  'Skill Providers',),
+          //     StreamBuilder(
+          //   stream: FirebaseAuth.instance.authStateChanges(),
+          //   builder: ((context, snapshot) {
+          //     if (userType == 'Skill Providers') {
+          //       SkillProvider.instance.getSKillLoggedinUserDetails();
+          //     } else if (userType == 'Users') {
+          //       UserProvider.instance.getLoggedinUserDetails();
+          //     }
 
-              if (snapshot.connectionState == ConnectionState.active) {
-                if (snapshot.hasData) {
-                  return OnBoardingScreen(
-                    user: userType,
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(
-                      child: NormalText(
-                    text: 'Error Occured',
-                  ));
-                }
-              }
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(color: kMainColor),
-                );
-              }
-              return const LandingPage();
-            }),
-          ),
+          //     if (snapshot.connectionState == ConnectionState.active) {
+          //       if (snapshot.hasData) {
+          //         return OnBoardingScreen(
+          //           user: userType,
+          //         );
+          //       } else if (snapshot.hasError) {
+          //         return Center(
+          //             child: NormalText(
+          //           text: 'Error Occured',
+          //         ));
+          //       }
+          //     }
+          //     if (snapshot.connectionState == ConnectionState.waiting) {
+          //       return const Center(
+          //         child: CircularProgressIndicator(color: kMainColor),
+          //       );
+          //     }
+          //     return const LandingPage();
+          //   }),
+          // ),
           routes: {
             LandingPage.id: (context) => const LandingPage(),
             LandingPage2.id: (context) => LandingPage2(),
@@ -102,9 +127,7 @@ class MyApp extends StatelessWidget {
             LoginScreen.id: (context) => const LoginScreen(),
             EmailPasswordChangeScreen.id: (context) =>
                 const EmailPasswordChangeScreen(),
-            // PasswordResetPinScreen.id: (context) =>
-            //     PasswordResetPinScreen(),
-
+            NoInternetScreen.id: (context) => const NoInternetScreen(),
             LocationScreen2.id: (context) => const LocationScreen2(),
             LocationScreen.id: (context) => const LocationScreen(),
             OnBoardingScreen.id: (context) => OnBoardingScreen(

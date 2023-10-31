@@ -405,7 +405,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                           });
                           setState(() {
                             proffession = 'Barbing';
-                            skill('Barbing');
+                            skill('barbing');
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -434,7 +434,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                           });
                           setState(() {
                             proffession = 'Teaching';
-                            skill('Teaching');
+                            skill('teaching');
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -462,8 +462,8 @@ class _DetailsPage2State extends State<DetailsPage2> {
                             _isChecked9 = false;
                           });
                           setState(() {
-                            proffession = 'Electricity';
-                            skill('Electricity');
+                            proffession = 'Electrician';
+                            skill('electrican');
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -474,7 +474,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                       height: 20,
                     ),
                     items(
-                      'Baking',
+                      'Baker',
                       Checkbox(
                         checkColor: kMainColor,
                         value: _isChecked4,
@@ -491,8 +491,8 @@ class _DetailsPage2State extends State<DetailsPage2> {
                             _isChecked9 = false;
                           });
                           setState(() {
-                            proffession = 'Baking';
-                            skill('Baking');
+                            proffession = 'Baker';
+                            skill('baker');
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -503,7 +503,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                       height: 20,
                     ),
                     items(
-                      'Plumbing',
+                      'Plumber',
                       Checkbox(
                         checkColor: kMainColor,
                         value: _isChecked5,
@@ -520,8 +520,8 @@ class _DetailsPage2State extends State<DetailsPage2> {
                             _isChecked9 = false;
                           });
                           setState(() {
-                            proffession = 'Plumbing';
-                            skill('Plumbing');
+                            proffession = 'plumber';
+                            skill('plumber');
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -550,7 +550,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                           });
                           setState(() {
                             proffession = 'Catering & Food Service';
-                            skill('Catering & Food Service');
+                            skill('foodservice');
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -578,8 +578,8 @@ class _DetailsPage2State extends State<DetailsPage2> {
                             _isChecked9 = false;
                           });
                           setState(() {
-                            proffession = 'Engineering';
-                            skill('Engineering');
+                            proffession = 'Engineer';
+                            skill('engineer');
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -607,8 +607,8 @@ class _DetailsPage2State extends State<DetailsPage2> {
                             _isChecked9 = false;
                           });
                           setState(() {
-                            proffession = 'Medicine';
-                            skill('Medicine');
+                            proffession = 'medicine';
+                            skill('medicine');
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -638,7 +638,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                           });
                           setState(() {
                             proffession = 'Others';
-                            skill(othersCont.text);
+                            skill(othersCont.text.toLowerCase().trim());
                           });
                         },
                         shape: RoundedRectangleBorder(
@@ -655,7 +655,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
                         isPassword: false,
                         isReadOnly: false,
                         keyBoardType: TextInputType.text,
-                        labelText: 'Enter other Proffesion',
+                        labelText: 'Enter other Professions',
                         obcureText: false,
                       ),
                     ),

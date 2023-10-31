@@ -1,12 +1,14 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
+import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class NoInternetScreen extends StatelessWidget {
-  const NoInternetScreen({Key? key}) : super(key: key);
-  static const id = 'noInternetPage';
+class NoInternetScreen2 extends StatelessWidget {
+  String? user;
+  NoInternetScreen2({Key? key, required this.user}) : super(key: key);
+  static const id = 'noInternetPage2';
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,13 @@ class NoInternetScreen extends StatelessWidget {
                       ReuseableButton(
                         text: 'Try Again',
                         onPressed: () {
-                          Navigator.pop(context);
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => OnBoardingScreen(
+                                user: user,
+                              ),
+                            ),
+                          );
                         },
                         width: 140.w,
                       )

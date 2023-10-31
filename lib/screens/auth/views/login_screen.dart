@@ -197,6 +197,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   String responce = await authViewModel.signIn(
                                     password: passwordController.text,
                                     email: emailController.text,
+                                    context: context
                                   );
 
                                   if (responce == "Users" ||

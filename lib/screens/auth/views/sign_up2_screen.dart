@@ -248,7 +248,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               bool sentOtp =
-                                  await authViewModel.sendOtp(_emailCont.text);
+                                  await authViewModel.sendOtp(_emailCont.text, context);
                               if (sentOtp) {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(

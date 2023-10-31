@@ -57,8 +57,7 @@ class _DisplayAllSearchScreenState
               future: searchResultProvider.searchSkills(widget.service),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.done) {
-                  print(snap.data);
-
+             
                   return ListView.builder(
                       itemCount: searchResultProvider.allCraftmen.length,
                       itemBuilder: (context, index) {

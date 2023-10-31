@@ -110,7 +110,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                         MaterialPageRoute(
                                           builder: ((context) =>
                                               DisplayAllSearchScreen(
-                                                service: searchCont.text,
+                                                service: searchCont.text.trim().toLowerCase(),
                                               )),
                                         ),
                                       );

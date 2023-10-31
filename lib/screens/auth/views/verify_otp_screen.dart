@@ -186,16 +186,14 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                 text: 'Verify',
                 textSize: 14.sp,
                 onPressed: () async {
-                     print('verified');
+                  print('verified');
                   //verify OTP
                   // bool verified = await authViewModel.verify(otpValue.text);
                   bool verified = true;
-                  
-
-               
 
                   if (verified == true) {
                     var res = await authViewModel.signUpUser(
+                        context: context,
                         body: widget.body,
                         password: widget.password,
                         email: widget.email,

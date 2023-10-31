@@ -200,7 +200,7 @@ class _ServiceDetailsScreenState extends ConsumerState<ServiceDetailsScreen> {
                   ),
                   ReuseableButton(
                     onPressed: () async {
-                      await authViewModel.request();
+           
 
                       bottomSheet(context);
                     },

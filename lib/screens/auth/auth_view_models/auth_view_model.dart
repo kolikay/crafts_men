@@ -5,12 +5,14 @@ import 'package:craftsmen/models/skillProvider_models.dart';
 import 'package:craftsmen/models/user_models.dart';
 import 'package:craftsmen/providers/skill_provider.dart';
 import 'package:craftsmen/providers/user_provider.dart';
+import 'package:craftsmen/screens/landing_page/no_internet.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:craftsmen/constants/const/shared_preferences.dart';
 import 'package:dio/dio.dart';
 import 'package:auth_handler/auth_handler.dart';
 import 'package:craftsmen/constants/const/app_state_constants.dart';
+import 'package:simple_connection_checker/simple_connection_checker.dart';
 
 class AuthViewModel extends ChangeNotifier {
   Dio dio = Dio();
@@ -51,14 +53,14 @@ class AuthViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future request() async {
-    setLoading(true);
-    await Future.delayed(const Duration(seconds: 2));
-    setLoading(false);
-  }
+  // Future request() async {
+  //   setLoading(true);
+  //   await Future.delayed(const Duration(seconds: 2));
+  //   setLoading(false);
+  // }
 
   //sent OTP for email validation
-  Future<bool> sendOtp(String email) async {
+  Future sendOtp(String email, context) async {
     setLoading(true);
     authHandler.config(
       senderEmail: "noreply@craftmen.dev",
@@ -66,30 +68,42 @@ class AuthViewModel extends ChangeNotifier {
       otpLength: 4,
     );
 
-    // bool result = await authHandler.sendOtp(email);
+    bool isConnected = await SimpleConnectionChecker.isConnectedToInternet();
 
-    // if (result) {
-    //   setLoading(false);
-    //   return true;
-    // } else {
-    //   setLoading(false);
-    //   return false;
-    // }
+    if (isConnected) {
+      // bool result = await authHandler.sendOtp(email);
 
-    setLoading(false);
-    return true;
-  }
+      // if (result) {
+      //   setLoading(false);
+      //   return true;
+      // } else {
+      //   setLoading(false);
+      //   return false;
+      // }
 
-//email validation
-  Future<bool> verify(String userOtp) async {
-    setLoading(true);
-    bool validated = await authHandler.verifyOtp(userOtp);
-    if (validated == true) {
       setLoading(false);
       return true;
     } else {
-      setLoading(false);
-      return false;
+      Navigator.pushNamed(context, NoInternetScreen.id);
+    }
+  }
+
+//email validation
+  Future verify(String userOtp, context) async {
+    bool isConnected = await SimpleConnectionChecker.isConnectedToInternet();
+    if (isConnected) {
+      setLoading(true);
+
+      bool validated = await authHandler.verifyOtp(userOtp);
+      if (validated == true) {
+        setLoading(false);
+        return true;
+      } else {
+        setLoading(false);
+        return false;
+      }
+    } else {
+      Navigator.pushNamed(context, NoInternetScreen.id);
     }
   }
 
@@ -99,99 +113,131 @@ class AuthViewModel extends ChangeNotifier {
     required String password,
     required String email,
     required String userType,
+    required context,
   }) async {
+    bool isConnected = await SimpleConnectionChecker.isConnectedToInternet();
     setLoading(true);
-    try {
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      // do whatever you want to do with new user object
-      _firestore.collection(userType).doc(_auth.currentUser!.uid).set(body);
+    if (isConnected) {
+      try {
+        await _auth.createUserWithEmailAndPassword(
+            email: email, password: password);
+        // do whatever you want to do with new user object
+        _firestore.collection(userType).doc(_auth.currentUser!.uid).set(body);
 
-      if (userType == "Users") {
-        await UserProvider.instance.getLoggedinUserDetails();
-      }
-      if (userType == "Skill Providers") {
-        await SkillProvider.instance.getSKillLoggedinUserDetails();
-      }
+        if (userType == "Users") {
+          await UserProvider.instance.getLoggedinUserDetails();
+        }
+        if (userType == "Skill Providers") {
+          await SkillProvider.instance.getSKillLoggedinUserDetails();
+        }
 
-      setLoading(false);
-      return 'Success';
-    } on FirebaseAuthException catch (e) {
-      setLoading(false);
-      return e.toString();
+        setLoading(false);
+        return 'Success';
+      } on FirebaseAuthException catch (e) {
+        setLoading(false);
+        return e.toString();
+      }
+    } else {
+      Navigator.pushNamed(context, NoInternetScreen.id);
     }
   }
 
 // Craftmen details Registration update
-  Future<String?> signUpCraftMen({required Map<String, dynamic> body}) async {
-    setLoading(true);
-    try {
-      await _firestore
-          .collection('Skill Providers')
-          .doc(_auth.currentUser!.uid)
-          .update(body);
-      setLoading(false);
-      return 'Success';
-    } on FirebaseAuthException catch (e) {
-      setLoading(false);
-      return e.toString();
+  Future<String?> signUpCraftMen(
+      {required Map<String, dynamic> body, context}) async {
+    bool isConnected = await SimpleConnectionChecker.isConnectedToInternet();
+    if (isConnected) {
+      setLoading(true);
+      try {
+        await _firestore
+            .collection('Skill Providers')
+            .doc(_auth.currentUser!.uid)
+            .update(body);
+        setLoading(false);
+        return 'Success';
+      } on FirebaseAuthException catch (e) {
+        setLoading(false);
+        return e.toString();
+      }
+    } else {
+      Navigator.pushNamed(context, NoInternetScreen.id);
     }
   }
 
 // User Login
   Future<String> signIn(
-      {required String password, required String email}) async {
+      {required String password,
+      required String email,
+      required context}) async {
     String? response;
-    setLoading(true);
+    bool isConnected = await SimpleConnectionChecker.isConnectedToInternet();
+    if (isConnected) {
+      setLoading(true);
 
-    if (password.isNotEmpty || email.isNotEmpty) {
-      await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) async {
-        final userDoc = await _firestore
-            .collection('Users')
-            .doc(_auth.currentUser!.uid)
-            .get();
+      if (password.isNotEmpty || email.isNotEmpty) {
+        await _auth
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((value) async {
+          final userDoc = await _firestore
+              .collection('Users')
+              .doc(_auth.currentUser!.uid)
+              .get();
 
-        if (userDoc.exists) {
-          UserModel data = await UserProvider.instance.getLoggedinUserDetails();
+          if (userDoc.exists) {
+            UserModel data =
+                await UserProvider.instance.getLoggedinUserDetails();
 
-          response = data.userType;
+            response = data.userType;
 
-          userPref.setUserType('Users');
+            userPref.setUserType('Users');
+            setLoading(false);
+          } else {
+            SkillProviderModel data =
+                await SkillProvider.instance.getSKillLoggedinUserDetails();
+
+            response = data.userType;
+
+            userPref.setUserType('Skill Providers');
+
+            setLoading(false);
+          }
+        }).catchError((e) async {
+          await _auth.signOut();
+          response = 'Login Failed';
+          setLoginError(true);
           setLoading(false);
-        } else {
-          SkillProviderModel data =
-              await SkillProvider.instance.getSKillLoggedinUserDetails();
-
-          response = data.userType;
-
-          userPref.setUserType('Skill Providers');
-
-          setLoading(false);
-        }
-      }).catchError((e) async {
-        print(e.toString());
-        await _auth.signOut();
-        response = 'Login Failed';
-        setLoginError(true);
-        setLoading(false);
-      });
+        });
+      }
+    } else {
+      Navigator.pushNamed(context, NoInternetScreen.id);
     }
     return response!;
   }
 
-  Future logOut(ref) async {
-    setLoading(true);
+  Future logOut(context) async {
+    bool isConnected = await SimpleConnectionChecker.isConnectedToInternet();
+    if (isConnected) {
+      setLoading(true);
 
-    await UserProvider.instance.clearUserDetailsLocally();
+      await UserProvider.instance.clearUserDetailsLocally();
 
-    await SkillProvider.instance.clearUserDetailsLocally();
+      await SkillProvider.instance.clearUserDetailsLocally();
 
-    await UserPreferences.resetSharedPref();
+      await UserPreferences.resetSharedPref();
 
-    await _auth.signOut();
+      await _auth.signOut();
 
-    setLoading(false);
+      setLoading(false);
+    } else {
+      Navigator.pushNamed(context, NoInternetScreen.id);
+    }
+  }
+
+  Future<bool> checkInternet() async {
+    bool isConnected = await SimpleConnectionChecker.isConnectedToInternet();
+    if (isConnected) {
+      return true;
+    }
+    return false;
   }
 }
