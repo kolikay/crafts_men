@@ -1,5 +1,6 @@
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/const/shared_preferences.dart';
+import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/providers/skill_provider.dart';
 import 'package:craftsmen/providers/user_provider.dart';
 import 'package:craftsmen/screens/landing_page/no_internet.dart';
@@ -163,23 +164,78 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       //   });
     }
     return isConnect
-        ? Scaffold(
-            body: showScreen[currentIndex],
-            // body: userScreens[currentIndex],
-            bottomNavigationBar: BottomNavigationBar(
-                iconSize: 25.0.w,
-                backgroundColor: Colors.white70,
-                selectedItemColor: kMainColor,
-                type: BottomNavigationBarType.fixed,
-                onTap: (index) => setState(() => currentIndex = index),
-                currentIndex: currentIndex,
-                items: onboardingIcons
-                // items: userOnboardingIcons,
+        ? WillPopScope(
+            onWillPop: _onWillPop,
+            child: Scaffold(
+              body: showScreen[currentIndex],
+              // body: userScreens[currentIndex],
+              bottomNavigationBar: BottomNavigationBar(
+                  iconSize: 25.0.w,
+                  backgroundColor: Colors.white70,
+                  selectedItemColor: kMainColor,
+                  type: BottomNavigationBarType.fixed,
+                  onTap: (index) => setState(() => currentIndex = index),
+                  currentIndex: currentIndex,
+                  items: onboardingIcons
+                  // items: userOnboardingIcons,
 
-                ),
+                  ),
+            ),
           )
         : NoInternetScreen2(
             user: widget.user,
           );
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => SizedBox(
+            height: 20,
+            width: 20,
+            child: AlertDialog(
+              title: Center(
+                child: NormalText(
+                  text: 'Are you Sure',
+                  size: 16.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              content: NormalText(
+                text: 'Do you want to exit the app',
+                size: 17.sp,
+                fontWeight: FontWeight.w500,
+              ),
+              actions: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () =>
+                          Navigator.of(context).pop(false), //<-- SEE HERE
+                      child: NormalText(
+                        text: 'No',
+                        size: 18.sp,
+                        fontWeight: FontWeight.w500,
+                        color: kMainColor,
+                      ),
+                    ),const SizedBox(width: 20,),
+                    TextButton(
+                      onPressed: () =>
+                          Navigator.of(context).pop(true), // <-- SEE HERE
+                      child: NormalText(
+                        text: 'Yes',
+                        size: 18.sp,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        )) ??
+        false;
   }
 }

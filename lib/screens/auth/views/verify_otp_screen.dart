@@ -9,6 +9,7 @@ import 'package:craftsmen/constants/reusesable_widgets/reusable_info_widget.dart
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/constants/utils/snack_bar.dart';
+import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
 import 'package:craftsmen/screens/auth/views/sign_up_screen.dart';
 import 'package:craftsmen/screens/landing_page/landing_page_screen.dart';
@@ -186,10 +187,8 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                 text: 'Verify',
                 textSize: 14.sp,
                 onPressed: () async {
-                  print('verified');
-                  //verify OTP
-                  // bool verified = await authViewModel.verify(otpValue.text);
-                  bool verified = true;
+                  bool verified =
+                      await authViewModel.verify(otpValue.text, context);
 
                   if (verified == true) {
                     var res = await authViewModel.signUpUser(
@@ -266,7 +265,7 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
   }
 
   void _resendCode() {
-    //other code here
+    AuthViewModel.instance.sendOtp(widget.email, context);
     setState(() {
       secondsRemaining = 30;
       enableResend = false;

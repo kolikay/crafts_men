@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:craftsmen/models/user_models.dart';
+import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
+import 'package:simple_connection_checker/simple_connection_checker.dart';
 
 class UserProvider extends ChangeNotifier {
   static final UserProvider _instance = UserProvider._();
@@ -40,7 +42,6 @@ class UserProvider extends ChangeNotifier {
 
     return user;
   }
-
 
 //clear user detail on logout
   Future clearUserDetailsLocally() async {

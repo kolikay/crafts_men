@@ -10,11 +10,13 @@ import 'package:craftsmen/constants/utils/pick_image.dart';
 import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/models/user_models.dart';
 import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
+import 'package:craftsmen/screens/landing_page/no_internet.dart';
 import 'package:craftsmen/screens/on_boarding/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:simple_connection_checker/simple_connection_checker.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -243,16 +245,22 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   padding: EdgeInsets.only(top: 10.0.h, right: 10.w),
                   child: IconButton(
                     onPressed: () async {
-                      AuthViewModel.instance.setLoading(true);
-                      if (onEdit) {
-                        await userInfoProvider
-                            .updateLoggedinUserDetails(getInputedData());
-                      }
+                      bool isConnected =
+                          await SimpleConnectionChecker.isConnectedToInternet();
+                      if (isConnected) {
+                        AuthViewModel.instance.setLoading(true);
+                        if (onEdit) {
+                          await userInfoProvider
+                              .updateLoggedinUserDetails(getInputedData());
+                        }
 
-                      setState(() {
-                        onEdit = !onEdit;
-                      });
-                      AuthViewModel.instance.setLoading(false);
+                        setState(() {
+                          onEdit = !onEdit;
+                        });
+                        AuthViewModel.instance.setLoading(false);
+                      } else {
+                        Navigator.pushNamed(context, NoInternetScreen.id);
+                      }
                     },
                     icon: onEdit
                         ? Icon(Icons.save, size: 30.w)

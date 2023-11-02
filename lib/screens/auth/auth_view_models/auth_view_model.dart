@@ -71,18 +71,15 @@ class AuthViewModel extends ChangeNotifier {
     bool isConnected = await SimpleConnectionChecker.isConnectedToInternet();
 
     if (isConnected) {
-      // bool result = await authHandler.sendOtp(email);
+      bool result = await authHandler.sendOtp(email);
 
-      // if (result) {
-      //   setLoading(false);
-      //   return true;
-      // } else {
-      //   setLoading(false);
-      //   return false;
-      // }
-
-      setLoading(false);
-      return true;
+      if (result) {
+        setLoading(false);
+        return true;
+      } else {
+        setLoading(false);
+        return false;
+      }
     } else {
       Navigator.pushNamed(context, NoInternetScreen.id);
     }

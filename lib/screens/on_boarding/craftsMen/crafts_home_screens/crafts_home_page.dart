@@ -21,7 +21,8 @@ class CraftsHomePageScreen extends ConsumerStatefulWidget {
   static const String id = 'homepage_screen';
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _CraftsHomePageScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _CraftsHomePageScreenState();
 }
 
 class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
@@ -111,7 +112,9 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                         MaterialPageRoute(
                                           builder: ((context) =>
                                               DisplayAllSearchScreen(
-                                                service: searchCont.text.trim().toLowerCase(),
+                                                service: searchCont.text
+                                                    .trim()
+                                                    .toLowerCase(),
                                               )),
                                         ),
                                       );
@@ -160,7 +163,9 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                               mainAxisSpacing: 1,
                               crossAxisCount: 4,
                               children: <Widget>[
-                                CraftsHomeConstants.newInkwell(context, 'Plumbers',
+                                CraftsHomeConstants.newInkwell(
+                                    context,
+                                    'Plumbers',
                                     'lib/assets/plumber.png', () async {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
@@ -171,7 +176,9 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                     ),
                                   );
                                 }),
-                                CraftsHomeConstants.newInkwell(context, 'Painters ',
+                                CraftsHomeConstants.newInkwell(
+                                    context,
+                                    'Painters ',
                                     'lib/assets/painter.png', () async {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
@@ -207,8 +214,8 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                     ),
                                   );
                                 }),
-                                CraftsHomeConstants.newInkwell(context, 'Engineer',
-                                    'lib/assets/engineer.png', () {
+                                CraftsHomeConstants.newInkwell(context,
+                                    'Engineer', 'lib/assets/engineer.png', () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: ((context) =>
@@ -230,7 +237,9 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                     ),
                                   );
                                 }),
-                                CraftsHomeConstants.newInkwell(context, 'Carpenter',
+                                CraftsHomeConstants.newInkwell(
+                                    context,
+                                    'Carpenter',
                                     'lib/assets/carpenter.png', () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
@@ -270,8 +279,8 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                             enlargeCenterPage: true,
                             viewportFraction: 0.9.w,
                             autoPlay: true,
-                            onPageChanged: (index, reason) => setState(
-                                () => CraftsHomeConstants.activeImageIndex = index),
+                            onPageChanged: (index, reason) => setState(() =>
+                                CraftsHomeConstants.activeImageIndex = index),
                             autoPlayInterval: const Duration(seconds: 2),
                           ),
                           itemCount: CraftsHomeConstants.images.length,

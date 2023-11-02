@@ -78,3 +78,5 @@ class NoInternetScreen2 extends StatelessWidget {
     );
   }
 }
+
+
