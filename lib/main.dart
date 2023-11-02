@@ -86,8 +86,8 @@ class _MyAppState extends State<MyApp> {
             colorScheme: Theme.of(context).colorScheme.copyWith(
                   primary: kMainColor,
                 ),
-          ),
-          home: isLoggedIn ? OnBoardingScreen(user: userType) : LandingPage2(),
+          ),home:LocationScreen(),
+          // home: isLoggedIn ? OnBoardingScreen(user: userType) : LandingPage2(),
           // OnBoardingScreen(user: 'Skill Providers',),
 
           // CraftmenFillDetailsScreen(user:  'Skill Providers',),
@@ -129,7 +129,7 @@ class _MyAppState extends State<MyApp> {
                 const EmailPasswordChangeScreen(),
             NoInternetScreen.id: (context) => const NoInternetScreen(),
             LocationScreen2.id: (context) => const LocationScreen2(),
-            LocationScreen.id: (context) => const LocationScreen(),
+            LocationScreen.id: (context) =>  LocationScreen(),
             OnBoardingScreen.id: (context) => OnBoardingScreen(
                   user: userType,
                 ),

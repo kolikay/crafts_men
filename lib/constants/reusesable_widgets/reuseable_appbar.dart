@@ -8,7 +8,7 @@ class ReuseableAppbar extends StatefulWidget {
   final GestureTapCallback secondButton;
   final String appBarTitle;
   final IconData firstAppIcon;
-  final IconData secondAppIcon;
+  final IconData? secondAppIcon;
   final Color color;
   const ReuseableAppbar({
     Key? key,
@@ -16,7 +16,7 @@ class ReuseableAppbar extends StatefulWidget {
     required this.secondButton,
     this.appBarTitle = '',
     required this.firstAppIcon,
-    required this.secondAppIcon,
+     this.secondAppIcon,
     required this.color
   }) : super(key: key);
 
@@ -36,7 +36,7 @@ class _ReuseableAppbarState extends State<ReuseableAppbar> {
             onTap: widget.firstButton,
             child: Icon(
               widget.firstAppIcon,
-              size: 30.0.h,
+              size: 20.0.h,
               color: widget.color,
             ),
           ),
@@ -46,9 +46,9 @@ class _ReuseableAppbarState extends State<ReuseableAppbar> {
             size: 24.2.sp,
           ),
           GestureDetector(
-            onTap: widget.secondButton,
+      
             child:
-                Icon(widget.secondAppIcon, size: 30.0.h, color: widget.color),
+                Icon(widget.secondAppIcon, size: 20.0.h, color: widget.color),
           ),
         ],
       ),

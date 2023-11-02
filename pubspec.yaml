@@ -82,6 +82,8 @@ dependencies:
 
   #group button
   group_button: 4.6.0
+  #google auto comple
+  google_place: ^0.4.7
 
 
  

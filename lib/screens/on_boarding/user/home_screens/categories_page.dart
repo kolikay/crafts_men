@@ -33,7 +33,6 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage> {
                 color: Colors.white,
                 appBarTitle: 'Categories',
                 firstAppIcon: Icons.arrow_back_ios,
-                secondAppIcon: Icons.search,
                 firstButton: () {
                   Navigator.pop(context);
                 },
@@ -54,78 +53,80 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Plumbers',
-                                )),
-                          ),
-                        );
-                      }),
-                      HomeConstants.categoryCard(context, 'Painters',
-                          'lib/assets/painter.png', () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Painters',
+                                  service: 'plumbers',
                                 )),
                           ),
                         );
                       }),
                       HomeConstants.categoryCard(
-                          context, 'Electricians', 'lib/assets/electrician.png', () {
+                          context, 'Painters', 'lib/assets/painter.png', () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Electricians',
+                                  service: 'painters',
                                 )),
                           ),
                         );
                       }),
                       HomeConstants.categoryCard(
-                          context, 'Barbers', 'lib/assets/Barber.png', () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Barbers',
-                                )),
-                          ),
-                        );
-                      }),
-                      HomeConstants.categoryCard(
-                          context, 'Engineers', 'lib/assets/engineer.png',
+                          context, 'Electricians', 'lib/assets/electrician.png',
                           () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Engineers',
-                                )),
-                          ),
-                        );
-                      }),
-                      HomeConstants.categoryCard(context, 'Doctors',
-                          'lib/assets/health.png', () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Doctors',
+                                  service: 'electricians',
                                 )),
                           ),
                         );
                       }),
                       HomeConstants.categoryCard(
-                          context, 'Carpenters', 'lib/assets/carpenter.png', () {
+                          context, 'Barbers', 'lib/assets/barber.png', () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Carpenters',
+                                  service: 'barbers',
                                 )),
                           ),
                         );
                       }),
-                      HomeConstants.categoryCard(context, 'Hair Stylists',
-                          'lib/assets/carpenter.png', () {
+                      HomeConstants.categoryCard(
+                          context, 'Engineers', 'lib/assets/engineer.png', () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Hair Stylists',
+                                  service: 'engineers',
+                                )),
+                          ),
+                        );
+                      }),
+                      HomeConstants.categoryCard(
+                          context, 'Doctors', 'lib/assets/health.png', () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: ((context) => const DisplayAllSearchScreen(
+                                  service: 'doctors',
+                                )),
+                          ),
+                        );
+                      }),
+                      HomeConstants.categoryCard(
+                          context, 'Carpenters', 'lib/assets/carpenter.png',
+                          () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: ((context) => const DisplayAllSearchScreen(
+                                  service: 'carpenters',
+                                )),
+                          ),
+                        );
+                      }),
+                      HomeConstants.categoryCard(
+                          context, 'Hair Stylists', 'lib/assets/carpenter.png',
+                          () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: ((context) => const DisplayAllSearchScreen(
+                                  service: 'hair stylists',
                                 )),
                           ),
                         );
@@ -136,7 +137,7 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Developers',
+                                  service: 'developers',
                                 )),
                           ),
                         );

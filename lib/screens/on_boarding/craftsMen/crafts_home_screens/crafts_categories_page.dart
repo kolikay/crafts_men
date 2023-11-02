@@ -54,7 +54,7 @@ class _CraftsMenCategoriesPageState extends ConsumerState<CraftsMenCategoriesPag
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Plumbers',
+                                  service: 'plumbers',
                                 )),
                           ),
                         );
@@ -64,7 +64,7 @@ class _CraftsMenCategoriesPageState extends ConsumerState<CraftsMenCategoriesPag
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Painters',
+                                  service: 'painters',
                                 )),
                           ),
                         );
@@ -74,7 +74,7 @@ class _CraftsMenCategoriesPageState extends ConsumerState<CraftsMenCategoriesPag
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Electricians',
+                                  service: 'electricians',
                                 )),
                           ),
                         );
@@ -84,7 +84,7 @@ class _CraftsMenCategoriesPageState extends ConsumerState<CraftsMenCategoriesPag
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Barbers',
+                                  service: 'barbers',
                                 )),
                           ),
                         );
@@ -95,7 +95,7 @@ class _CraftsMenCategoriesPageState extends ConsumerState<CraftsMenCategoriesPag
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Engineers',
+                                  service: 'engineers',
                                 )),
                           ),
                         );
@@ -105,7 +105,7 @@ class _CraftsMenCategoriesPageState extends ConsumerState<CraftsMenCategoriesPag
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Doctors',
+                                  service: 'doctors',
                                 )),
                           ),
                         );
@@ -115,7 +115,7 @@ class _CraftsMenCategoriesPageState extends ConsumerState<CraftsMenCategoriesPag
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Carpenters',
+                                  service: 'carpenters',
                                 )),
                           ),
                         );
@@ -125,7 +125,7 @@ class _CraftsMenCategoriesPageState extends ConsumerState<CraftsMenCategoriesPag
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Hair Stylists',
+                                  service: 'hair stylists',
                                 )),
                           ),
                         );
@@ -136,7 +136,7 @@ class _CraftsMenCategoriesPageState extends ConsumerState<CraftsMenCategoriesPag
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Developers',
+                                  service: 'developers',
                                 )),
                           ),
                         );

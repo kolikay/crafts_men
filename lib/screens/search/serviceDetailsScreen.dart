@@ -141,7 +141,7 @@ class _ServiceDetailsScreenState extends ConsumerState<ServiceDetailsScreen> {
                                   contentPadding:
                                       EdgeInsets.only(left: 10.w, bottom: 5.h),
                                   border: InputBorder.none,
-                                  hintText: 'Enter Date',
+                                  hintText: 'Enter Time',
                                   hintStyle:
                                       TextStyle(color: kBlack, fontSize: 15.sp),
                                 ),

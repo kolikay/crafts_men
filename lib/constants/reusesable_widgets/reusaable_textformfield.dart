@@ -19,12 +19,14 @@ class MyTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   void Function(String)? onChanged;
   final bool enable;
+  final FocusNode? focus;
 
-   MyTextField({
+  MyTextField({
     Key? key,
     this.borderColor = kMainColor,
     this.controller,
     this.hintText,
+    this.focus,
     required this.isPassword,
     required this.obcureText,
     required this.isReadOnly,

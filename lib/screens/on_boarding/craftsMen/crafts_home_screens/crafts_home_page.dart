@@ -226,13 +226,13 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                   );
                                 }),
                                 CraftsHomeConstants.newInkwell(
-                                    context, 'Health', 'lib/assets/health.png',
+                                    context, 'Doctors', 'lib/assets/health.png',
                                     () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'healths',
+                                            service: 'doctors',
                                           )),
                                     ),
                                   );
