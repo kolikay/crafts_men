@@ -90,22 +90,22 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage> {
                         );
                       }),
                       HomeConstants.categoryCard(
-                          context, 'Engineer', 'lib/assets/engineer.png',
+                          context, 'Engineers', 'lib/assets/engineer.png',
                           () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Engineere',
+                                  service: 'Engineers',
                                 )),
                           ),
                         );
                       }),
-                      HomeConstants.categoryCard(context, 'Health Workers',
+                      HomeConstants.categoryCard(context, 'Doctors',
                           'lib/assets/health.png', () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Health Workers',
+                                  service: 'Doctors',
                                 )),
                           ),
                         );
@@ -120,12 +120,12 @@ class _CategoriesPageState extends ConsumerState<CategoriesPage> {
                           ),
                         );
                       }),
-                      HomeConstants.categoryCard(context, 'Hair Stylist',
+                      HomeConstants.categoryCard(context, 'Hair Stylists',
                           'lib/assets/carpenter.png', () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Hair Stylist',
+                                  service: 'Hair Stylists',
                                 )),
                           ),
                         );

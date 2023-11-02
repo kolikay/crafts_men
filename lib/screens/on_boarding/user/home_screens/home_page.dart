@@ -165,7 +165,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'Developer',
+                                            service: 'plumbers',
                                           )),
                                     ),
                                   );
@@ -176,7 +176,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'Painter',
+                                            service: 'painters',
                                           )),
                                     ),
                                   );
@@ -189,7 +189,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'Electrician',
+                                            service: 'electricians',
                                           )),
                                     ),
                                   );
@@ -201,7 +201,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'Electrician',
+                                            service: 'barbers',
                                           )),
                                     ),
                                   );
@@ -212,19 +212,19 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'Electrician',
+                                            service: 'engineers',
                                           )),
                                     ),
                                   );
                                 }),
                                 HomeConstants.newInkwell(
-                                    context, 'Health', 'lib/assets/health.png',
+                                    context, 'Doctors', 'lib/assets/health.png',
                                     () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'Electrician',
+                                            service: 'doctors',
                                           )),
                                     ),
                                   );
@@ -235,7 +235,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'Electrician',
+                                            service: 'carpenters',
                                           )),
                                     ),
                                   );

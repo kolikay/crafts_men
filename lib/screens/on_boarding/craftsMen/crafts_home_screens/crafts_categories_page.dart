@@ -95,17 +95,17 @@ class _CraftsMenCategoriesPageState extends ConsumerState<CraftsMenCategoriesPag
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Engineere',
+                                  service: 'Engineers',
                                 )),
                           ),
                         );
                       }),
-                      CraftsHomeConstants.categoryCard(context, 'Health Workers',
+                      CraftsHomeConstants.categoryCard(context, 'Doctors',
                           'lib/assets/health.png', () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Health Workers',
+                                  service: 'Doctors',
                                 )),
                           ),
                         );
@@ -120,12 +120,12 @@ class _CraftsMenCategoriesPageState extends ConsumerState<CraftsMenCategoriesPag
                           ),
                         );
                       }),
-                      CraftsHomeConstants.categoryCard(context, 'Hair Stylist',
+                      CraftsHomeConstants.categoryCard(context, 'Hair Stylists',
                           'lib/assets/carpenter.png', () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: ((context) => const DisplayAllSearchScreen(
-                                  service: 'Hair Stylist',
+                                  service: 'Hair Stylists',
                                 )),
                           ),
                         );

@@ -171,7 +171,7 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'plumber',
+                                            service: 'plumbers',
                                           )),
                                     ),
                                   );
@@ -184,7 +184,7 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'painter',
+                                            service: 'painters',
                                           )),
                                     ),
                                   );
@@ -197,7 +197,7 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'electrician',
+                                            service: 'electricians',
                                           )),
                                     ),
                                   );
@@ -209,7 +209,7 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'barber',
+                                            service: 'barbers',
                                           )),
                                     ),
                                   );
@@ -220,7 +220,7 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'engineer',
+                                            service: 'engineers',
                                           )),
                                     ),
                                   );
@@ -232,7 +232,7 @@ class _CraftsHomePageScreenState extends ConsumerState<CraftsHomePageScreen> {
                                     MaterialPageRoute(
                                       builder: ((context) =>
                                           const DisplayAllSearchScreen(
-                                            service: 'health',
+                                            service: 'healths',
                                           )),
                                     ),
                                   );
