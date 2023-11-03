@@ -11,6 +11,7 @@ import 'package:craftsmen/constants/utils/progress_bar.dart';
 import 'package:craftsmen/constants/utils/snack_bar.dart';
 import 'package:craftsmen/screens/auth/views/login_screen.dart';
 import 'package:craftsmen/screens/auth/views/verify_otp_screen.dart';
+import 'package:craftsmen/screens/location/location_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -65,6 +66,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
         'Reviews': [],
         'User Type': widget.userType,
         'Profile Pic': '',
+        'Address': widget.address.trim(),
       };
       return body;
     }
@@ -247,25 +249,16 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen2> {
                           text: 'Sign Up',
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
-                              bool sentOtp =
-                                  await authViewModel.sendOtp(_emailCont.text, context);
-                              if (sentOtp) {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => VerifyOtpScreen(
-                                      email: _emailCont.text,
-                                      password: _password1Cont.text,
-                                      body: _getInputedData(),
-                                      userType: widget.userType,
-                                    ),
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => LocationScreen(
+                                    email: _emailCont.text,
+                                    password: _password1Cont.text,
+                                    body: _getInputedData(),
+                                    userType: widget.userType,
                                   ),
-                                );
-                                ShowSnackBar.buildErrorSnackbar(
-                                    context, 'OTP Sent  ', Colors.greenAccent);
-                              } else {
-                                ShowSnackBar.buildErrorSnackbar(
-                                    context, 'Could not send OTP', Colors.red);
-                              }
+                                ),
+                              );
                             }
                           },
                         ),

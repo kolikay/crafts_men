@@ -86,12 +86,12 @@ class _MyAppState extends State<MyApp> {
             colorScheme: Theme.of(context).colorScheme.copyWith(
                   primary: kMainColor,
                 ),
-          ),home:LocationScreen(),
-          // home: isLoggedIn ? OnBoardingScreen(user: userType) : LandingPage2(),
-          // OnBoardingScreen(user: 'Skill Providers',),
+          ),
 
+          home: isLoggedIn ? OnBoardingScreen(user: userType) : LandingPage2(),
+          // home: OnBoardingScreen(user: 'Skill Providers',),
           // CraftmenFillDetailsScreen(user:  'Skill Providers',),
-          //     StreamBuilder(
+          // home: StreamBuilder(
           //   stream: FirebaseAuth.instance.authStateChanges(),
           //   builder: ((context, snapshot) {
           //     if (userType == 'Skill Providers') {
@@ -129,7 +129,6 @@ class _MyAppState extends State<MyApp> {
                 const EmailPasswordChangeScreen(),
             NoInternetScreen.id: (context) => const NoInternetScreen(),
             LocationScreen2.id: (context) => const LocationScreen2(),
-            LocationScreen.id: (context) =>  LocationScreen(),
             OnBoardingScreen.id: (context) => OnBoardingScreen(
                   user: userType,
                 ),

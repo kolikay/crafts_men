@@ -1,5 +1,6 @@
 import 'package:craftsmen/constants/const/app_state_constants.dart';
 import 'package:craftsmen/constants/const/color.dart';
+import 'package:craftsmen/constants/const/shared_preferences.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusaable_textformfield.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
@@ -29,12 +30,21 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
 // Initial Selected Value
   String dropdownvalue = 'Male';
 
+  String? location;
+
   // List of items in our dropdown menu
   var genders = [
     'Male',
     'Female',
     'Others',
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+   location = UserPreferences.getUserLocation() ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,13 +137,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                                 validator: (val) {
                                   if (val!.isEmpty) {
                                     return 'Field Cannot be empty';
-                                  }else if( val.length < 11){
+                                  } else if (val.length < 11) {
                                     return 'Phone Number must be 11 digits';
-                                  }else if( val.length > 11){
+                                  } else if (val.length > 11) {
                                     return 'Phone Number must be 11 digits';
                                   }
                                   return null;
-                                
                                 },
                                 controller: _phoneNumber,
                                 obcureText: false,
@@ -200,7 +209,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                                       userName: _usernameCont.text,
                                       phoneNumber: _phoneNumber.text,
                                       gender: dropdownvalue,
-                                      address: '',
+                                      address: location!,
                                       userType: widget.userType,
                                     ),
                                   ),

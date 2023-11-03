@@ -6,6 +6,7 @@ import 'package:craftsmen/providers/search_skills_provider.dart';
 import 'package:craftsmen/providers/skill_provider.dart';
 import 'package:craftsmen/providers/user_provider.dart';
 import 'package:craftsmen/screens/auth/auth_view_models/auth_view_model.dart';
+import 'package:craftsmen/screens/location/location_screen.dart';
 import 'package:craftsmen/screens/on_boarding/user/profile_screens/profile_view_model/profile_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,10 +42,7 @@ final searchProvider = ChangeNotifierProvider((ref) {
 
 
 
-//stream of user data
-// final userDataStream = StreamProvider<List<UserModel>>((ref) {
-//   return UserProvider.instance.userDataStream;
-// });
+
 
 
 // // Update state and notify Notification screen app bar

@@ -158,7 +158,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     _gender = user.gender ?? '';
     _downloadedPhoto = user.profilePic ?? '';
     _address = user.address ??
-        'No 27, Kenneth Street, Ikoyi,Lagos state (Test Address)';
+        '';
   }
 
   @override

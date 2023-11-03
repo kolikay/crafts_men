@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:craftsmen/constants/const/app_state_constants.dart';
 import 'package:craftsmen/constants/const/color.dart';
+import 'package:craftsmen/constants/const/shared_preferences.dart';
 import 'package:craftsmen/constants/reusesable_widgets/normal_text.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusable_info_widget.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reuseable_button.dart';
@@ -43,8 +44,6 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
   bool enableResend = false;
   Timer? timer;
   final otpValue = TextEditingController();
-
-  var res;
 
   @override
   initState() {
@@ -243,6 +242,7 @@ class _VerifyOtpScreenState extends ConsumerState<VerifyOtpScreen> {
                       }
                     }
                   } else {
+                    UserPreferences.resetSharedPref();
                     ShowSnackBar.buildErrorSnackbar(
                         context, 'Incorrect OTP', Colors.red);
                   }

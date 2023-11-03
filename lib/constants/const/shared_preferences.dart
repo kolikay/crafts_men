@@ -24,6 +24,12 @@ static SharedPreferences? _preferences;
   // get userType
   static String? getUserType() => _preferences!.getString('User Type');
 
+      //set userlocation
+  static Future setUserLocation(String location) async => await _preferences!.setString('location', location);
+  
+  // get token
+  static String? getUserLocation() => _preferences!.getString('location');
+
 
 
   //set usertoken
@@ -50,6 +56,12 @@ static SharedPreferences? _preferences;
   
   // get token
   static String? getUsername() => _preferences!.getString('username');
+
+
+
+
+
+  
  
  static  resetSharedPref() => _preferences!.clear();
 
