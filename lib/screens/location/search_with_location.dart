@@ -26,21 +26,22 @@ import '../../constants/const/app_state_constants.dart';
 import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class LocationScreen extends ConsumerStatefulWidget {
+class LocationSearchScreen extends ConsumerStatefulWidget {
   final String? email;
   final String? password;
   String? userType;
   final Map<String, dynamic>? body;
-  LocationScreen(
+  LocationSearchScreen(
       {Key? key, this.email, this.body, this.password, this.userType})
       : super(key: key);
-  static const String id = 'location_screen';
+  static const String id = 'location_search_screen';
 
   @override
-  ConsumerState<LocationScreen> createState() => _LocationScreenState();
+  ConsumerState<LocationSearchScreen> createState() =>
+      _LocationSearchScreenState();
 }
 
-class _LocationScreenState extends ConsumerState<LocationScreen> {
+class _LocationSearchScreenState extends ConsumerState<LocationSearchScreen> {
   final userPref = UserPreferences();
   late GooglePlace googlePlace;
   TextEditingController location = TextEditingController();
@@ -60,7 +61,8 @@ class _LocationScreenState extends ConsumerState<LocationScreen> {
   @override
   void initState() {
     super.initState();
-     String apiKey = googleApikey;
+    // String apiKey = 'AIzaSyD8sWntz2nx2hmtohvlGQWGu-9OjnBMGBc';
+    String apiKey = googleApikey;
     googlePlace = GooglePlace(apiKey);
     startFocusNode = FocusNode();
   }
@@ -123,7 +125,7 @@ class _LocationScreenState extends ConsumerState<LocationScreen> {
           longitude: _currentPosition!.longitude);
 
       _firestore
-          .collection(userType)
+          .collection('Skill Providers')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({'position': myPosition.data});
 
@@ -289,7 +291,7 @@ class _LocationScreenState extends ConsumerState<LocationScreen> {
                     ),
                     TextButton(
                         onPressed: () {
-                          _getCurrentPosition(widget.userType!);
+                          _getCurrentPosition('Users');
                         },
                         child: NormalText(
                           text: 'Current Location',
@@ -297,6 +299,7 @@ class _LocationScreenState extends ConsumerState<LocationScreen> {
                           color: kMainColor,
                           fontWeight: FontWeight.w500,
                         )),
+                   
                     ReuseableButton(
                         text: "Proceed",
                         onPressed: () async {

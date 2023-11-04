@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:craftsmen/constants/const/app_state_constants.dart';
 import 'package:craftsmen/constants/const/color.dart';
 import 'package:craftsmen/constants/reusesable_widgets/reusesable_appBar2.dart';
@@ -53,25 +54,23 @@ class _DisplayAllSearchScreenState
               ),
             ),
           ),
-          body: FutureBuilder<List<SkillProviderModel>>(
-              future: searchResultProvider.searchSkills(widget.service),
+          body: StreamBuilder<List<DocumentSnapshot>>(
+              stream: searchResultProvider.searchLocations(widget.service),
               builder: (context, snap) {
-                if (snap.connectionState == ConnectionState.done) {
-             
+                if (snap.connectionState == ConnectionState.active) {
+                  if (!snap.hasData) {
+                    return Text('NO DATA');
+                  }
                   return ListView.builder(
-                      itemCount: searchResultProvider.allCraftmen.length,
+                      itemCount: 1,
                       itemBuilder: (context, index) {
+                        DocumentSnapshot data = snap.data![index];
+
                         return SearchDisplayCard(
-                          name:
-                              searchResultProvider.allCraftmen[index].fullName!,
-                          imageUrl: searchResultProvider
-                                      .allCraftmen[index].profilePic ==
-                                  ''
-                              ? 'https://st2.depositphotos.com/4520249/7558/v/450/depositphotos_75585915-stock-illustration-construction-worker-icon.jpg'
-                              : searchResultProvider
-                                  .allCraftmen[index].profilePic!,
+                          name: data.get('Full Name'),
+                          imageUrl: data.get('Profile Pic'),
                           rating: '4.5',
-                          distance: snap.data![index].email!,
+                          distance: data.get('email'),
                           tapped: () async {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -86,11 +85,51 @@ class _DisplayAllSearchScreenState
                       });
                 } else if (snap.hasError) {
                   return SizedBox();
-                } else {
+                } else if (snap.connectionState == ConnectionState.waiting) {
+                  print('waiting');
                   return const Center(child: CircularProgressIndicator());
                 }
+                return Text(snap.connectionState.toString());
               }),
         ),
+
+        // FutureBuilder<List<SkillProviderModel>>(
+        //       future: searchResultProvider.searchSkills(widget.service),
+        //       builder: (context, snap) {
+        //         if (snap.connectionState == ConnectionState.done) {
+        //           return ListView.builder(
+        //               itemCount: searchResultProvider.allCraftmen.length,
+        //               itemBuilder: (context, index) {
+        //                 return SearchDisplayCard(
+        //                   name:
+        //                       searchResultProvider.allCraftmen[index].fullName!,
+        //                   imageUrl: searchResultProvider
+        //                               .allCraftmen[index].profilePic ==
+        //                           ''
+        //                       ? 'https://st2.depositphotos.com/4520249/7558/v/450/depositphotos_75585915-stock-illustration-construction-worker-icon.jpg'
+        //                       : searchResultProvider
+        //                           .allCraftmen[index].profilePic!,
+        //                   rating: '4.5',
+        //                   distance: snap.data![index].email!,
+        //                   tapped: () async {
+        //                     Navigator.of(context).push(
+        //                       MaterialPageRoute(
+        //                         builder: ((context) => SingleSearchScreen(
+        //                               craftManDetails: searchResultProvider
+        //                                   .allCraftmen[index],
+        //                             )),
+        //                       ),
+        //                     );
+        //                   },
+        //                 );
+        //               });
+        //         } else if (snap.hasError) {
+        //           return SizedBox();
+        //         } else {
+        //           return const Center(child: CircularProgressIndicator());
+        //         }
+        //       }),
+        // ),
         Positioned(
           child: authViewModel.loading
               ? const Center(

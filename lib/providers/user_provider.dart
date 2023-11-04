@@ -38,6 +38,7 @@ class UserProvider extends ChangeNotifier {
     userApiData.phoneNumber = user.phoneNumber;
     userApiData.reviews = user.reviews;
     userApiData.profilePic = user.profilePic;
+    // userApiData.position = user.position;
     notifyListeners();
 
     return user;

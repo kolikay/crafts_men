@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> {
                   primary: kMainColor,
                 ),
           ),
-
+// home:LocationScreen(),
           home: isLoggedIn ? OnBoardingScreen(user: userType) : LandingPage2(),
           // home: OnBoardingScreen(user: 'Skill Providers',),
           // CraftmenFillDetailsScreen(user:  'Skill Providers',),

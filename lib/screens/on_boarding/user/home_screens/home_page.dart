@@ -72,7 +72,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
                       ],
                     ),
                     NormalText(
-                      text: '27, Kenneth Street, Ikoyi, Lagos',
+                      text: loginUser.userApiData.address ?? '',
                       size: 14.sp,
                       color: kBlackDull,
                     ),

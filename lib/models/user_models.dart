@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:geolocator/geolocator.dart';
 
 class UserModel extends ChangeNotifier {
   UserModel({
@@ -14,6 +15,7 @@ class UserModel extends ChangeNotifier {
     this.reviews,
     this.profilePic,
     this.userType,
+    // this.position,
   });
 
   String? id;
@@ -26,8 +28,9 @@ class UserModel extends ChangeNotifier {
   String? profilePic;
   List? reviews;
   String? userType;
+  // Position? position;
 
-  static UserModel fromSnapshot( DocumentSnapshot snap) {
+  static UserModel fromSnapshot(DocumentSnapshot snap) {
     var snapShot = snap.data() as Map<String, dynamic>;
 
     return UserModel(
@@ -41,6 +44,7 @@ class UserModel extends ChangeNotifier {
       reviews: ["Reviews"],
       profilePic: snapShot["Profile Pic"],
       userType: snapShot["User Type"],
+      // position: snapShot["position"],
     );
   }
 }
